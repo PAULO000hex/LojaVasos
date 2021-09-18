@@ -25,45 +25,46 @@ public class ProdutoController {
 	}
 	
 	@GetMapping("/produtos")
-	public String pessoas(Model model) {
+	public String produtos(Model model) {
 		model.addAttribute("listaProdutos", produtoRepo.findAll());
 		return "index";
 	}
 	
-	@GetMapping("/produtos{id}")
-	public String alterarPessoa(@PathVariable("id") long id, Model model) {
-		Optional<Produto> pessoaOpt = produtoRepo.findById(id);
-		if (pessoaOpt.isEmpty()) {
-			throw new IllegalArgumentException("Produto inválida!");
+	@GetMapping("/produto/{id}")
+	public String alterarProdutos(@PathVariable("id") long id, Model model) {
+		Optional<Produto> produtoOpt = produtoRepo.findById(id);
+		if (produtoOpt.isEmpty()) {
+			throw new IllegalArgumentException("Produto inválido!");
 		}
 		
-		model.addAttribute("produto", pessoaOpt.get());
-		return "produtos/form";
+		model.addAttribute("produto", produtoOpt.get());
+		return "product";
 	}
 	
 	@GetMapping("/produtos/incluir")
-	public String novaPessoa(@ModelAttribute("produto") Produto pessoa) {
-		return "produtos/form";
+	public String novoProduto(@ModelAttribute("produto") Produto produto) {
+		return "product";
 	}
 	
-	@PostMapping("/rh/pessoas/salvar")
-	public String salvarPessoa(@Valid @ModelAttribute("produto") Produto pessoa, BindingResult bindingResult) {
+	@PostMapping("/produtos/salvar")
+	public String salvarProduto(@Valid @ModelAttribute("produto") Produto produto, BindingResult bindingResult) {		
 		if (bindingResult.hasErrors()) {
-			return "produtos/form";
+			System.out.println(bindingResult.getAllErrors());
+			return "product";
 		}
 		
-		produtoRepo.save(pessoa);
+		produtoRepo.save(produto);
 		return "redirect:/produtos";
 	}
 	
 	@GetMapping("/produtos/excluir/{id}")
-	public String excluirPessoa(@PathVariable("id") long id) {
+	public String excluirProduto(@PathVariable("id") long id) {
 		Optional<Produto> pessoaOpt = produtoRepo.findById(id);
 		if (pessoaOpt.isEmpty()) {
 			throw new IllegalArgumentException("Produto inválido!");
 		}
 		
 		produtoRepo.delete(pessoaOpt.get());
-		return "redirect:/produtos";
+		return "redirect:/product";
 	}
 }
