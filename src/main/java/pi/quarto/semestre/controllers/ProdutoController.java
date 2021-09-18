@@ -30,14 +30,14 @@ public class ProdutoController {
 		return "index";
 	}
 	
-	@GetMapping("/produtos{id}")
+	@GetMapping("/produto/{id}")
 	public String alterarProdutos(@PathVariable("id") long id, Model model) {
-		Optional<Produto> pessoaOpt = produtoRepo.findById(id);
-		if (pessoaOpt.isEmpty()) {
-			throw new IllegalArgumentException("Produto inválida!");
+		Optional<Produto> produtoOpt = produtoRepo.findById(id);
+		if (produtoOpt.isEmpty()) {
+			throw new IllegalArgumentException("Produto inválido!");
 		}
 		
-		model.addAttribute("produto", pessoaOpt.get());
+		model.addAttribute("produto", produtoOpt.get());
 		return "product";
 	}
 	
