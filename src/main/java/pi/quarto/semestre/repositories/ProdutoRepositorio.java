@@ -1,5 +1,11 @@
 package pi.quarto.semestre.repositories;
 
-public class ProdutoRepositorio {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import pi.quarto.semestre.models.Produto;
+
+@Repository
+public interface ProdutoRepositorio extends JpaRepository<Produto, Long> {
 
 }
