@@ -15,20 +15,29 @@
 		<form action="#" th:action="@{/produtos/salvar}" th:object="${produto}" method="POST">
 			<input type="hidden" id="id" th:field="*{product_id}">
 
-			<span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-danger"></span>
+			
+			<label class="form-label">Descrição</label>
+			<span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-danger d-block"></span>
 			<input type="text" th:field="*{description}" class="form-control mb-4 col-4">
 			
-			<span th:if="${#fields.hasErrors('size')}" th:errors="*{size}" class="text-danger"></span>
+			<label class="form-label">Tamanho</label>
+			<span th:if="${#fields.hasErrors('size')}" th:errors="*{size}" class="text-danger d-block"></span>
       		<input type="number" th:field="*{size}" class="form-control mb-4 col-4">
       		
-      		<span th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="text-danger"></span>
+      		<label class="form-label">Preço</label>
+      		<span th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="text-danger d-block"></span>
       		<input type="number" th:field="*{price}" class="form-control mb-4 col-4">
       		
-      		<span th:if="${#fields.hasErrors('color')}" th:errors="*{color}" class="text-danger"></span>
+      		<label class="form-label">Cor</label>
+      		<span th:if="${#fields.hasErrors('color')}" th:errors="*{color}" class="text-danger d-block"></span>
 			<input type="text" th:field="*{color}" class="form-control mb-4 col-4">
 			
-			<span th:if="${#fields.hasErrors('available')}" th:errors="*{available}" class="text-danger"></span>
-      		<input type="text" th:field="*{available}" class="form-control mb-4 col-4"> 
+			<label class="form-label">Quantidade</label>
+			<span th:if="${#fields.hasErrors('available')}" th:errors="*{available}" class="text-danger d-block"></span>
+      		<input type="text" th:field="*{available}" class="form-control mb-4 col-4">
+      		
+      		<label class="form-label">Imagem</label>
+      		<input type="file" class="form-control mb-4 col-4">
 			
 			<button type="submit" class="btn btn-info col-2">Salvar</button>
 		</form>

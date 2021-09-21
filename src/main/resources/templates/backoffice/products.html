@@ -89,45 +89,20 @@
 
   <div class="featured container no-gutter">
     <div class="row posts">
-      <div id="1" class="item new col-md-4">
-        <a href="single-product.html">
-          <div class="featured-item">
-            <img src="assets/images/product-01.jpg" alt="">
-            <h4>Proin vel ligula</h4>
-            <h6>$15.00</h6>
-        </a>
-        <hr>
-        <a class="button" href="#">Editar</a>
-        |
-        <a class="button" href="#">Desativar</a>
+      <div class="item new col-md-3" th:each="produto : ${listaProdutos}">
+      	<div class="featured-item">
+	      	<a href="#">
+	            <img src="assets/images/product-01.jpg" alt="">
+	            <h4 th:text="${produto.description}"></h4>
+	            <h6 th:text="${produto.price}"></h6>
+	        </a>
+	        <hr>
+	        <a class="button" href="#" th:href="@{/produto/{id}(id=${produto.product_id})}">Editar</a>
+	        |
+	        <a class="button" href="#" th:href="@{/produto/excluir/{id}(id=${produto.product_id})}">Desativar</a>
+      	</div>
       </div>
     </div>
-    <div id="2" class="item high col-md-4">
-      <a href="single-product.html">
-        <div class="featured-item">
-          <img src="assets/images/product-02.jpg" alt="">
-          <h4>Erat odio rhoncus</h4>
-          <h6>$25.00</h6>
-      </a>
-      <hr>
-      <a class="button" href="#">Editar</a>
-      |
-      <a class="button" href="#">Desativar</a>
-    </div>
-  </div>
-  <div id="3" class="item low col-md-4">
-    <a href="single-product.html">
-      <div class="featured-item">
-        <img src="assets/images/product-03.jpg" alt="">
-        <h4>Integer vel turpis</h4>
-        <h6>$35.00</h6>
-    </a>
-    <hr>
-    <a class="button" href="#">Editar</a>
-    |
-    <a class="button" href="#">Desativar</a>
-  </div>
-  </div>
   </div>
 
   <div class="page-navigation">
