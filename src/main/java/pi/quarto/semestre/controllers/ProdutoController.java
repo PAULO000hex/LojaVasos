@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,6 +23,12 @@ public class ProdutoController {
 	
 	public ProdutoController(ProdutoRepositorio produtoRepo) {
 		this.produtoRepo = produtoRepo;
+	}
+	
+	@GetMapping("/index")
+	public String index(Model model) {
+		model.addAttribute("listaProdutos", produtoRepo.findAll());
+		return "index";
 	}
 	
 	@GetMapping("/produtos")
@@ -58,7 +65,7 @@ public class ProdutoController {
 		return "redirect:/produtos";
 	}
 	
-	@GetMapping("/produtos/excluir/{id}")
+	@GetMapping("/produto/excluir/{id}")
 	public String excluirProduto(@PathVariable("id") long id) {
 		Optional<Produto> produto = produtoRepo.findById(id);
 		if (produto.isEmpty()) {
@@ -66,6 +73,6 @@ public class ProdutoController {
 		}
 		
 		produtoRepo.delete(produto.get());
-		return "redirect:/product";
+		return "redirect:/produtos";
 	}
 }

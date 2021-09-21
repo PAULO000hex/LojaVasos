@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 
 <head>
 
@@ -19,10 +19,7 @@
   <link rel="stylesheet" href="assets/css/fontawesome.css">
   <link rel="stylesheet" href="assets/css/tooplate-main.css">
   <link rel="stylesheet" href="assets/css/owl.css">
-  <!--
-Tooplate 2114 Pixie
-https://www.tooplate.com/view/2114-pixie
--->
+
 </head>
 
 <body>
@@ -41,7 +38,7 @@ https://www.tooplate.com/view/2114-pixie
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
-      <a class="navbar-brand" href="#"><img src="assets/images/header-logo.png" alt=""></a>
+      <a class="navbar-brand" href="#"><img src="assets/images/logo-LosVasos.png" alt=""></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
         aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -61,6 +58,17 @@ https://www.tooplate.com/view/2114-pixie
           </li>
           <li class="nav-item">
             <a class="nav-link" href="contact.html">Entrar</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Backoffice
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#" th:href="@{/produtos/incluir}">Cadastrar Produto</a>
+              <a class="dropdown-item" href="#">Listar Produtos</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
           </li>
         </ul>
       </div>
@@ -114,14 +122,71 @@ https://www.tooplate.com/view/2114-pixie
     <div class="col-md-12">
       <div class="owl-carousel owl-theme">
         <!-- Aqui começam os produtos no loop  -->
-        <a th:each="produto : ${listaProdutos}" th:href="@{/produto/{id}(id=${produto.product_id})}">
+        <a href="single-product.html">
           <div class="featured-item">
             <img src="assets/images/item-01.jpg" alt="Item 1">
-            <h4 th:text="${produto.description}"></h4>
-            <h6 th:text="${produto.price}"></h6>
+            <h4>Proin vel ligula</h4>
+            <h6>$15.00</h6>
           </div>
         </a>
         <!-- Fim do produto -->
+
+        <a href="single-product.html">
+          <div class="featured-item">
+            <img src="assets/images/item-02.jpg" alt="Item 2">
+            <h4>Erat odio rhoncus</h4>
+            <h6>$25.00</h6>
+          </div>
+        </a>
+        <a href="single-product.html">
+          <div class="featured-item">
+            <img src="assets/images/item-03.jpg" alt="Item 3">
+            <h4>Integer vel turpis</h4>
+            <h6>$35.00</h6>
+          </div>
+        </a>
+        <a href="single-product.html">
+          <div class="featured-item">
+            <img src="assets/images/item-04.jpg" alt="Item 4">
+            <h4>Sed purus quam</h4>
+            <h6>$45.00</h6>
+          </div>
+        </a>
+        <a href="single-product.html">
+          <div class="featured-item">
+            <img src="assets/images/item-05.jpg" alt="Item 5">
+            <h4>Morbi aliquet</h4>
+            <h6>$55.00</h6>
+          </div>
+        </a>
+        <a href="single-product.html">
+          <div class="featured-item">
+            <img src="assets/images/item-06.jpg" alt="Item 6">
+            <h4>Urna ac diam</h4>
+            <h6>$65.00</h6>
+          </div>
+        </a>
+        <a href="single-product.html">
+          <div class="featured-item">
+            <img src="assets/images/item-04.jpg" alt="Item 7">
+            <h4>Proin eget imperdiet</h4>
+            <h6>$75.00</h6>
+          </div>
+        </a>
+        <a href="single-product.html">
+          <div class="featured-item">
+            <img src="assets/images/item-05.jpg" alt="Item 8">
+            <h4>Nullam risus nisl</h4>
+            <h6>$85.00</h6>
+          </div>
+        </a>
+        <a href="single-product.html">
+          <div class="featured-item">
+            <img src="assets/images/item-06.jpg" alt="Item 9">
+            <h4>Cras tempus</h4>
+            <h6>$95.00</h6>
+          </div>
+        </a>
       </div>
     </div>
   </div>
@@ -178,7 +243,7 @@ https://www.tooplate.com/view/2114-pixie
       <div class="row">
         <div class="col-md-12">
           <div class="logo">
-            <img src="assets/images/header-logo.png" alt="">
+            <img src="assets/images/logo-LosVasos.png" alt="">
           </div>
         </div>
         <div class="col-md-12">
