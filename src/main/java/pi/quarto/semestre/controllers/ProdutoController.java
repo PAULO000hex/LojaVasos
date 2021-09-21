@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -74,5 +73,16 @@ public class ProdutoController {
 		
 		produtoRepo.delete(produto.get());
 		return "redirect:/produtos";
+	}
+	
+	@GetMapping("/produto/detalhes/{id}")
+	public String detalhesProduto(@PathVariable("id") long id, Model model) {
+		Optional<Produto> produto = produtoRepo.findById(id);
+		if (produto.isEmpty()) {
+			throw new IllegalArgumentException("Produto inválido!");
+		}
+		
+		model.addAttribute("produto", produto.get());
+		return "detalhesProduto";
 	}
 }
