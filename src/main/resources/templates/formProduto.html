@@ -14,6 +14,10 @@
 		<h2>Editar Produto</h2>
 		<form action="#" th:action="@{/produtos/salvar}" th:object="${produto}" method="POST">
 			<input type="hidden" id="id" th:field="*{product_id}">
+			
+			<label class="form-label">Nome</label>
+			<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger d-block"></span>
+			<input type="text" th:field="*{name}" class="form-control mb-4 col-4">
 
 			<label class="form-label">Descrição</label>
 			<span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-danger d-block"></span>

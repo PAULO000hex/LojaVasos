@@ -19,6 +19,7 @@ public class IniciandoBanco implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		Produto p1 = new Produto();
+		p1.setName("Produto1");
 		p1.setDescription("Rosa");
 		p1.setSize("98.28");
 		p1.setPrice(10.99);
@@ -27,6 +28,7 @@ public class IniciandoBanco implements CommandLineRunner {
 		p1.setStatus(true);
 		
 		Produto p2 = new Produto();
+		p2.setName("Produto2");
 		p2.setDescription("Branco");
 		p2.setSize("18.9");
 		p2.setPrice(67.99);

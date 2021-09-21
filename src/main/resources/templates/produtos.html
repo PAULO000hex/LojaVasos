@@ -20,6 +20,7 @@
 			<thead>
 				<tr>				
 					<th>Id</th>
+					<th>Nome</th>
 					<th>Descrição</th>
 					<th>Tamanho</th>
 					<th>Preço</th>
@@ -32,6 +33,7 @@
 			<tbody>
 				<tr th:each="produto : ${listaProdutos}">
 					<td th:text="${produto.product_id}"></td>
+					<td th:text="${produto.name}"></td>
 					<td th:text="${produto.description}"></td>
 					<td th:text="${produto.size}"></td>
 					<td th:text="${produto.price}"></td>
