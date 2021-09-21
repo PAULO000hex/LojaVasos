@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Produto {
@@ -14,14 +16,19 @@ public class Produto {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long product_id;
 
+	@NotBlank(message = "O campo descrição não pode estar vazio!")
 	private String description;
-
+	
+	@NotBlank(message = "O campo tamanho não pode estar vazio!")
 	private String size;
 
+	@NotNull(message = "O campo preço não pode estar vazio!")
 	private double price;
 
+	@NotBlank(message = "O campo cor não pode estar vazio!")
 	private String color;
 
+	@NotNull(message = "O campo quantidade não pode estar vazio!")
 	private int available;
 
 	private boolean status;

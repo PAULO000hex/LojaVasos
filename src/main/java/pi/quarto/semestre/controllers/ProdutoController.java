@@ -27,7 +27,7 @@ public class ProdutoController {
 	@GetMapping("/produtos")
 	public String produtos(Model model) {
 		model.addAttribute("listaProdutos", produtoRepo.findAll());
-		return "index";
+		return "produtos";
 	}
 	
 	@GetMapping("/produto/{id}")
@@ -38,33 +38,34 @@ public class ProdutoController {
 		}
 		
 		model.addAttribute("produto", produtoOpt.get());
-		return "product";
+		return "formProduto";
 	}
 	
 	@GetMapping("/produtos/incluir")
 	public String novoProduto(@ModelAttribute("produto") Produto produto) {
-		return "product";
+		return "formProduto";
 	}
 	
 	@PostMapping("/produtos/salvar")
 	public String salvarProduto(@Valid @ModelAttribute("produto") Produto produto, BindingResult bindingResult) {		
 		if (bindingResult.hasErrors()) {
 			System.out.println(bindingResult.getAllErrors());
-			return "product";
+			return "formProduto";
 		}
 		
+		produto.setStatus(true);
 		produtoRepo.save(produto);
 		return "redirect:/produtos";
 	}
 	
 	@GetMapping("/produtos/excluir/{id}")
 	public String excluirProduto(@PathVariable("id") long id) {
-		Optional<Produto> pessoaOpt = produtoRepo.findById(id);
-		if (pessoaOpt.isEmpty()) {
+		Optional<Produto> produto = produtoRepo.findById(id);
+		if (produto.isEmpty()) {
 			throw new IllegalArgumentException("Produto inválido!");
 		}
 		
-		produtoRepo.delete(pessoaOpt.get());
+		produtoRepo.delete(produto.get());
 		return "redirect:/product";
 	}
 }
