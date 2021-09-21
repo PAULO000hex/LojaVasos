@@ -15,7 +15,6 @@
 		<form action="#" th:action="@{/produtos/salvar}" th:object="${produto}" method="POST">
 			<input type="hidden" id="id" th:field="*{product_id}">
 
-			
 			<label class="form-label">Descrição</label>
 			<span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-danger d-block"></span>
 			<input type="text" th:field="*{description}" class="form-control mb-4 col-4">
@@ -40,9 +39,10 @@
       		<input type="file" class="form-control mb-4 col-4">
 			
 			<button type="submit" class="btn btn-info col-2">Salvar</button>
+			<a th:href="@{/produtos}" class="btn btn-info col-2">Cancelar</a>
 		</form>
 		<hr>
-		<a th:href="@{/produtos}">Retornar para a lista de pessoas</a>
+		<a th:href="@{/produtos}">Retornar para a listagem de produtos</a>
 	</div>
 </body>
 </html>
