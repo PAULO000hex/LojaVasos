@@ -48,16 +48,16 @@
 		
 		<div class="row mt-4 mb-4">
 			<div class="col">
-				<h2>Descrilão do Produto</h2>
+				<h2>Nome do Produto</h2>
+				<p th:text="${produto.name}"></p>
+			</div>
+			<div class="col">
+				<h2>Descrição do Produto</h2>
 				<p th:text="${produto.description}"></p>
 			</div>
 			<div class="col">
 				<h2>Cor do Produto</h2>
 				<p th:text="${produto.color}"></p>
-			</div>
-			<div class="col">
-				<h2>Tamanho do Produto</h2>
-				<p th:text="${produto.size}"></p>
 			</div>
 		</div>
 		
@@ -69,6 +69,10 @@
 			<div class="col">
 				<h2>Status do Produto</h2>
 				<p th:text="${produto.status}"></p>
+			</div>
+			<div class="col">
+				<h2>Tamanho do Produto</h2>
+				<p th:text="${produto.size}"></p>
 			</div>
 		</div>
 		

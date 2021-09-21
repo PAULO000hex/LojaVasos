@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Produto {
@@ -15,7 +16,12 @@ public class Produto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long product_id;
+	
+	@Size(max = 200, message = "O nome deve ter no máximo 200 caracteres!")
+	@NotBlank(message = "O campo nome não pode estar vazio!")
+	private String name;
 
+	@Size(max = 2000, message = "A descrição deve ter no máximo 2000 caracteres!")
 	@NotBlank(message = "O campo descrição não pode estar vazio!")
 	private String description;
 	
@@ -37,9 +43,10 @@ public class Produto {
 	
 	public Produto() {}
 
-	public Produto(Long product_id, String description, String size, double price, String color, int available,
+	public Produto(Long product_id, String name, String description, String size, double price, String color, int available,
 			boolean status, String image_url) {
 		this.product_id = product_id;
+		this.name = name;
 		this.description = description;
 		this.size = size;
 		this.price = price;
@@ -55,6 +62,14 @@ public class Produto {
 
 	public void setProduct_id(Long product_id) {
 		this.product_id = product_id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {
