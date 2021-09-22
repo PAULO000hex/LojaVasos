@@ -1,5 +1,6 @@
 package pi.quarto.semestre.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,12 +13,12 @@ public class ProdutoImagens {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long imagemId;
+	private Long id;
 
 	private String url;
 	
-	@ManyToOne
-	@JoinColumn(name = "id")
+	@ManyToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name = "produto")
 	private Produto produto;
 
 	public ProdutoImagens() {}
@@ -28,11 +29,11 @@ public class ProdutoImagens {
 	}
 
 	public Long getImagemId() {
-		return imagemId;
+		return id;
 	}
 
-	public void setImagemId(Long imagemId) {
-		this.imagemId = imagemId;
+	public void setImagemId(Long id) {
+		this.id = id;
 	}
 
 	public String getUrl() {
