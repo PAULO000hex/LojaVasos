@@ -18,23 +18,23 @@ public class Produto {
 	private Long id;
 	
 	@Size(max = 200, message = "O nome deve ter no máximo 200 caracteres!")
-	@NotBlank(message = "O campo nome não pode estar vazio!")
+
 	private String name;
 
 	@Size(max = 2000, message = "A descrição deve ter no máximo 2000 caracteres!")
-	@NotBlank(message = "O campo descrição não pode estar vazio!")
+
 	private String description;
 	
-	@NotBlank(message = "O campo tamanho não pode estar vazio!")
+
 	private String size;
 
-	@NotNull(message = "O campo preço não pode estar vazio!")
+
 	private double price;
 
-	@NotBlank(message = "O campo cor não pode estar vazio!")
+
 	private String color;
 
-	@NotNull(message = "O campo quantidade não pode estar vazio!")
+
 	private int available;
 
 	private boolean status;
