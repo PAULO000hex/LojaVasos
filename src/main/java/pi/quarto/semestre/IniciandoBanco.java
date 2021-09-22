@@ -18,25 +18,26 @@ public class IniciandoBanco implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception {
-		Produto p1 = new Produto();
-		p1.setName("teste");
-		p1.setDescription("Rosa");
-		p1.setSize("98.28");
-		p1.setPrice(10.99);
-		p1.setColor("preto");
-		p1.setAvailable(10);
-		p1.setStatus(true);
-		
-		Produto p2 = new Produto();
-		p2.setName("seila");
-		p2.setDescription("Branco");
-		p2.setSize("18.9");
-		p2.setPrice(67.99);
-		p2.setColor("Lilás");
-		p2.setAvailable(29);
-		p2.setStatus(true);
+		Produto p1 = new Produto("seila","Branco","18.9",67.99,"Lilás",29,true,"circulo.jpg");
+		Produto p2 = new Produto("seila","Branco","18.9",67.99,"Lilás",29,true,"circulo.jpg");
+		Produto p3 = new Produto("seila","Branco","18.9",67.99,"Lilás",29,true,"circulo.jpg");
+		Produto p4 = new Produto("seila","Branco","18.9",67.99,"Lilás",29,true,"circulo.jpg");
+		Produto p5 = new Produto("seila","Branco","18.9",67.99,"Lilás",29,true,"circulo.jpg");
+		Produto p6 = new Produto("seila","Branco","18.9",67.99,"Lilás",29,true,"circulo.jpg");
+		Produto p7 = new Produto("seila","Branco","18.9",67.99,"Lilás",29,true,"circulo.jpg");
+		Produto p8 = new Produto("seila","Branco","18.9",67.99,"Lilás",29,true,"circulo.jpg");
+		Produto p9 = new Produto("seila","Branco","18.9",67.99,"Lilás",29,true,"circulo.jpg");
+		Produto p10 = new Produto("seila","Branco","18.9",67.99,"Lilás",29,true,"circulo.jpg");
 		
 		produtoRepo.save(p1);
 		produtoRepo.save(p2);
+		produtoRepo.save(p3);
+		produtoRepo.save(p4);
+		produtoRepo.save(p5);
+		produtoRepo.save(p6);
+		produtoRepo.save(p7);
+		produtoRepo.save(p8);
+		produtoRepo.save(p9);
+		produtoRepo.save(p10);
 	}
 }

@@ -43,9 +43,8 @@ public class Produto {
 	
 	public Produto() {}
 
-	public Produto(Long id, String name, String description, String size, double price, String color, int available,
+	public Produto(String name, String description, String size, double price, String color, int available,
 			boolean status, String image_url) {
-		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.size = size;
