@@ -15,7 +15,7 @@ public class Produto {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long product_id;
+	private Long id;
 	
 	@Size(max = 200, message = "O nome deve ter no máximo 200 caracteres!")
 	@NotBlank(message = "O campo nome não pode estar vazio!")
@@ -43,9 +43,9 @@ public class Produto {
 	
 	public Produto() {}
 
-	public Produto(Long product_id, String name, String description, String size, double price, String color, int available,
+	public Produto(Long id, String name, String description, String size, double price, String color, int available,
 			boolean status, String image_url) {
-		this.product_id = product_id;
+		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.size = size;
@@ -56,12 +56,12 @@ public class Produto {
 		this.image_url = image_url;
 	}
 
-	public Long getProduct_id() {
-		return product_id;
+	public Long getId() {
+		return id;
 	}
 
-	public void setProduct_id(Long product_id) {
-		this.product_id = product_id;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -137,7 +137,7 @@ public class Produto {
 		if (getClass() != obj.getClass())
 			return false;
 		Produto other = (Produto) obj;
-		return Objects.equals(product_id, other.product_id);
+		return Objects.equals(id, other.id);
 	}
 
 }

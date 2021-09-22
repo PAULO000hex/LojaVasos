@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 import javax.validation.Valid;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,7 +28,7 @@ import pi.quarto.semestre.repositories.ProdutoRepositorio;
 
 @Controller
 public class ProdutoController {
-        private static String caminhoImagens = "C:\\Users\\AmandaDosSantosBetti\\Documents\\imagens\\";
+        private static String caminhoImagens = "C:\\Users\\wmdbox\\Downloads\\imagensPI\\";
 	private ProdutoRepositorio produtoRepo;
 	
 	public ProdutoController(ProdutoRepositorio produtoRepo) {
@@ -42,7 +43,7 @@ public class ProdutoController {
 	
 	@GetMapping("/produtos")
 	public String produtos(Model model) {
-		model.addAttribute("listaProdutos", produtoRepo.findAll());
+		model.addAttribute("listaProdutos", produtoRepo.findAll(Sort.by(Sort.Direction.DESC, "id")));
 		return "produtos";
 	}
 	
@@ -74,9 +75,9 @@ public class ProdutoController {
                 try{
                     if(!arquivo.isEmpty()){
                         byte[] bytes = arquivo.getBytes();
-                        Path caminho = Paths.get(caminhoImagens+String.valueOf(produto.getProduct_id())+arquivo.getOriginalFilename());
+                        Path caminho = Paths.get(caminhoImagens+String.valueOf(produto.getId())+arquivo.getOriginalFilename());
                         Files.write(caminho, bytes);
-                        produto.setImage_url(String.valueOf((produto.getProduct_id())+arquivo.getOriginalFilename()));
+                        produto.setImage_url(String.valueOf((produto.getId())+arquivo.getOriginalFilename()));
                         produtoRepo.save(produto);
                     }
                 }catch(IOException e){
@@ -92,7 +93,13 @@ public class ProdutoController {
 			throw new IllegalArgumentException("Produto inválido!");
 		}
 		
-		produtoRepo.delete(produto.get());
+		Produto produtoBanco = produto.get();
+		if(produtoBanco.isStatus()) {
+			produtoBanco.setStatus(false);
+		} else {
+			produtoBanco.setStatus(true);
+		}
+		produtoRepo.save(produtoBanco);
 		return "redirect:/produtos";
 	}
 	
