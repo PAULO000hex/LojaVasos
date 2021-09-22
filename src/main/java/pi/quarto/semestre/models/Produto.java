@@ -18,11 +18,9 @@ public class Produto {
 	private Long id;
 	
 	@Size(max = 200, message = "O nome deve ter no máximo 200 caracteres!")
-
 	private String name;
 
 	@Size(max = 2000, message = "A descrição deve ter no máximo 2000 caracteres!")
-
 	private String description;
 	
 

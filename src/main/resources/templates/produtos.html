@@ -59,16 +59,6 @@
 			</tbody>
 		</table>
 
-		<div class="row mt-3">
-			<div class="col">
-				<nav aria-label="Page navigation example">
-				  <ul class="pagination">
-				    <li th:if="${listaProdutos.hasPrevious()}" class="page-item"><a class="page-link" th:href="@{/produtospag(page=${listaProdutos.number-1}, size = ${listaProdutos.size})}">Anterior</a></li>
-				    <th:block th:each="i:${#numbers.sequence(0,listaProdutos.totalPages -1)}" class="page-item"><a class="page-link" th:href="@{/produtospag(page=${i},size= ${listaProdutos.size})}">[[ ${i} +1 ]] </a></th:block>
-				    <li th:if="${listaProdutos.hasNext()}" class="page-item"><a class="page-link" th:href="@{/produtospag(page=${listaProdutos.number+1}, size = ${listaProdutos.size})}">Proxima</a></li></ul>
-				</nav>
-			</div>
-		</div>
 	</div>
 </body>
 </html>

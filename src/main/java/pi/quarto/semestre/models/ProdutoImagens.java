@@ -17,7 +17,7 @@ public class ProdutoImagens {
 
 	private String url;
 	
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne()
 	@JoinColumn(name = "produto")
 	private Produto produto;
 
