@@ -132,9 +132,6 @@ public class ProdutoController {
 				Files.write(caminho, bytes);
 				produto.setImage_url(String.valueOf((produto.getId()) + arquivo.getOriginalFilename()));
 				produtoRepo.save(produto);
-				
-				ProdutoImagens produtoImagem = new ProdutoImagens(produto.getImage_url(), produto);
-				produtoImagensRepo.save(produtoImagem);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -167,6 +164,7 @@ public class ProdutoController {
 		}
 		
 		model.addAttribute("produto", produto.get());
+		model.addAttribute("imagens", produtoImagensRepo.findAll());
 		return "detalhesProduto";
 	}
 
