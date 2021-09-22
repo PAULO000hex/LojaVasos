@@ -12,31 +12,27 @@ public class ProdutoImagens {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private Long imagemId;
 
 	private String url;
 	
-	private boolean ismain;
-	
 	@ManyToOne
-	@JoinColumn(nullable = false, name = "id")
+	@JoinColumn(name = "id")
 	private Produto produto;
 
 	public ProdutoImagens() {}
 	
-	public ProdutoImagens(Long id, String url, boolean ismain, Produto produto) {
-		this.id = id;
+	public ProdutoImagens(String url, Produto produto) {
 		this.url = url;
-		this.ismain = ismain;
 		this.produto = produto;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getImagemId() {
+		return imagemId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setImagemId(Long imagemId) {
+		this.imagemId = imagemId;
 	}
 
 	public String getUrl() {
@@ -45,14 +41,6 @@ public class ProdutoImagens {
 
 	public void setUrl(String url) {
 		this.url = url;
-	}
-
-	public boolean isIsmain() {
-		return ismain;
-	}
-
-	public void setIsmain(boolean ismain) {
-		this.ismain = ismain;
 	}
 
 	public Produto getProduto() {

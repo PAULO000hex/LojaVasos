@@ -45,7 +45,7 @@
 						<a th:href="@{/produto/excluir/{id}(id=${produto.id})}" class="btn btn-danger" th:text="${produto.status} ? 'Desativar' : 'Ativar'"></a>
 					</td>
 					<td><a th:href="@{/produto/detalhes/{id}(id=${produto.id})}">Ver detalhes</a></td>
-					<td><a th:href="@{/produto/imagens}" class="btn btn-primary">Gerenciar Imagens</a></td>
+					<td><a th:href="@{/produto/imagens/{id}(id=${produto.id})}" class="btn btn-primary">Gerenciar Imagens</a></td>
 				</tr>
 			</tbody>
 		</table>
