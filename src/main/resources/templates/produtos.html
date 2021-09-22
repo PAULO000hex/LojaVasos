@@ -8,7 +8,7 @@
 
 </head>
 <body>
-	<div class="container my-2">
+	<div class="my-2 mx-5">
 		<div class="d-flex justify-content-between mb-3">
 			<h1>Produtos</h1>
 			
@@ -28,6 +28,7 @@
 					<th>Status</th>
 					<th>Ações</th>
 					<th>Detalhes do Produto</th>
+					<th>Gerenciar Imagens</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -44,6 +45,7 @@
 						<a th:href="@{/produto/excluir/{id}(id=${produto.id})}" class="btn btn-danger" th:text="${produto.status} ? 'Desativar' : 'Ativar'"></a>
 					</td>
 					<td><a th:href="@{/produto/detalhes/{id}(id=${produto.id})}">Ver detalhes</a></td>
+					<td><a th:href="@{/produto/imagens}" class="btn btn-primary">Gerenciar Imagens</a></td>
 				</tr>
 			</tbody>
 		</table>

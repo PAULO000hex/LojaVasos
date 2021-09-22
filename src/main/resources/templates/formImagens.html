@@ -15,14 +15,10 @@
 		<h1>Manutenção de Produtos</h1>
 		<hr>
 		<h2>Editar Produto</h2>
-		<form action="#" th:action="@{/produtos/salvar}" th:object="${produto}" method="POST">
-			<input type="hidden" id="id" th:field="*{product_id}">
-			
-			<select class="js-example-basic-single" name="state">
-  <option value="AL">Alabama</option>
-  <option value="WY">Wyoming</option>
-</select>
-
+		<form action="#" th:action="@{/produtos/salvar}" th:object="${listaProdutos}" method="POST">			
+			<select class="js-example-basic-single form-control" name="state">
+			  <option th:each="produto : ${listaProdutos}" th:value="${produto.id}" th:text="${produto.name}"></option>
+			</select>
 
       		<label class="form-label">Imagem</label>
       		<input type="file" class="form-control mb-4 col-4">

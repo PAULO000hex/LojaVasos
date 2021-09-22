@@ -13,7 +13,7 @@
 		<hr>
 		<h2>Editar Produto</h2>
 		<form action="#" th:action="@{/produtos/salvar}" th:object="${produto}" method="POST" enctype="multipart/form-data">
-			<input type="hidden" id="id" th:field="*{product_id}">
+			<input type="hidden" id="id" th:field="*{id}">
 			
 			<label class="form-label">Nome</label>
 			<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger d-block"></span>
@@ -39,7 +39,7 @@
 			<span th:if="${#fields.hasErrors('available')}" th:errors="*{available}" class="text-danger d-block"></span>
       		<input type="text" th:field="*{available}" class="form-control mb-4 col-4">
       		
-      		<label class="form-label">Imagem</label>
+      		<label class="form-label">Imagem Padrão</label>
       		<input type="file" name="file" class="form-control mb-4 col-4">
 			
 			<button type="submit" class="btn btn-info col-2">Salvar</button>

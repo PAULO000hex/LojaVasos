@@ -47,6 +47,12 @@ public class ProdutoController {
 		return "produtos";
 	}
 	
+	@GetMapping("/produto/imagens")
+	public String produtoImagens(Model model) {
+		model.addAttribute("listaProdutos", produtoRepo.findAll());
+		return "formImagens";
+	}
+	
 	@GetMapping("/produto/{id}")
 	public String alterarProdutos(@PathVariable("id") long id, Model model) {
 		Optional<Produto> produtoOpt = produtoRepo.findById(id);
