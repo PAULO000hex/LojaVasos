@@ -32,7 +32,7 @@
 			</thead>
 			<tbody>
 				<tr th:each="produto : ${listaProdutos}">
-					<td th:text="${produto.product_id}"></td>
+					<td th:text="${produto.id}"></td>
 					<td th:text="${produto.name}"></td>
 					<td th:text="${produto.description}"></td>
 					<td th:text="${produto.size}"></td>
@@ -40,10 +40,10 @@
 					<td th:text="${produto.available}"></td>
 					<td th:text="${produto.status}"></td>
 					<td>
-						<a th:href="@{/produto/{id}(id=${produto.product_id})}" class="btn btn-primary">Alterar</a>
-						<a th:href="@{/produto/excluir/{id}(id=${produto.product_id})}" class="btn btn-danger">Excluir</a>
+						<a th:href="@{/produto/{id}(id=${produto.id})}" class="btn btn-primary">Alterar</a>
+						<a th:href="@{/produto/excluir/{id}(id=${produto.id})}" class="btn btn-danger" th:text="${produto.status} ? 'Desativar' : 'Ativar'"></a>
 					</td>
-					<td><a th:href="@{/produto/detalhes/{id}(id=${produto.product_id})}">Ver detalhes</a></td>
+					<td><a th:href="@{/produto/detalhes/{id}(id=${produto.id})}">Ver detalhes</a></td>
 				</tr>
 			</tbody>
 		</table>
