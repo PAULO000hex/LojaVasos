@@ -5,10 +5,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -33,10 +35,10 @@ import pi.quarto.semestre.repositories.ProdutoRepositorio;
 
 @Controller
 public class ProdutoController {
-	
+	@Autowired
+	private ProdutoImagensRepositorio produtoImagensRepo;
 	private static String caminhoImagens = "C:\\Users\\wmdbox\\Downloads\\imagensPI\\";
 	private ProdutoRepositorio produtoRepo;
-	private ProdutoImagensRepositorio produtoImagensRepo;
 
 	public ProdutoController(ProdutoRepositorio produtoRepo) {
 		this.produtoRepo = produtoRepo;
@@ -130,6 +132,9 @@ public class ProdutoController {
 				Files.write(caminho, bytes);
 				produto.setImage_url(String.valueOf((produto.getId()) + arquivo.getOriginalFilename()));
 				produtoRepo.save(produto);
+				
+				ProdutoImagens produtoImagem = new ProdutoImagens(produto.getImage_url(), produto);
+				produtoImagensRepo.save(produtoImagem);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -160,7 +165,7 @@ public class ProdutoController {
 		if (produto.isEmpty()) {
 			throw new IllegalArgumentException("Produto inválido!");
 		}
-
+		
 		model.addAttribute("produto", produto.get());
 		return "detalhesProduto";
 	}
