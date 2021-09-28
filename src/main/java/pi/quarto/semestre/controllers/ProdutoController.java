@@ -43,7 +43,7 @@ public class ProdutoController {
 	public String produtos(Model model) {
 		model.addAttribute("listaProdutos",
 				produtoRepo.findAll(Sort.by(Sort.Direction.DESC, "id")));
-		return "produtos";
+		return "backoffice/produtos";
 	}
 	
 	@GetMapping("/produto/imagens/{id}")
@@ -54,7 +54,7 @@ public class ProdutoController {
 		}
 
 		model.addAttribute("produto", produtoOpt.get());
-		return "formImagens";
+		return "backoffice/formImagens";
 	}
 
 	@PostMapping("/produto/imagem/salvar")
@@ -85,12 +85,12 @@ public class ProdutoController {
 		}
 
 		model.addAttribute("produto", produtoOpt.get());
-		return "formProduto";
+		return "backoffice/formProduto";
 	}
 
 	@GetMapping("/produtos/incluir")
 	public String novoProduto(@ModelAttribute("produto") Produto produto) {
-		return "formProduto";
+		return "backoffice/formProduto";
 	}
 
 	@PostMapping("/produtos/salvar")
@@ -98,7 +98,7 @@ public class ProdutoController {
 			@RequestParam("file") MultipartFile arquivo) {
 		if (bindingResult.hasErrors()) {
 			System.out.println(bindingResult.getAllErrors());
-			return "formProduto";
+			return "backoffice/formProduto";
 		}
 
 		produto.setStatus(true);
@@ -144,7 +144,7 @@ public class ProdutoController {
 		
 		model.addAttribute("produto", produto.get());
 		model.addAttribute("imagens", produtoImagensRepo.findAll());
-		return "detalhesProduto";
+		return "backoffice/detalhesProduto";
 	}
 
 	@GetMapping("/produto/mostrarImagem/{imagem}")

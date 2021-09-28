@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <title>Eccomerce</title>
+    <style>
+        @media(max-width: 992px) {
+            .card {
+                margin: 0 auto;
+            }
+        }
+    </style>
+  </head>
+  <body>
+	  <div class="container">
+	    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+	      <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+	        <img src="" alt="img-logo">
+	      </a>
+	
+	      <div class="col-md-3 text-end">
+	        Icons para logar/registrar aqui
+	      </div>
+	    </header>
+	  </div>
+  
+    <div class="container">
+        <div class="row mt-3">
+            <div th:each="produto : ${listaProdutos}" class="col mb-3">
+                <div class="card" style="width: 18rem; max-height: 22rem;">
+                    <img class="img-fluid" th:src="@{/produto/mostrarImagem/{imagem}(imagem=${produto.Image_url})}" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title mb-3">Nome do Produto</h5>
+                      <a href="#" class="btn btn-primary">Detalhes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+  </body>
+</html>
