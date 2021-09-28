@@ -46,11 +46,10 @@
 					<td th:text="${produto.price}"></td>
 					<td th:text="${produto.available}"></td>
 					<td th:text="${produto.status}"></td>
-					<td><a th:href="@{/produto/{id}(id=${produto.id})}"
-						class="btn btn-primary">Alterar</a> <a
-						th:href="@{/produto/excluir/{id}(id=${produto.id})}"
-						class="btn btn-danger"
-						th:text="${produto.status} ? 'Desativar' : 'Ativar'"></a></td>
+					<td>
+						<a th:href="@{/produto/{id}(id=${produto.id})}"	class="btn btn-primary">Alterar</a>
+						<a th:href="@{/produto/excluir/{id}(id=${produto.id})}"	class="btn btn-danger" th:text="${produto.status} ? 'Desativar' : 'Ativar'"></a>
+					</td>
 					<td><a th:href="@{/produto/detalhes/{id}(id=${produto.id})}">Ver
 							detalhes</a></td>
 					<td><a th:href="@{/produto/imagens/{id}(id=${produto.id})}"

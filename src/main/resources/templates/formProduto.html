@@ -14,39 +14,38 @@
 	<div class="container my-2">
 		<h1>Manutenção de Produtos</h1>
 		<hr>
-		<h2>Editar Produto</h2>
 		<form action="#" th:action="@{/produtos/salvar}" th:object="${produto}" method="POST" enctype="multipart/form-data">
 			<input type="hidden" id="id" th:field="*{id}">
 			
 			<label class="form-label">Nome</label>
 			<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger d-block"></span>
-			<input type="text" th:field="*{name}" class="form-control mb-4 col-4" maxlength="200">
+			<input type="text" th:field="*{name}" class="form-control mb-4 col-4" maxlength="200" required>
 
 			<label class="form-label">Descrição</label>
 			<span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-danger d-block"></span>
-			<textarea maxlength="2000" th:field="*{description}" class="form-control mb-4 col-4" ></textarea>
+			<textarea maxlength="2000" th:field="*{description}" class="form-control mb-4 col-4" required></textarea>
 			
 			<label class="form-label">Tamanho</label>
 			<span th:if="${#fields.hasErrors('size')}" th:errors="*{size}" class="text-danger d-block"></span>
-      		<input type="number" th:field="*{size}" class="form-control mb-4 col-4">
+      		<input type="number" th:field="*{size}" class="form-control mb-4 col-4" required>
       		
       		<label class="form-label">Preço</label>
       		<span th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="text-danger d-block" ></span>
-      		<input type="number" th:field="*{price}" class="form-control mb-4 col-4" id="price" step="0.01" min="0">
+      		<input type="number" th:field="*{price}" class="form-control mb-4 col-4" id="price" step="0.01" required>
       		
       		<label class="form-label">Cor</label>
       		<span th:if="${#fields.hasErrors('color')}" th:errors="*{color}" class="text-danger d-block"></span>
-			<input type="text" th:field="*{color}" class="form-control mb-4 col-4">
+			<input type="text" th:field="*{color}" class="form-control mb-4 col-4" required>
 			
 			<label class="form-label">Quantidade</label>
 			<span th:if="${#fields.hasErrors('available')}" th:errors="*{available}" class="text-danger d-block"></span>
-      		<input type="text" th:field="*{available}" class="form-control mb-4 col-4">
+      		<input type="text" th:field="*{available}" class="form-control mb-4 col-4" required>
       		
       		<label class="form-label">Imagem Padrão</label>
-      		<input type="file" name="file" class="form-control mb-4 col-4">
+      		<input type="file" name="file" class="form-control mb-4 col-4" accept="image/*" required>
 			
 			<button type="submit" class="btn btn-info col-2">Salvar</button>
-			<a th:href="@{/produtospag}" class="btn btn-info col-2">Cancelar</a>
+			<a th:href="@{/produtos}" class="btn btn-info col-2">Cancelar</a>
 		</form>
 		<hr>
 		<a th:href="@{/produtos}">Retornar para a listagem de produtos</a>
