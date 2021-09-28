@@ -46,11 +46,10 @@
 					<td th:text="${produto.price}"></td>
 					<td th:text="${produto.available}"></td>
 					<td th:text="${produto.status}"></td>
-					<td><a th:href="@{/produto/{id}(id=${produto.id})}"
-						class="btn btn-primary">Alterar</a> <a
-						th:href="@{/produto/excluir/{id}(id=${produto.id})}"
-						class="btn btn-danger"
-						th:text="${produto.status} ? 'Desativar' : 'Ativar'"></a></td>
+					<td>
+						<a th:href="@{/produto/{id}(id=${produto.id})}"	class="btn btn-primary">Alterar</a>
+						<a th:href="@{/produto/excluir/{id}(id=${produto.id})}"	class="btn btn-danger" th:text="${produto.status} ? 'Desativar' : 'Ativar'"></a>
+					</td>
 					<td><a th:href="@{/produto/detalhes/{id}(id=${produto.id})}">Ver
 							detalhes</a></td>
 					<td><a th:href="@{/produto/imagens/{id}(id=${produto.id})}"
@@ -59,16 +58,6 @@
 			</tbody>
 		</table>
 
-		<div class="row mt-3">
-			<div class="col">
-				<nav aria-label="Page navigation example">
-				  <ul class="pagination">
-				    <li th:if="${listaProdutos.hasPrevious()}" class="page-item"><a class="page-link" th:href="@{/produtospag(page=${listaProdutos.number-1}, size = ${listaProdutos.size})}">Anterior</a></li>
-				    <th:block th:each="i:${#numbers.sequence(0,listaProdutos.totalPages -1)}" class="page-item"><a class="page-link" th:href="@{/produtospag(page=${i},size= ${listaProdutos.size})}">[[ ${i} +1 ]] </a></th:block>
-				    <li th:if="${listaProdutos.hasNext()}" class="page-item"><a class="page-link" th:href="@{/produtospag(page=${listaProdutos.number+1}, size = ${listaProdutos.size})}">Proxima</a></li></ul>
-				</nav>
-			</div>
-		</div>
 	</div>
 </body>
 </html>

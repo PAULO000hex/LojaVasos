@@ -5,17 +5,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,7 +21,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import pi.quarto.semestre.models.Produto;
 import pi.quarto.semestre.models.ProdutoImagens;
@@ -35,6 +29,7 @@ import pi.quarto.semestre.repositories.ProdutoRepositorio;
 
 @Controller
 public class ProdutoController {
+	
 	@Autowired
 	private ProdutoImagensRepositorio produtoImagensRepo;
 	private static String caminhoImagens = "C:\\Users\\wmdbox\\Downloads\\imagensPI\\";
@@ -44,25 +39,11 @@ public class ProdutoController {
 		this.produtoRepo = produtoRepo;
 	}
 
-	@GetMapping("/index")
-	public String index(Model model) {
-		model.addAttribute("listaProdutos", produtoRepo.findAll());
-		return "index";
-	}
-
 	@GetMapping("/produtos")
 	public String produtos(Model model) {
 		model.addAttribute("listaProdutos",
-				produtoRepo.findAll(PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "id"))));
+				produtoRepo.findAll(Sort.by(Sort.Direction.DESC, "id")));
 		return "produtos";
-	}
-	
-	@GetMapping("/produtospag")
-	public ModelAndView carregaProdutosPaginacao(@PageableDefault(size = 5)Pageable pageable, ModelAndView model) {
-		Page<Produto> pageProduto = produtoRepo.findAll(pageable);
-		model.addObject("listaProdutos", pageProduto);
-		model.setViewName("/produtos");
-		return model;
 	}
 	
 	@GetMapping("/produto/imagens/{id}")
@@ -87,9 +68,7 @@ public class ProdutoController {
 						.get(caminhoImagens + String.valueOf(produto.getId()) + arquivo.getOriginalFilename());
 				Files.write(caminho, bytes);
 				
-				ProdutoImagens prodImg = new ProdutoImagens();
-				prodImg.setUrl(String.valueOf((produto.getId()) + arquivo.getOriginalFilename()));
-				prodImg.setProduto(produto);
+				ProdutoImagens prodImg = new ProdutoImagens(String.valueOf((produto.getId()) + arquivo.getOriginalFilename()), produto);
 				produtoImagensRepo.save(prodImg);
 			}
 		} catch (IOException e) {
@@ -136,7 +115,7 @@ public class ProdutoController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return "redirect:/produtospag";
+		return "redirect:/produtos";
 	}
 
 	@GetMapping("/produto/excluir/{id}")
