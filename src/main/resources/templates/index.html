@@ -16,7 +16,7 @@
   <body>
 	  <div class="container">
 	    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-	      <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+	      <a href="/index" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
 	        <img src="" alt="img-logo">
 	      </a>
 	
@@ -29,11 +29,14 @@
     <div class="container">
         <div class="row mt-3">
             <div th:each="produto : ${listaProdutos}" class="col mb-3">
-                <div class="card" style="width: 18rem; max-height: 22rem;">
-                    <img class="img-fluid" th:src="@{/produto/mostrarImagem/{imagem}(imagem=${produto.Image_url})}" alt="Card image cap">
-                    <div class="card-body">
-                      <h5 class="card-title mb-3">Nome do Produto</h5>
-                      <a href="#" class="btn btn-primary">Detalhes</a>
+                <div class="card p-3" style="width: 18rem; max-height: 22rem;">
+                    <img th:src="@{/produto/mostrarImagem/{imagem}(imagem=${produto.Image_url})}" class="img-fluid" alt="Card image cap">
+                    <div>
+                      <h5 class="mt-2 mb-1" th:text="${produto.name}"></h5>
+                      <div class="d-flex justify-content-between">
+                        <span class="mt-1" th:text="${produto.price}">R$ 299,00</span>
+                        <a th:href="@{/produto/detalhes-eccomerce/{id}(id=${produto.id})}"><img src="assets/images/detalhes.png" alt="detalhes"></a>
+                      </div>
                     </div>
                 </div>
             </div>
