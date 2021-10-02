@@ -49,7 +49,7 @@ public class ProdutoController {
 	@GetMapping("/produto/imagens/{id}")
 	public String produtoImagens(@PathVariable("id") long id, Model model) {
 		Optional<Produto> produtoOpt = produtoRepo.findById(id);
-		if (produtoOpt.isEmpty()) {
+		if (produtoOpt==null) {
 			throw new IllegalArgumentException("Produto inválido!");
 		}
 
@@ -80,7 +80,7 @@ public class ProdutoController {
 	@GetMapping("/produto/{id}")
 	public String alterarProdutos(@PathVariable("id") long id, Model model) {
 		Optional<Produto> produtoOpt = produtoRepo.findById(id);
-		if (produtoOpt.isEmpty()) {
+		if (produtoOpt==null) {
 			throw new IllegalArgumentException("Produto inválido!");
 		}
 
@@ -121,7 +121,7 @@ public class ProdutoController {
 	@GetMapping("/produto/excluir/{id}")
 	public String excluirProduto(@PathVariable("id") long id) {
 		Optional<Produto> produto = produtoRepo.findById(id);
-		if (produto.isEmpty()) {
+		if (produto==null) {
 			throw new IllegalArgumentException("Produto inválido!");
 		}
 
@@ -138,7 +138,7 @@ public class ProdutoController {
 	@GetMapping("/produto/detalhes/{id}")
 	public String detalhesProduto(@PathVariable("id") long id, Model model) {
 		Optional<Produto> produto = produtoRepo.findById(id);
-		if (produto.isEmpty()) {
+		if (produto==null) {
 			throw new IllegalArgumentException("Produto inválido!");
 		}
 		
