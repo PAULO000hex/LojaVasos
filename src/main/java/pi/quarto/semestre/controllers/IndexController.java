@@ -26,7 +26,7 @@ public class IndexController {
 	@GetMapping("/produto/detalhes-eccomerce/{id}")
 	public String detalhesProduto(@PathVariable("id") long id, Model model) {
 		Optional<Produto> produto = produtoRepo.findById(id);
-		if (produto.isEmpty()) {
+		if (produto ==null) {
 			throw new IllegalArgumentException("Produto inválido!");
 		}
 		
