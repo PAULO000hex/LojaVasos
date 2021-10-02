@@ -8,8 +8,49 @@
   </head>
   <body>
     <h1>Detalhes do Produto!</h1>
-    
-    <a th:href="@{/index}">Retornar para o index</a>
+  <div class="container my-2">
+		<h1>Visualizar Produto</h1>
+		
+		<div class="row">
+			<div class="col">
+				<span class="d-block">R$ <span th:text="${produto.price}"></span></span>
+				<button class="btn btn-info col-2 disabled">Comprar</button>
+			</div>
+		</div>
+		
+		<div class="row mt-4 mb-4">
+			<div class="col">
+				<h2>Nome do Produto</h2>
+				<p th:text="${produto.name}"></p>
+			</div>
+			<div class="col">
+				<h2>Descrição do Produto</h2>
+				<p th:text="${produto.description}"></p>
+			</div>
+			<div class="col">
+				<h2>Cor do Produto</h2>
+				<p th:text="${produto.color}"></p>
+			</div>
+		</div>
+		
+		<div class="row mt-4 mb-4">
+			<div class="col">
+				<h2>Quantidade do Produto</h2>
+				<p th:text="${produto.available}"></p>
+			</div>
+			<div class="col">
+				<h2>Status do Produto</h2>
+				<p th:text="${produto.status}"></p>
+			</div>
+			<div class="col">
+				<h2>Tamanho do Produto</h2>
+				<p th:text="${produto.size}"></p>
+			</div>
+		</div>
+		  <a th:href="@{/index}">Retornar para o index</a>
+	</div>
+	
+  
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
   </body>
