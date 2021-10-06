@@ -27,8 +27,6 @@
 				<tr>
 					<th>Id</th>
 					<th>Nome</th>
-					<th>Descrição</th>
-					<th>Tamanho</th>
 					<th>Preço</th>
 					<th>Quantidade</th>
 					<th>Status</th>
@@ -41,8 +39,6 @@
 				<tr th:each="produto : ${listaProdutos}">
 					<td th:text="${produto.id}"></td>
 					<td th:text="${produto.name}"></td>
-					<td th:text="${produto.description}"></td>
-					<td th:text="${produto.size}"></td>
 					<td th:text="${produto.price}"></td>
 					<td th:text="${produto.available}"></td>
 					<td th:text="${produto.status}"></td>
