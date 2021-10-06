@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import pi.quarto.semestre.models.Produto;
+import pi.quarto.semestre.repositories.ProdutoImagensRepositorio;
 import pi.quarto.semestre.repositories.ProdutoRepositorio;
 
 @Controller
@@ -16,6 +17,9 @@ public class IndexController {
 	
 	@Autowired
 	private ProdutoRepositorio produtoRepo;
+	
+	@Autowired
+	private ProdutoImagensRepositorio produtoImagensRepo;
 
 	@GetMapping("/index")
 	public String produtos(Model model) {
@@ -31,6 +35,7 @@ public class IndexController {
 		}
 		
 		model.addAttribute("produto", produto.get());
+		model.addAttribute("imagens", produtoImagensRepo.findAll());
 		return "detalhesProduto";
 	}
 }
