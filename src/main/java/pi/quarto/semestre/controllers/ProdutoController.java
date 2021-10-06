@@ -32,7 +32,7 @@ public class ProdutoController {
 	
 	@Autowired
 	private ProdutoImagensRepositorio produtoImagensRepo;
-	private static String caminhoImagens = "C:\\Users\\wmdbox\\Downloads\\imagensPI\\";
+	private static String caminhoImagens = "src/main/resources/static/assets/images/";
 	private ProdutoRepositorio produtoRepo;
 
 	public ProdutoController(ProdutoRepositorio produtoRepo) {
@@ -68,7 +68,7 @@ public class ProdutoController {
 						.get(caminhoImagens + String.valueOf(produto.getId()) + arquivo.getOriginalFilename());
 				Files.write(caminho, bytes);
 				
-				ProdutoImagens prodImg = new ProdutoImagens(String.valueOf((produto.getId()) + arquivo.getOriginalFilename()), produto);
+				ProdutoImagens prodImg = new ProdutoImagens(String.valueOf((produto.getId()) +"\\"+ arquivo.getOriginalFilename()), produto);
 				produtoImagensRepo.save(prodImg);
 			}
 		} catch (IOException e) {
@@ -106,10 +106,10 @@ public class ProdutoController {
 		try {
 			if (!arquivo.isEmpty()) {
 				byte[] bytes = arquivo.getBytes();
-				Path caminho = Paths
-						.get(caminhoImagens + String.valueOf(produto.getId()) + arquivo.getOriginalFilename());
+				Path caminho = Paths.get(caminhoImagens + String.valueOf(produto.getId()) +"/"+ arquivo.getOriginalFilename());
+				System.out.println(caminho.toAbsolutePath());
 				Files.write(caminho, bytes);
-				produto.setImage_url(String.valueOf((produto.getId()) + arquivo.getOriginalFilename()));
+				produto.setImage_url(String.valueOf((produto.getId()) +"/"+ arquivo.getOriginalFilename()));
 				produtoRepo.save(produto);
 			}
 		} catch (IOException e) {
@@ -151,6 +151,7 @@ public class ProdutoController {
 	@ResponseBody
 	public byte[] retornarImagem(@PathVariable("imagem") String imagem) throws IOException {
 		File imagemArquivo = new File(caminhoImagens + imagem);
+		System.out.println(caminhoImagens + imagem);
 		if (imagem != null || imagem.trim().length() > 0) {
 			return Files.readAllBytes(imagemArquivo.toPath());
 
