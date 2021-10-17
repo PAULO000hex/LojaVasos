@@ -16,4 +16,5 @@ import pi.quarto.semestre.models.Produto;
 			  value = "SELECT * FROM Produto p WHERE p.status = 1", 
 			  nativeQuery = true)
 	  public List <Produto> findByStatus(Boolean status);
+	
 	}
