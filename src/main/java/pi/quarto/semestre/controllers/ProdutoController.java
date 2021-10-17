@@ -43,7 +43,7 @@ public class ProdutoController {
 	public String produtos(Model model) {
 		
 			model.addAttribute("listaProdutos",
-					produtoRepo.findAll());
+					produtoRepo.findAll() );
 			return "backoffice/produtos";
 		
 		
