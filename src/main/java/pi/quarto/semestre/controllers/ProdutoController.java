@@ -41,11 +41,11 @@ public class ProdutoController {
 
 	@GetMapping("/produtos")
 	public String produtos(Model model) {
+
 		
 			model.addAttribute("listaProdutos",
 					produtoRepo.findAll(Sort.by(Sort.Direction.DESC, "id")));
 			return "backoffice/produtos";
-		
 		
 	}
 	
