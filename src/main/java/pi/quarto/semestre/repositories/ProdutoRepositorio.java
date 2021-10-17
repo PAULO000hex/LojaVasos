@@ -14,6 +14,6 @@ public interface ProdutoRepositorio extends JpaRepository<Produto, Long> {
 	@Query(
 			  value = "SELECT * FROM Produto p WHERE p.status = 1", 
 			  nativeQuery = true)
-	  public List <Produto> findByStatus(Boolean status);
+	  public List  <Produto> findByStatus(Boolean status);
 	
 }
