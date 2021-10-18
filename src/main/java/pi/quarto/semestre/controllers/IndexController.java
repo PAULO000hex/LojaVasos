@@ -23,7 +23,7 @@ public class IndexController {
 
 	@GetMapping("/index")
 	public String produtos(Model model) {
-		model.addAttribute("listaProdutos", produtoRepo.findAllProdutoByNameIsNotNull());
+		model.addAttribute("listaProdutos", produtoRepo.findByStatus(true) );
 		return "index";
 	}
 	
