@@ -12,6 +12,6 @@ import pi.quarto.semestre.models.Produto;
 public interface ProdutoRepositorio extends JpaRepository<Produto, Long> {
 
 	@Query( value = "select * from Produto p where p.status = true", nativeQuery = true)
-	public List<Produto>findByStatus(boolean status);
+	public List<Produto>findByStatus(boolean status );
 	
 }
