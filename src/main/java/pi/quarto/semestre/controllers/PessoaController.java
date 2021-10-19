@@ -1,23 +1,49 @@
 package pi.quarto.semestre.controllers;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
+
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import pi.quarto.semestre.Exceptions.ServiceExc;
 import pi.quarto.semestre.models.Pessoa;
 import pi.quarto.semestre.models.Produto;
 import pi.quarto.semestre.repositories.PessoaRepository;
+import pi.quarto.semestre.repositories.ProdutoRepositorio;
+import pi.quarto.semestre.service.ServiceUsuario;
+import pi.quarto.semestre.util.Util;
 
 @Controller
 public class PessoaController {
 	@Autowired
 	private PessoaRepository pessoaRepository;
+	
+	@Autowired
+	private ServiceUsuario serviceUsuario;
+	
+	@Autowired
+	private ProdutoRepositorio produtoRepo;
+	
+	@GetMapping("/login")
+	public ModelAndView login() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/login");
+		return mv;
+	}
+	
+
 
 	@RequestMapping(method = RequestMethod.GET, value = "/cadastropessoa")
 	public ModelAndView inicio() {
@@ -28,9 +54,10 @@ public class PessoaController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "**/salvarpessoa")
-	public ModelAndView salvar(Pessoa pessoa) {
+	public ModelAndView salvar(Pessoa pessoa) throws Exception {
 		pessoa.setStatus(true);
-		pessoaRepository.save(pessoa);// salva
+		System.out.println("oie "+pessoa.getSenha());
+		serviceUsuario.salvarUsuario(pessoa);// salva
 
 		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
 		Iterable<Pessoa> pessoasIt = pessoaRepository.findAll();// consulta
@@ -85,5 +112,13 @@ public class PessoaController {
 
 		return modelAndView;
 	}
-
+	@PostMapping("/login")
+    public String loginUsuario(Model model, Pessoa usuario) throws NoSuchAlgorithmException {
+    	Pessoa user = this.pessoaRepository.Login(usuario.getEmail(), Util.md5(usuario.getSenha()));
+    	if(user != null) {
+    		return "redirect:/"; 
+    	}
+    	model.addAttribute("erro", "Usuário ou senha invalidos");
+	    return "/login";
+	}
 }
