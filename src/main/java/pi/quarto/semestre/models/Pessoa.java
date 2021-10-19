@@ -20,6 +20,11 @@ public class Pessoa implements Serializable {
 	private long id;
 	private String nome;
 	private boolean status;
+
+	
+	private String email;
+	private String cpf;
+	private String senha;
 	
 	public boolean isStatus() {
 		return status;
@@ -45,6 +50,15 @@ public class Pessoa implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public String getSenha() {
+		return senha;
+	}
+	
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+	
 	public String getCpf() {
 		return cpf;
 	}
@@ -54,7 +68,5 @@ public class Pessoa implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	private String email;
-	private String cpf;
 	
 }
