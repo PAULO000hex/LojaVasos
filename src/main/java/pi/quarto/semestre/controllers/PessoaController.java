@@ -21,9 +21,9 @@ public class PessoaController {
 
 	@RequestMapping(method = RequestMethod.GET, value = "/cadastropessoa")
 	public ModelAndView inicio() {
-		
+
 		ModelAndView modelAndView = new ModelAndView("cadastro/cadastropessoa"); // prepara o retorno do ModelAndv
-		modelAndView.addObject("pessoaobj", new Pessoa()); //objeto vazio
+		modelAndView.addObject("pessoaobj", new Pessoa()); // objeto vazio
 		return modelAndView;
 	}
 
@@ -33,20 +33,18 @@ public class PessoaController {
 		pessoaRepository.save(pessoa);// salva
 
 		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
-		Iterable<Pessoa> pessoasIt = pessoaRepository.findAll();//consulta
+		Iterable<Pessoa> pessoasIt = pessoaRepository.findAll();// consulta
 		andView.addObject("pessoas", pessoasIt); // carrega lista de usuarios
-		
-		
-		
-		andView.addObject("pessoaobj", new Pessoa());// objeto vazio para o formulario 
+
+		andView.addObject("pessoaobj", new Pessoa());// objeto vazio para o formulario
 		return andView;
 
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/listapessoas")
+	@RequestMapping(method = RequestMethod.GET, value = "cadastro/listarpessoas")
 	public ModelAndView pessoas() {
 
-		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
+		ModelAndView andView = new ModelAndView("cadastro/listarpessoas");
 		Iterable<Pessoa> pessoasIt = pessoaRepository.findAll();
 		andView.addObject("pessoas", pessoasIt);
 		andView.addObject("pessoaobj", new Pessoa());
@@ -56,23 +54,21 @@ public class PessoaController {
 
 	@GetMapping("/editarpessoa/{idpessoa}")
 	public ModelAndView editar(@PathVariable("idpessoa") Long idpessoa) {// Intercepta url passando idpesoa {
-		
-		
+
 		Optional<Pessoa> pessoa = pessoaRepository.findById(idpessoa);// carrega objeto do banco e consulta
-		
+
 		ModelAndView modelAndView = new ModelAndView("cadastro/cadastropessoa"); // prepara o retorno do mav
 		modelAndView.addObject("pessoaobj", pessoa.get()); // passa objeto para edicao
-		
+
 		return modelAndView;
 	}
 
 	@GetMapping("/removerpessoa/{idpessoa}")
 	public ModelAndView excluir(@PathVariable("idpessoa") Long idpessoa) {// Intercepta url passando idpesoa {
-		
-		
+
 		Optional<Pessoa> pessoa = pessoaRepository.findById(idpessoa);// carrega objeto do banco e consulta
-		
-		if (pessoa==null) {
+
+		if (pessoa == null) {
 			throw new IllegalArgumentException("pessoa inválido!");
 		}
 
@@ -82,15 +78,12 @@ public class PessoaController {
 		} else {
 			pessoabanco.setStatus(true);
 		}
-		
+
 		pessoaRepository.save(pessoabanco);
-		ModelAndView modelAndView = new ModelAndView("cadastro/cadastropessoa"); // prepara o retorno do mav
+		ModelAndView modelAndView = new ModelAndView("redirect:/cadastro/listarpessoas"); // prepara o retorno do mav
 		modelAndView.addObject("pessoaobj", new Pessoa()); // passa objeto para edicao
 
 		return modelAndView;
 	}
 
-	
-	
-	
 }
