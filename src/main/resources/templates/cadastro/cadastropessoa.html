@@ -7,9 +7,44 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js" 
+        integrity="sha256-yE5LLp5HSQ/z+hJeCqkz9hdjNkk1jaiGG0tDCraumnA=" 
+        crossorigin="anonymous"
+></script>
+<style>
+        @media(max-width: 992px) {
+            .card {
+                margin: 0 auto;
+            }
+        }
+        
+        .logo {
+        	width: 135px; 
+        	height: 60px;
+        }
+        
+        @media(max-width: 568px) {
+            .logo {
+	        	width: 100px;
+	        	height: 50px;
+	        }
+        }
+    </style>
 </head>
 <body>
+<div class="container-fluid px-md-4 px-2 bg-warning">
+	    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-between py-3 mb-4 border-bottom">
+	      <a href="/index" class="mb-2 text-dark text-decoration-none">
+	        <img src="/assets/images/logo-vasos.png" class="logo" alt="img-logo">
+	      </a>
+	
+	      <div>
+            <a href="/index" class="me-1"><img src="/assets/images/login.png" alt="Login"><span class="me-3">Login</a></span>
+            <a href="/cadastropessoa" class="me-1"><img src="/assets/images/registration.png" alt="Registrar"><span class="me-3">Criar login</a></span>
+            <a href="/index" class="me-3"><img src="/assets/images/carrinho.png" alt="Comprar"></a>
+	      </div>
+	    </header>
+	  </div>
 <section class="vh-100 bg-image">
   <div class="mask d-flex align-items-center h-100 gradient-custom-3">
     <div class="container h-100">
@@ -27,23 +62,23 @@
                 </div>
 
                 <div class="form-outline mb-4">
-                <label class="form-label" for="form3Example3cg">E-mail</label>
-                  <input type="email" name="email" th:field="*{email}" id="form3Example3cg" class="form-control form-control-lg" required/>
+                <label class="form-label" for="form3Example2cg">E-mail</label>
+                  <input type="email" name="email" th:field="*{email}" id="form3Example2cg" class="form-control form-control-lg" required/>
                 </div>
                 
                 <div class="form-outline mb-4">
-                <label class="form-label" for="form3Example1cg">CPF</label>
-                  <input type="text" name="cpf" th:field="*{cpf}" id="form3Example1cg" class="form-control form-control-lg" required/>
+                <label class="form-label" for="form3Example3cg">CPF</label>
+                  <input type="text" name="cpf" th:field="*{cpf}" id="form3Example3cg" class="form-control form-control-lg" required/>
                 </div>
 
                 <div class="form-outline mb-4">
-                <label class="form-label" for="form3Example4cg">Senha</label>
-                  <input type="password" id="form3Example4cg" class="form-control form-control-lg" required/>  
+                <label class="form-label" for="form3Example4cdg">Senha</label>
+                  <input type="password" id="form3Example4cdg" class="form-control form-control-lg" required/>  
                 </div>
 
                 <div class="form-outline mb-4">
-                <label class="form-label" for="form3Example4cdg">Confirmar Senha</label>
-                  <input type="password" id="form3Example4cdg" class="form-control form-control-lg" required/>
+                <label class="form-label" for="form3Example5cdg">Confirmar Senha</label>
+                  <input type="password" id="form3Example5cdg" class="form-control form-control-lg" required/>
                 </div>
 
                 <div class="d-flex justify-content-center">
@@ -60,5 +95,20 @@
   </div>
 </section>
 </body>
+<script>
+$(document).ready(function(){
+	$("#form3Example3cg").mask("000.000.000-00")
+
+});
+
+$(document).submit(function(e){
+	if($("#form3Example5cdg").val() != $("#form3Example4cdg").val()){
+		console.log('$("#form3Example5cdg").val()',$("#form3Example5cdg").val());
+		console.log('$("#form3Example4cdg").val()',$("#form3Example4cdg").val());
+		e.preventDefault();
+		alert("As senhas não conferem")
+	}
+})
+</script>
 
 
