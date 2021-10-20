@@ -34,6 +34,7 @@
     </style>
 </head>
 <body>
+<header>
 <div class="container-fluid px-md-4 px-2 bg-warning">
 	    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-between py-3 mb-4 border-bottom">
 	      <a href="/index" class="mb-2 text-dark text-decoration-none">
@@ -41,12 +42,13 @@
 	      </a>
 	
 	      <div>
-            <a href="/index" class="me-1"><img src="/assets/images/login.png" alt="Login"><span class="me-3">Login</a></span>
+            <a href="/login" class="me-1"><img src="/assets/images/login.png" alt="Login"><span class="me-3">Login</a></span>
             <a href="/cadastropessoa" class="me-1"><img src="/assets/images/registration.png" alt="Registrar"><span class="me-3">Criar login</a></span>
             <a href="/index" class="me-3"><img src="/assets/images/carrinho.png" alt="Comprar"></a>
 	      </div>
 	    </header>
 	  </div>
+</header>
 <table border="1" class="table table-striped table-responsive-md" id="table">
 			<thead>
 				<tr>
@@ -54,9 +56,9 @@
 					<th>Nome</th>
 					<th>Email</th>
 					<th>CPF</th>
-					<th>Senha</th>
+					<th>Grupo</th>
 					<th>Status</th>
-					<th></th>
+					<th>Grupo</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -66,10 +68,10 @@
 				<td th:text="${pessoa.nome}"></td>
 				<td th:text="${pessoa.email}"></td>
 				<td th:text="${pessoa.cpf}"></td>
-				<td></td>
-				<td th:text="${pessoa.status}"></td>
-				<td><a th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}" >Editar</a></td>
+				<td th:text="${pessoa.admin} ? Administrador : Backoffice"></td>
 				<td><a th:href="@{/removerpessoa/{idpessoa}(idpessoa=${pessoa.id})}" 	class="btn btn-danger" th:text="${pessoa.status} ? 'Desativar' : 'Ativar'"> Excluir</a></td>
+				<td><a th:href="@{/alterargrupo/{idpessoa}(idpessoa=${pessoa.id})}" 	class="btn btn-danger" th:text="'Alterar'"> Excluir</a></td>
+				<td><a th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}" >Editar</a></td>
 			</tr>
 			</tbody>
 	</table>

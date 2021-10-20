@@ -44,8 +44,6 @@ public class PessoaController {
 		return mv;
 	}
 	
-
-
 	@RequestMapping(method = RequestMethod.GET, value = "/cadastropessoa")
 	public ModelAndView inicio() {
 
@@ -74,8 +72,12 @@ public class PessoaController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "cadastro/listarpessoas")
-	public ModelAndView pessoas() {
-
+	public ModelAndView pessoas(HttpServletRequest request) {
+		
+		if(request.getSession().getAttribute("admin") == null || (boolean) request.getSession().getAttribute("admin") == false) {
+			return new ModelAndView("/login");
+		}
+		
 		ModelAndView andView = new ModelAndView("cadastro/listarpessoas");
 		Iterable<Pessoa> pessoasIt = pessoaRepository.findAll();
 		andView.addObject("pessoas", pessoasIt);
@@ -117,6 +119,31 @@ public class PessoaController {
 
 		return modelAndView;
 	}
+	
+	@GetMapping("/alterargrupo/{idpessoa}")
+	public ModelAndView alterarGrupo(@PathVariable("idpessoa") Long idpessoa) {// Intercepta url passando idpesoa {
+
+		Optional<Pessoa> pessoa = pessoaRepository.findById(idpessoa);// carrega objeto do banco e consulta
+
+		if (pessoa == null) {
+			throw new IllegalArgumentException("pessoa inválido!");
+		}
+
+		Pessoa pessoabanco = pessoa.get();
+		if (pessoabanco.isAdmin()) {
+			pessoabanco.setAdmin(false);
+		} else {
+			pessoabanco.setAdmin(true);
+		}
+
+		pessoaRepository.save(pessoabanco);
+		ModelAndView modelAndView = new ModelAndView("redirect:/cadastro/listarpessoas"); // prepara o retorno do mav
+		modelAndView.addObject("pessoaobj", new Pessoa()); // passa objeto para edicao
+
+		return modelAndView;
+	}
+	
+	
 	@PostMapping("/login")
     public String loginUsuario(Model model, Pessoa usuario, HttpServletRequest request) throws NoSuchAlgorithmException {
     	Pessoa user = this.pessoaRepository.Login(usuario.getEmail(), Util.md5(usuario.getSenha()));
@@ -125,7 +152,7 @@ public class PessoaController {
     		request.getSession().setAttribute("id", user.getId());
     		request.getSession().setAttribute("admin",user.isAdmin());
     		
-    		return "redirect:/index"; 
+    		return "redirect:/menu"; 
     	}
     	model.addAttribute("erro", "Usuário ou senha invalidos");
 	    return "/login";
