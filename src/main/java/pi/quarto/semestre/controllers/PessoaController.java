@@ -120,9 +120,8 @@ public class PessoaController {
     		request.getSession().setAttribute("nome", user.getNome());
     		request.getSession().setAttribute("id", user.getId());
     		request.getSession().setAttribute("admin",user.isAdmin());
-    		System.out.println(request.getSession().getAttribute("usuario"));
     		
-    		return "redirect:/"; 
+    		return "redirect:/index"; 
     	}
     	model.addAttribute("erro", "Usuário ou senha invalidos");
 	    return "/login";

@@ -2,6 +2,7 @@ package pi.quarto.semestre.models;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +21,7 @@ public class Pessoa implements Serializable {
 	private long id;
 	private String nome;
 	private boolean status;
+	@Column(unique=true)
 	private String email;
 	private String cpf;
 	private String senha;
