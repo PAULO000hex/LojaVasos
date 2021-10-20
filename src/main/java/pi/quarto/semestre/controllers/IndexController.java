@@ -41,6 +41,24 @@ public class IndexController {
 		return "index";
 	}
 	
+	@GetMapping("/menu")
+	public String menu(Model model, HttpServletRequest request) {
+		model.addAttribute("listaProdutos", produtoRepo.findByStatus(true) );
+		
+		//Comparação se é ADMIN
+		boolean admin = (boolean) request.getSession().getAttribute("admin");
+		
+		if(admin == true) {
+			//SE FOR ADMIN
+			model.addAttribute("Menu", admin);
+		}else {
+			//SE FOR BACKOFFICE
+			model.addAttribute("Menu", admin);
+		}
+		
+		return "menu";
+	}
+	
 	@GetMapping("/produto/detalhes-eccomerce/{id}")
 	public String detalhesProduto(@PathVariable("id") long id, Model model) {
 		Optional<Produto> produto = produtoRepo.findById(id);
