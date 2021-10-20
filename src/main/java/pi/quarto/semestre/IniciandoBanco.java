@@ -42,7 +42,8 @@ public class IniciandoBanco implements CommandLineRunner {
 		 * produtoRepo.save(p7); produtoRepo.save(p8);
 		 */
 		
-		Pessoa p1 = new Pessoa("admin","admin@admin","123",Util.md5("admin"), true,false, true);
+		/*Pessoa p1 = new Pessoa("admin","admin@admin","123",Util.md5("admin"), true,false, true);
 		pessoaRepository.save(p1);
+		*/
 	}
 }
