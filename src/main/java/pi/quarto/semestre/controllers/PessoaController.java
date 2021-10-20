@@ -86,6 +86,21 @@ public class PessoaController {
 		return andView;
 
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "cadastro/listarpessoa")
+	public ModelAndView pessoa(HttpServletRequest request) {
+		
+
+		ModelAndView andView = new ModelAndView("cadastro/listarpessoa");
+		Pessoa pessoasIt = pessoaRepository.findUsuarioById((long)request.getSession().getAttribute("id"));
+		System.out.println("id " + pessoasIt.getId());
+		andView.addObject("pessoas", pessoasIt);
+		andView.addObject("pessoaobj", new Pessoa());
+		return andView;
+
+	}
+	
+	
 
 	@GetMapping("/editarpessoa/{idpessoa}")
 	public ModelAndView editar(@PathVariable("idpessoa") Long idpessoa) {// Intercepta url passando idpesoa {

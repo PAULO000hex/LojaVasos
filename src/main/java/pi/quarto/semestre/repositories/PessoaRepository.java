@@ -23,4 +23,7 @@ public interface PessoaRepository extends CrudRepository<Pessoa, Long> {
 
 @Query(value="select * from Pessoa where email = :email", nativeQuery = true)
 public Pessoa Login2(String email);
+
+@Query(value="select * from Pessoa where id = :id", nativeQuery = true)
+public Pessoa findUsuarioById(long id);
 }

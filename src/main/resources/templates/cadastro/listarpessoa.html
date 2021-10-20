@@ -3,7 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Usuário</title>
+<title>Usuï¿½rio</title>
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.js"></script>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -56,7 +56,7 @@
 				</tr>
 			</thead>
 			<tbody>
-			<tr>
+			<tr th:each="pessoa:${pessoas}">
 				<td th:text="${pessoa.id}"></td>
 				<td th:text="${pessoa.nome}"></td>
 				<td th:text="${pessoa.email}"></td>
