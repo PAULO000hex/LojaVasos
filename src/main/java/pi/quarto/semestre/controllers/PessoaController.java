@@ -57,8 +57,11 @@ public class PessoaController {
 	@RequestMapping(method = RequestMethod.POST, value = "**/salvarpessoa")
 	public ModelAndView salvar(Pessoa pessoa) throws Exception {
 		pessoa.setStatus(true);
-		System.out.println("oie "+pessoa.getSenha());
-		serviceUsuario.salvarUsuario(pessoa);// salva
+		if(pessoa.getId() != 0) {
+		serviceUsuario.editarUsuario(pessoa);
+		}else{
+			serviceUsuario.salvarUsuario(pessoa);// salva
+		}
 
 		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
 		Iterable<Pessoa> pessoasIt = pessoaRepository.findAll();// consulta
