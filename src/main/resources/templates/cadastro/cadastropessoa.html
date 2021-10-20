@@ -63,7 +63,7 @@
 
                 <div class="form-outline mb-4">
                 <label class="form-label" for="form3Example2cg">E-mail</label>
-                  <input type="email" name="email" th:field="*{email}" id="form3Example2cg" class="form-control form-control-lg" required/>
+                  <input type="email" th:readonly="*{email}" name="email" th:field="*{email}" id="form3Example2cg" class="form-control form-control-lg" required/>
                 </div>
                 
                 <div class="form-outline mb-4">
@@ -85,7 +85,7 @@
                   <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Cadastrar</button>
                 </div>
 
-                <p class="text-center text-muted mt-5 mb-0">Listar Usuários <a href="/cadastro/listarpessoas" class="fw-bold text-body"><u>Listar</u></a></p>
+                <p class="text-center text-muted mt-5 mb-0">Listar Usuï¿½rios <a href="/cadastro/listarpessoas" class="fw-bold text-body"><u>Listar</u></a></p>
               </form>
             </div>
           </div>
@@ -106,7 +106,7 @@ $(document).submit(function(e){
 		console.log('$("#form3Example5cdg").val()',$("#form3Example5cdg").val());
 		console.log('$("#form3Example4cdg").val()',$("#form3Example4cdg").val());
 		e.preventDefault();
-		alert("As senhas não conferem")
+		alert("As senhas nï¿½o conferem")
 	}
 })
 </script>

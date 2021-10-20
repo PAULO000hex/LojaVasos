@@ -29,5 +29,17 @@ public class ServiceUsuario {
 		}
 		pessoaRepository.save(user);
 	}
+public void editarUsuario(Pessoa user) throws Exception {
+		
+		try {
+			if(pessoaRepository.findByEmail(user.getEmail()) == null) {
+				throw new EmailExistsException("Não existe um email cadastrado para: " + user.getEmail());
+			}
+			user.setSenha(Util.md5(user.getSenha()));
+		}catch(NoSuchAlgorithmException e) {
+			throw new CriptoExistException("Erro na criptografia da senha");
+		}
+		pessoaRepository.save(user);
+	}
 	
 }
