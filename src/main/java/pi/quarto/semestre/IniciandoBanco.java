@@ -22,8 +22,8 @@ public class IniciandoBanco implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Pessoa p1 = new Pessoa("admin","admin@admin","123",Util.md5("admin"), true,false, true);
-		pessoaRepository.save(p1);
+//		Pessoa p1 = new Pessoa("admin","admin@admin","",Util.md5("admin"), true,false, true);
+//		pessoaRepository.save(p1);
 
 	}
 }
