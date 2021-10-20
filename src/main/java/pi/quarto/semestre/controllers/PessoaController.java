@@ -80,6 +80,7 @@ public class PessoaController {
 		
 		ModelAndView andView = new ModelAndView("cadastro/listarpessoas");
 		Iterable<Pessoa> pessoasIt = pessoaRepository.findAll();
+		andView.addObject("userId",request.getSession().getAttribute("id"));
 		andView.addObject("pessoas", pessoasIt);
 		andView.addObject("pessoaobj", new Pessoa());
 		return andView;
