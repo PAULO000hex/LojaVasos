@@ -20,11 +20,26 @@ public class Pessoa implements Serializable {
 	private long id;
 	private String nome;
 	private boolean status;
-
-	
 	private String email;
 	private String cpf;
 	private String senha;
+	private boolean admin;
+	private boolean backoffice;
+	
+	public Pessoa() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Pessoa( String nome, String email, String cpf, String senha, boolean status, boolean backoffice,
+			boolean admin) {
+		this.nome = nome;
+        this.email= email;
+		this.cpf = cpf;
+		this.senha = senha;
+		this.status = status;
+		this.backoffice = backoffice;
+		this.admin = admin;
+	} 
 	
 	public boolean isStatus() {
 		return status;
@@ -67,6 +82,18 @@ public class Pessoa implements Serializable {
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	public boolean isAdmin() {
+		return admin;
+	}
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+	public boolean isBackoffice() {
+		return backoffice;
+	}
+	public void setBackoffice(boolean backoffice) {
+		this.backoffice = backoffice;
 	}
 	
 }
