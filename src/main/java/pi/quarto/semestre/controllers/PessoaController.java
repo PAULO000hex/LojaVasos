@@ -66,6 +66,7 @@ public class PessoaController {
 		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
 		Iterable<Pessoa> pessoasIt = pessoaRepository.findAll();// consulta
 		andView.addObject("pessoas", pessoasIt); // carrega lista de usuarios
+		andView.setViewName("redirect:/cadastro/listarpessoas");
 
 		andView.addObject("pessoaobj", new Pessoa());// objeto vazio para o formulario
 		return andView;
