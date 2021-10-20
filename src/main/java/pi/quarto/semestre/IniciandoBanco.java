@@ -6,15 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import pi.quarto.semestre.models.Pessoa;
 import pi.quarto.semestre.models.Produto;
+import pi.quarto.semestre.repositories.PessoaRepository;
 import pi.quarto.semestre.repositories.ProdutoRepositorio;
+import pi.quarto.semestre.util.Util;
 
 @Component
 @Transactional
 public class IniciandoBanco implements CommandLineRunner {
 
 	@Autowired
-	private ProdutoRepositorio produtoRepo;
+	private PessoaRepository pessoaRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -38,5 +41,8 @@ public class IniciandoBanco implements CommandLineRunner {
 		 * produtoRepo.save(p4); produtoRepo.save(p5); produtoRepo.save(p6);
 		 * produtoRepo.save(p7); produtoRepo.save(p8);
 		 */
+		
+		Pessoa p1 = new Pessoa("admin","admin@admin","123",Util.md5("admin"), true,false, true);
+		pessoaRepository.save(p1);
 	}
 }

@@ -3,6 +3,7 @@ package pi.quarto.semestre.controllers;
 import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -113,9 +114,14 @@ public class PessoaController {
 		return modelAndView;
 	}
 	@PostMapping("/login")
-    public String loginUsuario(Model model, Pessoa usuario) throws NoSuchAlgorithmException {
+    public String loginUsuario(Model model, Pessoa usuario, HttpServletRequest request) throws NoSuchAlgorithmException {
     	Pessoa user = this.pessoaRepository.Login(usuario.getEmail(), Util.md5(usuario.getSenha()));
     	if(user != null) {
+    		request.getSession().setAttribute("nome", user.getNome());
+    		request.getSession().setAttribute("id", user.getId());
+    		request.getSession().setAttribute("admin",user.isAdmin());
+    		System.out.println(request.getSession().getAttribute("usuario"));
+    		
     		return "redirect:/"; 
     	}
     	model.addAttribute("erro", "Usuário ou senha invalidos");
