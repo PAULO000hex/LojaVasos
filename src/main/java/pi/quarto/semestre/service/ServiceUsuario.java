@@ -7,39 +7,38 @@ import org.springframework.stereotype.Service;
 
 import pi.quarto.semestre.Exceptions.CriptoExistException;
 import pi.quarto.semestre.Exceptions.EmailExistsException;
-import pi.quarto.semestre.Exceptions.ServiceExc;
-import pi.quarto.semestre.models.Pessoa;
-import pi.quarto.semestre.repositories.PessoaRepository;
+import pi.quarto.semestre.models.Funcionario;
+import pi.quarto.semestre.repositories.FuncionarioRepository;
 import pi.quarto.semestre.util.*;
 
 @Service
 public class ServiceUsuario {
 	@Autowired
-	private PessoaRepository pessoaRepository;
+	private FuncionarioRepository funcionarioRepository;
 	
-	public void salvarUsuario(Pessoa user) throws Exception {
+	public void salvarUsuario(Funcionario user) throws Exception {
 		
 		try {
-			if(pessoaRepository.findByEmail(user.getEmail()) != null) {
+			if(funcionarioRepository.findByEmail(user.getEmail()) != null) {
 				throw new EmailExistsException("Já existe um email cadastrado para: " + user.getEmail());
 			}
 			user.setSenha(Util.md5(user.getSenha()));
 		}catch(NoSuchAlgorithmException e) {
 			throw new CriptoExistException("Erro na criptografia da senha");
 		}
-		pessoaRepository.save(user);
+		funcionarioRepository.save(user);
 	}
-public void editarUsuario(Pessoa user) throws Exception {
+public void editarUsuario(Funcionario user) throws Exception {
 		
 		try {
-			if(pessoaRepository.findByEmail(user.getEmail()) == null) {
+			if(funcionarioRepository.findByEmail(user.getEmail()) == null) {
 				throw new EmailExistsException("Não existe um email cadastrado para: " + user.getEmail());
 			}
 			user.setSenha(Util.md5(user.getSenha()));
 		}catch(NoSuchAlgorithmException e) {
 			throw new CriptoExistException("Erro na criptografia da senha");
 		}
-		pessoaRepository.save(user);
+		funcionarioRepository.save(user);
 	}
 	
 }

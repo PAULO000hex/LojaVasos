@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Usuários</title>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js" 
+        integrity="sha256-yE5LLp5HSQ/z+hJeCqkz9hdjNkk1jaiGG0tDCraumnA=" 
+        crossorigin="anonymous"
+></script>
+<style>
+        @media(max-width: 992px) {
+            .card {
+                margin: 0 auto;
+            }
+        }
+        
+        .logo {
+        	width: 135px; 
+        	height: 60px;
+        }
+        
+        @media(max-width: 568px) {
+            .logo {
+	        	width: 100px;
+	        	height: 50px;
+	        }
+        }
+    </style>
+</head>
+<body>
+<div th:each= "pessoa: ${pessoaobj}" >
+<div class= "row">
+
+<p> ID: <span th:text="${pessoa.id}"></span></p>
+<p> nome: <span th:text="${pessoa.nome}"></span></p>
+</div>
+</div>
+<h1> ENDERECOS</h1>
+<div class = "row">
+
+<!--  ACTION ESTÁ PASSANDO A CHAVE DA PESSOA PARA RELACIONAR AO ENDEREÇO
+< PESSOAOBJ.ID ESTÁ PUXANDO O ID DA PESSOA PAR PASSAR COMO CHAVE ESTRANGEIRA >
+ -->
+<form th:action = "@{/adicionarendereco/{pessoaid}(pessoaid=${pessoaobj.id})}" method="post" class= "col s25"  >
+<div class="row" >
+
+<div  class = "input-field col s5" >
+
+<label class ="active" for= "logradouro"  > logradouro:</label>
+<input id="logradouro" name="logradouro" class="validate" >
+</div>
+
+<div  class = "input-field col s5" >
+
+<label class ="active" for= "cep"  > CEP:</label>
+<input id="cep" name="cep" class="validate" >
+</div>
+<div  class = "input-field col s5" > 
+
+<label class ="active" for= "bairro"  > bairro:</label>
+<input id="bairro" name="bairro" class="validate" >
+
+</div>
+<div  class = "input-field col s5" > 
+
+<label class ="active" for= "cidade"  > cidade:</label>
+<input id="cidade" name="cidade" class="validate" >
+
+</div>
+
+<div  class = "input-field col s5" > 
+
+<label class ="active" for= "uf"  > uf:</label>
+<input id="uf" name="uf" class="validate" >
+
+</div>
+
+<input type="submit"  value= "Adicionar" class="btn btn-primary">
+</div>
+</form>
+</div>
+
+<table class= "stripped">
+<tr th:each= "enderecos: ${enderecos}">
+<td th:text="${enderecos.cep}" ></td>
+
+ </tr>
+
+
+</table>
+
+</body>
+
+
+
