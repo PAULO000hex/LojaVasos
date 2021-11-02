@@ -1,50 +1,38 @@
 package pi.quarto.semestre.models;
 
-import java.io.Serializable;
-import java.util.List;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
 
-
-@MappedSuperclass
-public abstract  class Pessoa implements Serializable {
+@Entity
+public class Funcionario extends Pessoa {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	protected long id;
-	protected String nome;
-	protected boolean status;
-	@Column(unique=true)
-	protected String email;
-	protected String cpf;
-	protected String senha;
 	
 	
-
-	 
-	public Pessoa() {
+	private boolean backoffice;
+	private boolean admin;
+	
+	
+	public Funcionario() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Pessoa( String nome, String email, String cpf, String senha, boolean status) {
+	public Funcionario( String nome, String email, String cpf, String senha, boolean status,  boolean backoffice, boolean admin ) {
 		this.nome = nome;
         this.email= email;
 		this.cpf = cpf;
 		this.senha = senha;
 		this.status = status;
+		this.backoffice = backoffice;
+		this.admin=admin;
+		
 	} 
 	
+
+
 	public boolean isStatus() {
 		return status;
 	}
@@ -84,8 +72,23 @@ public abstract  class Pessoa implements Serializable {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+
+	public boolean isBackoffice() {
+		return backoffice;
 	}
+
+	public void setBackoffice(boolean backoffice) {
+		this.backoffice = backoffice;
+	}
+
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+
+
 	
 }
