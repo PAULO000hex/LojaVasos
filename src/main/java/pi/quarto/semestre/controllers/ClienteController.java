@@ -2,8 +2,13 @@ package pi.quarto.semestre.controllers;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import pi.quarto.semestre.service.ServiceUsuario;
-
+import pi.quarto.semestre.util.Util;
 import pi.quarto.semestre.models.Cliente;
 import pi.quarto.semestre.models.Endereco;
 import pi.quarto.semestre.models.Funcionario;
@@ -32,10 +37,10 @@ public class ClienteController {
 	@Autowired
 	EnderecoRepository enderecoRepository;
 
-	@GetMapping("/logincliente")
+	@GetMapping("/loginCliente")
 	public ModelAndView logincliente() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/logincliente");
+		mv.setViewName("/loginCliente");
 		return mv;
 	}
 
@@ -95,7 +100,31 @@ public class ClienteController {
 		return modelAndView ;
 	}
 	
+	@PostMapping("/loginCliente")
+    public String loginUsuario(Model model, Cliente cliente, HttpServletRequest request) throws NoSuchAlgorithmException {
+    	Cliente user = this.clienteRepository.Login(cliente.getEmail(), Util.md5(cliente.getSenha()));
+    	if(user != null) {
+    		request.getSession().setAttribute("nome", user.getNome());
+    		request.getSession().setAttribute("id", user.getId());
+    		
+    		return "redirect:/cliente"; 
+    	}
+    	model.addAttribute("erro", "Usuário ou senha invalidos");
+	    return "/loginCliente";
+	}
 	
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/cliente")
+	public ModelAndView pessoa(HttpServletRequest request) {
+
+		ModelAndView andView = new ModelAndView("/cliente");
+		List<Endereco> enderecos = enderecoRepository.findEnderecoById((long)request.getSession().getAttribute("id"));
+		Cliente cliente = clienteRepository.findUsuarioById((long)request.getSession().getAttribute("id"));
+		andView.addObject("cliente", cliente);
+		andView.addObject("listaEnderecos", enderecos);
+		return andView;
+
+	}
 	
 	
 }
