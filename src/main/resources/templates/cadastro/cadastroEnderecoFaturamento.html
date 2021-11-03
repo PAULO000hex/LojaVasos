@@ -3,7 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Usuários</title>
+<title>Usuï¿½rios</title>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -52,10 +52,10 @@
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
           <div class="card" style="border-radius: 15px;">
             <div class="card-body p-5">
-              <h2 class="text-uppercase text-center mb-5">Endereço de Faturamento</h2>
+              <h2 class="text-uppercase text-center mb-5">Endereï¿½o de Faturamento</h2>
 
-              <form action="salvarpessoa" method="post" th:object="${pessoaobj}">
-				<input type="hidden" name="id" th:field="*{id} "/>
+              <form action="adicionarendereco" method="post" th:object="${enderecoobj}">
+				<input type="hidden" name="id" th:field="*{clienteid} "/>
                   <div class="form-outline mb-4">
                     <label class="form-label" for="cep" style="display: block">CEP</label>
                     <input type="text" name="cep" th:field="*{cep}" id="cep" class="form-control form-control-lg col-6" style="display: inline-block" required/>
@@ -72,7 +72,7 @@
                 </div>
 
                 <div class="form-outline mb-4">
-                  <label class="form-label" for="numero">Nº</label>
+                  <label class="form-label" for="numero">Nï¿½</label>
                   <input type="text" name="numero" th:field="*{numero}" id="numero" class="form-control form-control-lg col-4" required/>
                 </div>
 
@@ -99,16 +99,7 @@
 </section>
 </body>
 <script>
-  $(document).ready(function(){
-    $("#form3Example3cg").mask("000.000.000-00");
-  });
 
-  $("#main").submit(function(e){
-    if($("#form3Example5cdg").val() != $("#form3Example4cdg").val()){
-      e.preventDefault();
-      alert("As senhas não conferem")
-    }
-  })
 
   function buscarCEP(){
     var CEP = $("#cep").val().replace("-","");
@@ -127,4 +118,10 @@
     });
   }
 </script>
+<script th:inline="javascript">
+/*<![CDATA[*/
 
+console.log([[${clienteid}]]);
+$("#clienteid").val([[${clienteid}]])
+/*]]>*/
+</script>

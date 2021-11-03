@@ -51,11 +51,20 @@ public class ClienteController {
 			serviceUsuario.salvarUsuarioc(cliente);// salva
 		}
 
-		ModelAndView andView = new ModelAndView("redirect:/cadastro/cadastroEnderecoEntrega/" + cliente.getId());
+		ModelAndView andView = new ModelAndView("redirect:/cadastro/cadastroEnderecoFaturamento/" + cliente.getId());
 		
 
 		return andView;
 		
+	}
+	
+	@GetMapping("/cadastro/cadastroEnderecoFaturamento/{clienteid}")
+	public ModelAndView endereco1(@PathVariable("clienteid") long clienteid) {
+		ModelAndView modelAndView = new ModelAndView("cadastro/cadastroEnderecoFaturamento");
+		modelAndView.addObject("enderecoobj", new Endereco()); // objeto vazio
+		modelAndView.addObject("clienteid", clienteid);
+		
+		return modelAndView;
 	}
 	
 	
@@ -73,7 +82,7 @@ public class ClienteController {
 	/// ADCIONA NOVO ENDERECO
 	@RequestMapping(method = RequestMethod.POST, value = "**/adicionarendereco/")
 	public ModelAndView adcEndereco(Endereco endereco ){
-        System.out.println(endereco.getCliente());
+        
 		enderecoRepository.save(endereco);
 		ModelAndView modelAndView = new ModelAndView("redirect:/cadastro/cadastroEnderecoEntrega/"+endereco.getClienteid());
 		return modelAndView ;
