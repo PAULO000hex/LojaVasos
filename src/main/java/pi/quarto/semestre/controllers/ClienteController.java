@@ -31,7 +31,14 @@ public class ClienteController {
 	
 	@Autowired
 	EnderecoRepository enderecoRepository;
-	
+
+	@GetMapping("/logincliente")
+	public ModelAndView logincliente() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/logincliente");
+		return mv;
+	}
+
 	@RequestMapping(method = RequestMethod.GET, value = "/cadastrocliente")
 	public ModelAndView inicio() {
 

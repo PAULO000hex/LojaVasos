@@ -22,9 +22,17 @@ import org.springframework.format.annotation.DateTimeFormat;
   
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date nascimento;
-  
-  
-  
+
+
+	  public String getGenero() {
+		  return genero;
+	  }
+
+	  public void setGenero(String genero) {
+		  this.genero = genero;
+	  }
+
+	  private String genero;
   
   
   public Cliente() {

@@ -56,7 +56,9 @@
               <h2 class="text-uppercase text-center mb-5">Endereço de Entrega</h2>
               <form th:action="adicionarendereco" method="post" id="main" th:object="${enderecoobj}">
 				<input type="hidden" name="id" th:field="*{clienteid}"  />
-                <input type="hidden" name="endereco" th:field="*{endereco}"  />
+                <input type="hidden" name="entrega" value="1"  />
+                <input type="hidden" name="faturamento" value="0"  />
+
                 <div class="form-outline mb-4">
                     <label class="form-label" for="cep" style="display: block">CEP</label>
                     <input type="text" name="cep" th id="cep" class="form-control form-control-lg col-6" style="display: inline-block" required/>
