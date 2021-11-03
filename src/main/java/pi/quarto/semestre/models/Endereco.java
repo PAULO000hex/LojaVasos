@@ -16,13 +16,35 @@ public class Endereco {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long Id;
 
-	private String Logradouro;
+	private String logradouro;
 	private String cep;
 	private String bairro;
 	private String cidade;
 	private String uf;
-
+	private String numero;
+	private Long clienteid;
 	
+	public Long getClienteid() {
+		return clienteid;
+	}
+
+	public void setClienteid(Long clienteid) {
+		this.clienteid = clienteid;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+
 	@ManyToOne()
 	@ForeignKey(name= "cliente_id")
 	private Cliente cliente;
@@ -73,16 +95,16 @@ public class Endereco {
 		return cliente;
 	}
 
-	public void setPessoa(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
 	public String getLogradouro() {
-		return Logradouro;
+		return logradouro;
 	}
 
 	public void setLogradouro(String logradouro) {
-		Logradouro = logradouro;
+		this.logradouro = logradouro;
 	}
+	
+
+
+
 	
 }
