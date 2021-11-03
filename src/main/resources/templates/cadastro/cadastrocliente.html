@@ -54,7 +54,7 @@
             <div class="card-body p-5">
               <h2 class="text-uppercase text-center mb-5">Criar Conta</h2>
 
-              <form action="salvarpessoa" method="post" th:object="${pessoaobj}">
+              <form action="salvarcliente" method="post" th:object="${clienteobj}">
 				<input type="hidden" name="id" th:field="*{id} "/>
                 <div class="form-outline mb-4">
                 <label class="form-label" for="form3Example1cg">Nome Completo</label>
@@ -69,6 +69,11 @@
                 <div class="form-outline mb-4">
                 <label class="form-label" for="form3Example3cg">CPF</label>
                   <input type="text" name="cpf" th:field="*{cpf}" id="form3Example3cg" class="form-control form-control-lg" required/>
+                </div>
+                
+                 <div class="form-outline mb-4">
+                <label class="form-label" for="form3Example3cg">Nascimento</label>
+                  <input type="date" name="nascimento" th:field="*{nascimento}" id="form3Example3cg" class="form-control form-control-lg" required/>
                 </div>
 
                 <div class="form-outline mb-4">

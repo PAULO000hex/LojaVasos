@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+
+import org.springframework.format.annotation.DateTimeFormat;
   
   @Entity
   public class Cliente extends Pessoa {
@@ -18,21 +20,39 @@ import javax.persistence.OneToMany;
   
 
   
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  private Date nascimento;
   
-  @OneToMany(mappedBy="cliente") // substituir por cliente private
+  
+  
+  
+  
+  public Cliente() {
+
+}
+  
+  public Cliente( String nome, String email, String cpf, String senha, boolean status, Date nascimento   ) {
+		this.nome = nome;
+      this.email= email;
+		this.cpf = cpf;
+		this.senha = senha;
+		this.status = status;
+		this.nascimento=nascimento;
+		
+	} 
+
+
+@OneToMany(mappedBy="cliente") // substituir por cliente private
   List<Endereco> enderecos;
   
-  
-  
-  
- public List<Endereco> getEnderecos() { return enderecos; }
-  
-  public void setEnderecos(List<Endereco> enderecos) { this.enderecos =
- enderecos; }
-  
-  
-  
 
+public List<Endereco> getEnderecos() {
+	return enderecos;
+}
+
+public void setEnderecos(List<Endereco> enderecos) {
+	this.enderecos = enderecos;
+}
 
 public static long getSerialversionuid() {
 	return serialVersionUID;
@@ -77,4 +97,15 @@ public boolean isStatus() {
 		this.cpf = cpf;
   
   }
+
+	public Date getNascimento() {
+		return nascimento;
+	}
+
+
+	public void setNascimento(Date nascimento) {
+		this.nascimento = nascimento;
+	}
+
+
   }

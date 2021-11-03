@@ -54,36 +54,36 @@
           <div class="card" style="border-radius: 15px;">
             <div class="card-body p-5">
               <h2 class="text-uppercase text-center mb-5">Endereço de Entrega</h2>
-              <form action="#" method="post" id="main" th:object="${pessoaobj}">
-				<input type="hidden" name="id" th:field="*{id} "/>
+              <form th:action="adicionarendereco" method="post" id="main" th:object="${enderecoobj}">
+				<input type="hidden" name="id" th:field="*{clienteid}"  />
                   <div class="form-outline mb-4">
                     <label class="form-label" for="cep" style="display: block">CEP</label>
-                    <input type="text" name="cep" th:field="*{cep}" id="cep" class="form-control form-control-lg col-6" style="display: inline-block" required/>
+                    <input type="text" name="cep" th id="cep" class="form-control form-control-lg col-6" style="display: inline-block" required/>
                       <button type="submit" onClick="buscarCEP()" class="btn btn-success btn-lg gradient-custom-4 text-body" style="background-color: #ffc107; border-color: #ffc107; display: inline-block; float: right;" value="Buscar">Buscar</button>
                   </div>
                 <div class="form-outline mb-4">
                 <label class="form-label" for="logradouro">Logradouro</label>
-                  <input type="text" th:readonly="*{logradouro}" name="logradouro" th:field="*{logradouro}" id="logradouro" class="form-control form-control-lg" required/>
+                  <input type="text" name="logradouro" th:field="*{logradouro}" id="logradouro" class="form-control form-control-lg" required/>
                 </div>
                 
                 <div class="form-outline mb-4">
                 <label class="form-label" for="bairro">Bairro</label>
-                  <input type="text" name="bairro" th:field="*{bairro}" id="bairro" class="form-control form-control-lg" required/>
+                  <input type="text" name="bairro"   th:field="*{bairro}" id="bairro" class="form-control form-control-lg" required/>
                 </div>
 
                 <div class="form-outline mb-4">
                   <label class="form-label" for="numero">Nº</label>
-                  <input type="text" name="numero" th:field="*{numero}" id="numero" class="form-control form-control-lg col-4" required/>
+                  <input type="text" name="numero"  th:field="*{numero}" id="numero" class="form-control form-control-lg col-4" required/>
                 </div>
 
                 <div class="form-outline mb-4">
                   <label class="form-label" for="cidade">Cidade</label>
-                  <input type="text" name="cidade" th:field="*{cidade}" id="cidade" class="form-control form-control-lg" required/>
+                  <input type="text" name="cidade"   th:field="*{cidade}" id="cidade" class="form-control form-control-lg" required/>
                 </div>
 
                 <div class="form-outline mb-4">
                   <label class="form-label" for="UF">UF</label>
-                  <input type="text" name="uf" th:field="*{uf}" id="uf" class="form-control form-control-lg col-4" required/>
+                  <input type="text" name="uf" th:field="*{uf}"  id="uf" class="form-control form-control-lg col-4" required/>
                 </div>
 
                 <div class="d-flex justify-content-center">
@@ -129,6 +129,14 @@ function buscarCEP(){
     $('#uf').val(response.uf);
   });
 }
+
+
 </script>
 
+<script th:inline="javascript">
+/*<![CDATA[*/
 
+console.log([[${clienteid}]]);
+$("#clienteid").val([[${clienteid}]])
+/*]]>*/
+</script>
