@@ -60,7 +60,7 @@ public class ClienteController {
 	
 	
 	@GetMapping("/cadastro/cadastroEnderecoEntrega/{clienteid}")
-	public ModelAndView enderecos(@PathVariable("clienteid") Long clienteid) {// Intercepta url passando idpesoa {
+	public ModelAndView enderecos(@PathVariable("clienteid") long clienteid) {// Intercepta url passando idpesoa {
 		
 		ModelAndView modelAndView = new ModelAndView("cadastro/cadastroEnderecoEntrega");
 		modelAndView.addObject("enderecoobj", new Endereco()); // objeto vazio
@@ -72,13 +72,10 @@ public class ClienteController {
 	
 	/// ADCIONA NOVO ENDERECO
 	@RequestMapping(method = RequestMethod.POST, value = "**/adicionarendereco/")
-	public ModelAndView adcEndereco(Endereco endereco, 
-			@PathVariable("clienteid") Long clienteid ){
-		
-		
-		endereco.setClienteid(clienteid);
+	public ModelAndView adcEndereco(Endereco endereco ){
+        System.out.println(endereco.getCliente());
 		enderecoRepository.save(endereco);
-		ModelAndView modelAndView = new ModelAndView("cadastro/cadastroEnderecoEntrega");
+		ModelAndView modelAndView = new ModelAndView("redirect:/cadastro/cadastroEnderecoEntrega/"+endereco.getClienteid());
 		return modelAndView ;
 	}
 	
