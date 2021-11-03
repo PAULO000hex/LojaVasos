@@ -56,7 +56,9 @@
 
               <form action="adicionarendereco" method="post" th:object="${enderecoobj}">
 				<input type="hidden" name="id" th:field="*{clienteid} "/>
-                  <div class="form-outline mb-4">
+                <input type="hidden" name="faturamento" th:field="*{faturamento}"  />
+
+                <div class="form-outline mb-4">
                     <label class="form-label" for="cep" style="display: block">CEP</label>
                     <input type="text" name="cep" th:field="*{cep}" id="cep" class="form-control form-control-lg col-6" style="display: inline-block" required/>
                     <button type="submit" onClick="buscarCEP()" class="btn btn-success btn-lg gradient-custom-4 text-body" style="background-color: #ffc107; border-color: #ffc107; display: inline-block; float: right;" value="Buscar">Buscar</button>

@@ -56,7 +56,8 @@
               <h2 class="text-uppercase text-center mb-5">Endereço de Entrega</h2>
               <form th:action="adicionarendereco" method="post" id="main" th:object="${enderecoobj}">
 				<input type="hidden" name="id" th:field="*{clienteid}"  />
-                  <div class="form-outline mb-4">
+                <input type="hidden" name="endereco" th:field="*{endereco}"  />
+                <div class="form-outline mb-4">
                     <label class="form-label" for="cep" style="display: block">CEP</label>
                     <input type="text" name="cep" th id="cep" class="form-control form-control-lg col-6" style="display: inline-block" required/>
                       <button type="submit" onClick="buscarCEP()" class="btn btn-success btn-lg gradient-custom-4 text-body" style="background-color: #ffc107; border-color: #ffc107; display: inline-block; float: right;" value="Buscar">Buscar</button>
@@ -87,7 +88,7 @@
                 </div>
 
                 <div class="d-flex justify-content-center">
-                  <a href="\login"><button class="btn btn-success btn-lg gradient-custom-4 text-body" style="background-color: #ffc107; border-color: #ffc107; margin-right: 2.5px;">Finalizar</button></a>
+                  <a href="\login" class="btn btn-success btn-lg gradient-custom-4 text-body" style="background-color: #ffc107; border-color: #ffc107; margin-right: 2.5px;">Finalizar</a>
                   <button type="submit" for="main" class="btn btn-success btn-lg gradient-custom-4 text-body" style="background-color: #ffc107; border-color: #ffc107; margin-left: 2.5px;">Novo Endereço</button>
                 </div>
               </form>
