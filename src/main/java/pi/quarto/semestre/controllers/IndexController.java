@@ -34,18 +34,6 @@ public class IndexController {
 	@GetMapping("/index")
 	public String produtos(Model model, HttpServletRequest request) {
 		model.addAttribute("listaProdutos", produtoRepo.findByStatus(true) );
-		
-		//Comparação se é ADMIN
-		boolean admin = (boolean) request.getSession().getAttribute("admin");
-		
-		if(admin == true) {
-			//SE FOR ADMIN
-			model.addAttribute("Menu", admin);
-		}else {
-			//SE FOR BACKOFFICE
-			model.addAttribute("Menu", admin);
-		}
-		
 		return "index";
 	}
 	
