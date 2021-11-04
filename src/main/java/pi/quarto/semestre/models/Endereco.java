@@ -1,5 +1,6 @@
 package pi.quarto.semestre.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,6 +26,8 @@ public class Endereco {
 	private long clienteid;
 	private boolean faturamento;
 	private boolean entrega;
+	@Column(columnDefinition = "boolean default true") 
+	private boolean status;
 	
 	/*@ManyToOne()
 	@ForeignKey(name= "cliente_id")
@@ -120,6 +123,14 @@ public class Endereco {
 
 	public void setEntrega(boolean entrega) {
 		this.entrega = entrega;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 	
 
