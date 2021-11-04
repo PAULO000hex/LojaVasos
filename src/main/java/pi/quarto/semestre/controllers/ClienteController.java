@@ -126,5 +126,16 @@ public class ClienteController {
 
 	}
 	
+	@GetMapping("/editarcliente/{clienteid}")
+	public ModelAndView editar(@PathVariable("clienteid") long clienteid) {// Intercepta url passando idpesoa {
+
+		Optional<Cliente> pessoa = clienteRepository.findById(clienteid);// carrega objeto do banco e consulta
+
+		ModelAndView modelAndView = new ModelAndView("cadastro/cadastrocliente"); // prepara o retorno do mav
+		modelAndView.addObject("clienteobj", pessoa.get()); // passa objeto para edicao
+
+		return modelAndView;
+	}
+	
 	
 }
