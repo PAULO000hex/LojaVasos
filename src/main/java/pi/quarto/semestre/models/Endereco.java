@@ -27,6 +27,16 @@ public class Endereco {
 	private boolean faturamento;
 	private boolean entrega;
 	private boolean status;
+
+	public boolean isPrincipal() {
+		return principal;
+	}
+
+	public void setPrincipal(boolean principal) {
+		this.principal = principal;
+	}
+
+	private boolean principal;
 	
 	/*@ManyToOne()
 	@ForeignKey(name= "cliente_id")

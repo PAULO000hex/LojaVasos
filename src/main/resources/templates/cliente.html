@@ -73,7 +73,9 @@
 					<td th:text="${endereco.bairro}"></td>
 					<td th:text="${endereco.numero}"></td>
 					<td th:text="${endereco.faturamento} ? 'Faturamento' : 'Entrega'"></td>
-					<td></td>
+					<td>
+					<a th:href="@{/editarprincipal/{enderecoid}(enderecoid=${endereco.id})}"
+							class="btn btn-primary" th:text="'Alterar'"></a></td>
 					<td><a
 							th:href="@{/removerendereco/{idendereco}(idendereco=${endereco.id})}"
 							class="btn btn-danger"
