@@ -26,7 +26,6 @@ public class Endereco {
 	private long clienteid;
 	private boolean faturamento;
 	private boolean entrega;
-	@Column(columnDefinition = "boolean default true") 
 	private boolean status;
 	
 	/*@ManyToOne()
@@ -34,7 +33,7 @@ public class Endereco {
 	private Cliente cliente;*/
 	
 	private Cliente cliente;
-	
+
 	public long getClienteid() {
 		return clienteid;
 	}

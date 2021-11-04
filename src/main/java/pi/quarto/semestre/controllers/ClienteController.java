@@ -136,6 +136,24 @@ public class ClienteController {
 
 		return modelAndView;
 	}
-	
+	@GetMapping("/removerendereco/{idendereco}")
+	public ModelAndView excluir(@PathVariable("idendereco") Long idendereco) {
+
+		Optional<Endereco> endereco = enderecoRepository.findById(idendereco);// carrega objeto do banco e consulta
+
+		if (endereco == null) {
+			throw new IllegalArgumentException("endereco inválido!");
+		}
+
+		Endereco enderecobanco = endereco.get();
+
+		enderecobanco.setStatus(false);
+
+		enderecoRepository.save(enderecobanco);
+
+		ModelAndView modelAndView = new ModelAndView("redirect:/cliente"); // prepara o retorno do mav
+
+		return modelAndView;
+	}
 	
 }

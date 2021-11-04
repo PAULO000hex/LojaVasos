@@ -18,6 +18,8 @@ public interface EnderecoRepository extends CrudRepository<Endereco, Long> {
 		
 	@Query(value="select * from endereco where clienteid = :clienteid and status=true", nativeQuery = true)
 	public List<Endereco> findEnderecoById(long clienteid);
-		
+
+	@Query(value="UPDATE endereco SET status=false WHERE id = :enderecoId", nativeQuery = true)
+	public void desativarEndereco(long enderecoId);
 	
 }
