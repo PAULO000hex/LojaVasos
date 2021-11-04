@@ -136,10 +136,35 @@ public class ClienteController {
 
 		return modelAndView;
 	}
+
+	@GetMapping("/editarprincipal/{enderecoid}")
+	public ModelAndView editarPrincipal(@PathVariable("enderecoid") long enderecoid) {// Intercepta url passando idpesoa {
+
+		Iterable<Endereco> enderecos = enderecoRepository.findAll();
+
+		for( Endereco endereco: enderecos){
+			if(endereco.isPrincipal()){
+				endereco.setPrincipal(false);
+			}
+		}
+
+		Optional<Endereco> endereco = enderecoRepository.findById(enderecoid);
+
+		Endereco enderecobanco = endereco.get();
+
+		enderecobanco.setPrincipal(true);
+
+		enderecoRepository.save(enderecobanco);
+
+		ModelAndView modelAndView = new ModelAndView("redirect:/cliente");
+
+		return modelAndView;
+	}
+
 	@GetMapping("/removerendereco/{idendereco}")
 	public ModelAndView excluir(@PathVariable("idendereco") Long idendereco) {
 
-		Optional<Endereco> endereco = enderecoRepository.findById(idendereco);// carrega objeto do banco e consulta
+		Optional<Endereco> endereco = enderecoRepository.findById(idendereco);
 
 		if (endereco == null) {
 			throw new IllegalArgumentException("endereco inválido!");
@@ -151,7 +176,7 @@ public class ClienteController {
 
 		enderecoRepository.save(enderecobanco);
 
-		ModelAndView modelAndView = new ModelAndView("redirect:/cliente"); // prepara o retorno do mav
+		ModelAndView modelAndView = new ModelAndView("redirect:/cliente");
 
 		return modelAndView;
 	}
