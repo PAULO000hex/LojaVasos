@@ -75,8 +75,9 @@
 					<td th:text="${endereco.faturamento} ? 'Faturamento' : 'Entrega'"></td>
 					<td></td>
 					<td><a
-
-							class="btn btn-danger"> Excluir</a></td>
+							th:href="@{/removerendereco/{idendereco}(idendereco=${endereco.id})}"
+							class="btn btn-danger"
+							> Excluir</a></td>
 				</tr>
 			</tbody>
 		</table>
