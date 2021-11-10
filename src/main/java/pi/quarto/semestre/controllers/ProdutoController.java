@@ -61,17 +61,15 @@ public class ProdutoController {
 	}
 
 	@PostMapping("/produto/imagem/salvar")
-	public String salvarImagem(@Valid @ModelAttribute("produto") Produto produto,
-			@RequestParam("file") MultipartFile arquivo) {
-
+	public String salvarImagem(@RequestParam("file") MultipartFile arquivo, 
+			@RequestParam("idproduto") Long idProduto) {
 		try {
 			if (!arquivo.isEmpty()) {
 				byte[] bytes = arquivo.getBytes();
 				Path caminho = Paths
-						.get(caminhoImagens + String.valueOf(produto.getId()) + arquivo.getOriginalFilename());
+						.get(caminhoImagens + String.valueOf(idProduto) + arquivo.getOriginalFilename());
 				Files.write(caminho, bytes);
-				
-				ProdutoImagens prodImg = new ProdutoImagens(String.valueOf((produto.getId()) + arquivo.getOriginalFilename()), produto);
+				ProdutoImagens prodImg = new ProdutoImagens(String.valueOf((idProduto) + arquivo.getOriginalFilename()), idProduto);
 				produtoImagensRepo.save(prodImg);
 			}
 		} catch (IOException e) {
@@ -146,7 +144,7 @@ public class ProdutoController {
 		}
 		
 		model.addAttribute("produto", produto.get());
-		model.addAttribute("imagens", produtoImagensRepo.findAll());
+		model.addAttribute("imagens", produtoImagensRepo.findImagemByIdProduto(id));
 		return "backoffice/detalhesProduto";
 	}
 

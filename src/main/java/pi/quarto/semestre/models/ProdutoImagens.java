@@ -18,15 +18,15 @@ public class ProdutoImagens {
 
 	private String url;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "produto")
-	private Produto produto;
+	//@ManyToOne(cascade = CascadeType.PERSIST)
+	//@JoinColumn(name = "produto")
+	private Long idProduto;
 
 	public ProdutoImagens() {}
 	
-	public ProdutoImagens(String url, Produto produto) {
+	public ProdutoImagens(String url, Long idProduto) {
 		this.url = url;
-		this.produto = produto;
+		this.idProduto = idProduto;
 	}
 
 	public Long getImagemId() {
@@ -45,11 +45,11 @@ public class ProdutoImagens {
 		this.url = url;
 	}
 
-	public Produto getProduto() {
-		return produto;
+	public Long getIdProduto() {
+		return idProduto;
 	}
 
-	public void setProduto(Produto produto) {
-		this.produto = produto;
+	public void setIdProduto(Long idProduto) {
+		this.idProduto = idProduto;
 	}
 }
