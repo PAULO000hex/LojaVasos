@@ -1,23 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
 <body>
 <div th:fragment="myheader" class="container-fluid px-md-4 px-2 bg-warning">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-between py-3 mb-4 border-bottom">
-        <a href="/" class="mb-2 text-dark text-decoration-none">
+        <a href="/index" class="mb-2 text-dark text-decoration-none">
             <img src="assets/images/logo-vasos.png" class="logo" alt="img-logo">
         </a>
 
         <div>
-            <a href ="/loginCliente" class="me-1"><img src="assets/images/login.png" alt="Login"><span class="me-3">Login</a></span>
-            <a href ="/cadastropessoa" class="me-1"><img src="assets/images/registration.png" alt="Registrar"><span class="me-3">Criar login</a></span>
-           <!-- <a href ="/logout" class="me-3">Logout</a> -->
-            <a href ="/" class="me-3"><img src="assets/images/carrinho.png" alt="Comprar"></a>
+
+            <!-- <a href ="/logout" class="me-3">Logout</a> -->
+            <div th:if="${id}">
+                <div>
+                    <a href ="/logout" class="me-3">Logout</a>
+                    <a href ="/index" class="me-3"><img src="assets/images/carrinho.png" alt="Comprar"></a></div>
+            </div>
+            <!-- ELSE -->
+            <div th:unless="${id}">
+                <div>
+                    <a  href="/cadastropessoa" class="me-1"><img src="assets/images/registration.png" alt="Registrar"><span class="me-3">Criar login</a></span>
+                    <a href ="/loginCliente" class="me-1"><img src="assets/images/login.png" alt="Login"><span class="me-3">Login</a></span>
+                    <a href ="/index" class="me-3"><img src="assets/images/carrinho.png" alt="Comprar"></a></div>
+            </div>
         </div>
+
     </header>
+    <h1 th:value="${id}"></h1>
 </div>
 </body>
 </html>
