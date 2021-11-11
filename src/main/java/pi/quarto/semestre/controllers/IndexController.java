@@ -34,6 +34,7 @@ public class IndexController {
 	@GetMapping("/index")
 	public String produtos(Model model, HttpServletRequest request) {
 		model.addAttribute("listaProdutos", produtoRepo.findByStatus(true) );
+		model.addAttribute("id",request.getSession().getAttribute("id"));
 		return "index";
 	}
 	
