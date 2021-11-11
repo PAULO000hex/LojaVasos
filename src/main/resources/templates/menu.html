@@ -26,19 +26,7 @@
     </style>
   </head>
   <body class="bg-light">
-	  <div class="container-fluid px-md-4 px-2 bg-warning">
-	    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-between py-3 mb-4 border-bottom">
-	      <a href="/index" class="mb-2 text-dark text-decoration-none">
-	        <img src="assets/images/logo-vasos.png" class="logo" alt="img-logo">
-	      </a>
-	
-	      <div>
-            <a href ="/loginCliente" class="me-1"><img src="assets/images/login.png" alt="Login"><span class="me-3">Login</a></span>
-            <a href ="/cadastropessoa" class="me-1"><img src="assets/images/registration.png" alt="Registrar"><span class="me-3">Criar login</a></span>
-            <a href ="/index" class="me-3"><img src="assets/images/carrinho.png" alt="Comprar"></a>
-	      </div>
-	    </header>
-	  </div>
+  <div th:replace="header::myheader"></div>
 	<div class="container">
     <h1>Menu - BackOffice</h1>
     <div th:utext="${Menu} ? '<h2><a href=/produtos>Listar Produtos</a><br><a href=/cadastro/listarpessoas>Listar Usuários</a></h2>' : '<h2><a href=/produtos>Listar Produtos</a><br><a href=/cadastro/listarpessoa>Mostrar meu usuario</a></h2>'"></div>

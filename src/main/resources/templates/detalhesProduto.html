@@ -15,20 +15,7 @@
     </style>
 </head>
 <body class="bg-light">
-	<div class="container-fluid px-md-4 px-2 bg-warning">
-	    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-between py-3 mb-4 border-bottom">
-	      <a href="/index" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-	        <img src="/assets/images/logo-vasos.png" style="width: 135px; height: 60px;" alt="img-logo">
-	      </a>
-	
-	      <div>
-            <a href ="/index" class="mr-1"><img src="/assets/images/login.png" alt="Login"></a><span class="mr-3">Login</span>
-            <a href ="/index" class="mr-1"><img src="/assets/images/registration.png" alt="Registrar"></a><span class="mr-3">Criar login</span>
-            <a href ="/index" class="mr-3"><img src="/assets/images/carrinho.png" alt="Comprar"></a>
-	      </div>
-	    </header>
-	  </div>
-	  
+<div th:replace="header::myheader"></div>
 	<div class="container my-5">
 		<div class="row">
 			<div class="col-lg">
