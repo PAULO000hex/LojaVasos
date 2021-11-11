@@ -32,19 +32,7 @@
     </style>
 </head>
 <body>
-<div class="container-fluid px-md-4 px-2 bg-warning">
-	    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-between py-3 mb-4 border-bottom">
-	      <a href="/index" class="mb-2 text-dark text-decoration-none">
-	        <img src="/assets/images/logo-vasos.png" class="logo" alt="img-logo">
-	      </a>
-	
-	      <div>
-            <a href="/login" class="me-1"><img src="/assets/images/login.png" alt="Login"><span class="me-3">Login</a></span>
-            <a href="/cadastropessoa" class="me-1"><img src="/assets/images/registration.png" alt="Registrar"><span class="me-3">Criar login</a></span>
-            <a href="/index" class="me-3"><img src="/assets/images/carrinho.png" alt="Comprar"></a>
-	      </div>
-	    </header>
-	  </div>
+<div th:replace="header::myheader"></div>
 <section class="vh-100 bg-image">
   <div class="mask d-flex align-items-center h-100 gradient-custom-3">
     <div class="container h-100">
