@@ -71,22 +71,25 @@ public class ClienteController {
 	}
 	
 	@GetMapping("/cadastro/cadastroEnderecoFaturamento/{clienteid}")
-	public ModelAndView endereco1(@PathVariable("clienteid") long clienteid) {
+	public ModelAndView endereco1(@PathVariable("clienteid") long clienteid, HttpServletRequest request) {
+
 		ModelAndView modelAndView = new ModelAndView("cadastro/cadastroEnderecoFaturamento");
 		modelAndView.addObject("enderecoobj", new Endereco()); // objeto vazio
 		modelAndView.addObject("clienteid", clienteid);
-		
+		modelAndView.addObject("id",request.getSession().getAttribute("id"));
+
 		return modelAndView;
 	}
 	
 	
 	@GetMapping("/cadastro/cadastroEnderecoEntrega/{clienteid}")
-	public ModelAndView enderecos(@PathVariable("clienteid") long clienteid) {// Intercepta url passando idpesoa {
-		
+	public ModelAndView enderecos(@PathVariable("clienteid") long clienteid, HttpServletRequest request) {// Intercepta url passando idpesoa {
+
 		ModelAndView modelAndView = new ModelAndView("cadastro/cadastroEnderecoEntrega");
 		modelAndView.addObject("enderecoobj", new Endereco()); // objeto vazio
 		modelAndView.addObject("clienteid", clienteid);
-		
+		modelAndView.addObject("id",request.getSession().getAttribute("id"));
+
 		return modelAndView;
 	}
 	
@@ -116,7 +119,6 @@ public class ClienteController {
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/cliente")
 	public ModelAndView pessoa(HttpServletRequest request) {
-
 		ModelAndView andView = new ModelAndView("/cliente");
 		List<Endereco> enderecos = enderecoRepository.findEnderecoById((long)request.getSession().getAttribute("id"));
 		Cliente cliente = clienteRepository.findUsuarioById((long)request.getSession().getAttribute("id"));

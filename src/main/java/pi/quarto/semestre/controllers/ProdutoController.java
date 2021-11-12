@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,23 +41,27 @@ public class ProdutoController {
 	}
 
 	@GetMapping("/produtos")
-	public String produtos(Model model) {
+	public String produtos(Model model, HttpServletRequest request) {
 
-		
 			model.addAttribute("listaProdutos",
 					produtoRepo.findAll(Sort.by(Sort.Direction.DESC, "id")));
-			return "backoffice/produtos";
+
+		model.addAttribute("id",request.getSession().getAttribute("id"));
+
+		return "backoffice/produtos";
 		
 	}
 	
 	@GetMapping("/produto/imagens/{id}")
-	public String produtoImagens(@PathVariable("id") long id, Model model) {
+	public String produtoImagens(@PathVariable("id") long id, Model model, HttpServletRequest request) {
 		Optional<Produto> produtoOpt = produtoRepo.findById(id);
 		if (produtoOpt==null) {
 			throw new IllegalArgumentException("Produto inválido!");
 		}
 
 		model.addAttribute("produto", produtoOpt.get());
+		model.addAttribute("id",request.getSession().getAttribute("id"));
+
 		return "backoffice/formImagens";
 	}
 
