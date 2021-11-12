@@ -31,7 +31,7 @@ public class IndexController {
 		return "redirect:/login";
 	}
 
-	@GetMapping("/index")
+	@GetMapping("/")
 	public String produtos(Model model, HttpServletRequest request) {
 		model.addAttribute("listaProdutos", produtoRepo.findByStatus(true) );
 		model.addAttribute("id",request.getSession().getAttribute("id"));
@@ -41,7 +41,7 @@ public class IndexController {
 	@GetMapping("/menu")
 	public String menu(Model model, HttpServletRequest request) {
 		model.addAttribute("listaProdutos", produtoRepo.findByStatus(true) );
-		
+		model.addAttribute("id",request.getSession().getAttribute("id"));
 		//Comparação se é ADMIN
 		boolean admin = (boolean) request.getSession().getAttribute("admin");
 		
@@ -57,7 +57,8 @@ public class IndexController {
 	}
 	
 	@GetMapping("/produto/detalhes-eccomerce/{id}")
-	public String detalhesProduto(@PathVariable("id") long id, Model model) {
+	public String detalhesProduto(@PathVariable("id") long id, Model model, HttpServletRequest request) {
+		model.addAttribute("id",request.getSession().getAttribute("id"));
 		Optional<Produto> produto = produtoRepo.findById(id);
 		if (produto ==null) {
 			throw new IllegalArgumentException("Produto inválido!");

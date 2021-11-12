@@ -85,6 +85,8 @@ public class FuncionarioController {
 			andView.addObject("userId",request.getSession().getAttribute("id"));
 			andView.addObject("pessoas", pessoasIt);
 			andView.addObject("pessoaobj", new Funcionario());
+			andView.addObject("id",request.getSession().getAttribute("id"));
+
 			return andView;
 
 		}
@@ -98,6 +100,8 @@ public class FuncionarioController {
 			System.out.println("id " + pessoasIt.getId());
 			andView.addObject("pessoas", pessoasIt);
 			andView.addObject("pessoaobj", new Funcionario());
+			andView.addObject("id",request.getSession().getAttribute("id"));
+
 			return andView;
 
 		}
@@ -105,12 +109,14 @@ public class FuncionarioController {
 		
 
 		@GetMapping("/editarpessoa/{idpessoa}")
-		public ModelAndView editar(@PathVariable("idpessoa") Long idpessoa) {// Intercepta url passando idpesoa {
+		public ModelAndView editar(@PathVariable("idpessoa") Long idpessoa, HttpServletRequest request) {// Intercepta url passando idpesoa {
 
 			Optional<Funcionario> pessoa = funcionarioRepository.findById(idpessoa);// carrega objeto do banco e consulta
 
 			ModelAndView modelAndView = new ModelAndView("cadastro/cadastropessoa"); // prepara o retorno do mav
 			modelAndView.addObject("pessoaobj", pessoa.get()); // passa objeto para edicao
+			modelAndView.addObject("id",request.getSession().getAttribute("id"));
+
 
 			return modelAndView;
 		}
