@@ -1,0 +1,73 @@
+package pi.quarto.semestre.models;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
+@Entity
+public class Compra implements Serializable {
+
+	public Compra() {
+	}
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long Id;
+	@ManyToOne
+	private Cliente cliente;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataCompra = new Date();
+
+	private String pagamento;
+
+	public Long getId() {
+		return Id;
+	}
+
+	public void setId(Long id) {
+		Id = id;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public Date getDataCompra() {
+		return dataCompra;
+	}
+
+	public void setDataCompra(Date dataCompra) {
+		this.dataCompra = dataCompra;
+	}
+
+	public String getPagamento() {
+		return pagamento;
+	}
+
+	public void setPagamento(String pagamento) {
+		this.pagamento = pagamento;
+	}
+
+	public Double getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(Double valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
+	private Double valorTotal;
+
+}
