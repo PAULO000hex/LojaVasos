@@ -7,6 +7,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.springframework.beans.factory.annotation.Value;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,9 +17,13 @@ import javax.persistence.GenerationType;
 @Entity
 public class Compra implements Serializable {
 
+	/**
+	 * 
+	 */
+
 	public Compra() {
 	}
-
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
@@ -68,6 +75,7 @@ public class Compra implements Serializable {
 		this.valorTotal = valorTotal;
 	}
 
-	private Double valorTotal;
+	
+	private Double valorTotal = 0.;
 
 }

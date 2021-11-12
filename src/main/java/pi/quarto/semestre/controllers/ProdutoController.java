@@ -75,6 +75,9 @@ public class ProdutoController {
 						.get(caminhoImagens + String.valueOf(idProduto) + arquivo.getOriginalFilename());
 				Files.write(caminho, bytes);
 				ProdutoImagens prodImg = new ProdutoImagens(String.valueOf((idProduto) + arquivo.getOriginalFilename()), idProduto);
+				Produto prod = produtoRepo.findProdutoById(idProduto);
+				prod.setImage_url(prodImg.getUrl());
+				
 				produtoImagensRepo.save(prodImg);
 			}
 		} catch (IOException e) {

@@ -8,72 +8,97 @@
 <!------ Include the above in your HEAD tag ---------->
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <title>Carrinho de compras</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
+	
 	<div class="container">
 		<div class="row">
-			<div class="container">
-				<table id="cart" class="table table-hover table-condensed">
-					<thead>
-						<tr>
-							<th style="width: 50%">Product</th>
-							<th style="width: 10%">Price</th>
-							<th style="width: 8%">Quantity</th>
-							<th style="width: 22%" class="text-center">Subtotal</th>
-							<th style="width: 10%"></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td data-th="Product">
-								<div class="row">
-									<div class="col-sm-2 hidden-xs">
-										<img src="http://placehold.it/100x100" alt="..."
-											class="img-responsive" />
-									</div>
-									<div class="col-sm-10">
-										<h4 class="nomargin">Product 1</h4>
-										<p>Quis aute iure reprehenderit in voluptate velit esse
-											cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit
-											amet.</p>
-									</div>
-								</div>
-							</td>
-							<td data-th="Price">$1.99</td>
-							<td data-th="Quantity"><input type="number"
-								class="form-control text-center" value="1"></td>
-							<td data-th="Subtotal" class="text-center">1.99</td>
-							<td class="actions" data-th="">
-								<button class="btn btn-info btn-sm">
-									<i class="fa fa-refresh"></i>
-								</button>
-								<button class="btn btn-danger btn-sm">
-									<i class="fa fa-trash-o"></i>
-								</button>
-							</td>
-						</tr>
-					</tbody>
-					<tfoot>
-						<tr class="visible-xs">
-							<td class="text-center"><strong>Total 1.99</strong></td>
-						</tr>
-						<tr>
-							<td><a href="#" class="btn btn-warning"><i
-									class="fa fa-angle-left"></i> Continue Shopping</a></td>
-							<td colspan="2" class="hidden-xs"></td>
-							<td class="hidden-xs text-center"><strong>Total
-									$1.99</strong></td>
-							<td><a href="#" class="btn btn-success btn-block">Checkout
-									<i class="fa fa-angle-right"></i>
-							</a></td>
-						</tr>
-					</tfoot>
-				</table>
-			</div>
-		</div>
-
-	</div>
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col"> </th>
+                            <th scope="col">Produto</th>
+                            <th scope="col">Estoque</th>
+                            <th scope="col" class="text-center">Quantidade</th>
+                            <th scope="col" class="text-right">Valor Unitário</th>
+                            <th scope="col" class="text-right">Valor Total</th>
+                            <th> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item : ${listaItens}">
+                            <td><img th:src="@{/produto/mostrarImagem/{imagem}(imagem=${item.produto.image_url})}" class="img-fluid" alt="Card image cap" style=" max-height: 5rem;"> </td>
+                            <td th:text="${item.produto.name}"></td>
+                            <td></td>
+                            
+                            <td> <span th:text="${item.quantidade}"></span>               
+                            <a class="btn btn-sm btn-success"
+                            th:href="@{/alterarQuantidade/{produtoid}/{acao} (produtoid=${item.produto.id},acao=${1})}" role="button">
+                            <i class="fa fa-plus"></i> 
+                            </a>
+                            
+                            <a class="btn btn-sm btn-success"
+                            th:href="@{/alterarQuantidade/{produtoid}/{acao} (produtoid=${item.produto.id},acao=${0})}" role="button">
+                            <i class="fa fa-minus"></i> 
+                            </a>
+                            </td>
+                            
+                            <td class="text-right" th:text="${item.valorUnitario}"> R$</td>
+                            <td class="text-right" th:text="${item.valorTotal}"> R$</td>
+                            <td class="text-right">
+                           <a class="btn btn-sm btn-danger"
+                            th:href="@{/removerProduto/{produtoid} (produtoid=${item.produto.id})}" role="button">
+                            <i class="fa fa-trash"></i> 
+                            </a>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Sub-Total</td>
+                            <td class="text-right"><span th:text="${compra.valorTotal}"></span></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Frete</td>
+                            <td class="text-right"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><strong>Total</strong></td>
+                            <td class="text-right"><span th:text="${compra.valorTotal}"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+                    </div>
+        <div class="col mb-2">
+            <div class="row">
+                <div class="col-sm-12  col-md-6 text-right">
+                    <a class="btn btn-lg btn-block btn-success" href="/" style="background:black;">Continue Comprando</a>
+                </div>
+                <div class="col-sm-12 col-md-6 text-right">
+                    <button class="btn btn-lg btn-block btn-success text-uppercase">Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
