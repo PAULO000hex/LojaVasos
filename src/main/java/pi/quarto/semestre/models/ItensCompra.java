@@ -8,15 +8,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.springframework.beans.factory.annotation.Value;
+
 @Entity
 public class ItensCompra implements Serializable{
 
-	
+
 	public ItensCompra() {
 		
 		
 	}
-	
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long Id;
@@ -27,9 +29,14 @@ public class ItensCompra implements Serializable{
 	@ManyToOne
 	private Compra compra;
 	
-	private int quantidade;
 	
-	private Double valorUnitario;
+	private int quantidade = 0;
+	
+	
+	private Double valorUnitario = 0.;
+	
+	
+	private Double valorTotal = 0.;
 
 	public Long getId() {
 		return Id;
@@ -69,6 +76,14 @@ public class ItensCompra implements Serializable{
 
 	public void setValorUnitario(Double valorUnitario) {
 		this.valorUnitario = valorUnitario;
+	}
+
+	public Double getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(Double valorTotal) {
+		this.valorTotal = valorTotal;
 	}
 	
 	
