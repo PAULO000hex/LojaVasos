@@ -43,13 +43,23 @@ public class CarrinhoController {
 		
 	}
 	
+	@GetMapping("/finalizarCompra")
+	public ModelAndView finalizarCompra() {
+		ModelAndView mv = new ModelAndView("finalizarCompra");
+		calcularTotal();
+		mv.addObject("compra",compra);
+		mv.addObject("listaItens", itensCompra);
+		return mv;
+		
+	}
+	
 	@GetMapping("/alterarQuantidade/{produtoid}/{acao}")
 	public String alterarQuantidade(@PathVariable Long produtoid, @PathVariable Integer acao) {
 		
 		
 		for(ItensCompra it:itensCompra) {
 			if(it.getProduto().getId().equals(produtoid)) {
-				if(acao.equals(1)) {
+				if(acao.equals(1) && it.getQuantidade()<it.getProduto().getAvailable()) {
 				it.setQuantidade(it.getQuantidade()+1);
 				it.setValorTotal(0.);
 				it.setValorTotal(it.getValorTotal()+ (it.getQuantidade()*it.getValorUnitario()));

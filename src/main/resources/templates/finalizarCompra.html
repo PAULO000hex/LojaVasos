@@ -7,7 +7,7 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-<title>Carrinho de compras</title>
+<title>Finalizar a compra</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
@@ -16,6 +16,7 @@
 	<div class="container">
 		<div class="row">
         <div class="col-12">
+       
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
@@ -35,26 +36,11 @@
                             <td th:text="${item.produto.name}"></td>
                             <td></td>
                             
-                            <td> <span th:text="${item.quantidade}"></span>               
-                            <a class="btn btn-sm btn-success"
-                            th:href="@{/alterarQuantidade/{produtoid}/{acao} (produtoid=${item.produto.id},acao=${1})}" role="button">
-                            <i class="fa fa-plus"></i> 
-                            </a>
-                            
-                            <a class="btn btn-sm btn-success"
-                            th:href="@{/alterarQuantidade/{produtoid}/{acao} (produtoid=${item.produto.id},acao=${0})}" role="button">
-                            <i class="fa fa-minus"></i> 
-                            </a>
-                            </td>
+                            <td> <span th:text="${item.quantidade}"></span></td>
                             
                             <td class="text-right" th:text="${item.valorUnitario}"> R$</td>
                             <td class="text-right" th:text="${item.valorTotal}"> R$</td>
-                            <td class="text-right">
-                           <a class="btn btn-sm btn-danger"
-                            th:href="@{/removerProduto/{produtoid} (produtoid=${item.produto.id})}" role="button">
-                            <i class="fa fa-trash"></i> 
-                            </a>
-                            </td>
+                            <td class="text-right"></td>
                         </tr>
                         
                         <tr>
@@ -67,29 +53,11 @@
                             <td class="text-right"><span th:text="${compra.valorTotal}"></span></td>
                         </tr>
                         <tr>
-                            <td><div class="form-outline mb-4">
-                    <label class="form-label" for="cep" style="display: block">CEP</label>
-                    <input type="text" name="cep" th id="cep" class="form-control form-control-lg col-6" style="display: inline-block" required/>
-                      <button type="submit" onClick="buscarCEP()" class="btn btn-success btn-lg gradient-custom-4 text-body" style="background-color: #ffc107; border-color: #ffc107; display: inline-block; float: right;" value="Buscar">Buscar</button>
-                  </div></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td><div class="form-check">
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-  <label class="form-check-label" for="exampleRadios1">Normal - 4 dias úteis
-  </label>
-</div>
-<div class="form-check">
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-  <label class="form-check-label" for="exampleRadios2">Expressa - 3 dias úteis
-  </label>
-</div>
-<div class="form-check">
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option3">
-  <label class="form-check-label" for="exampleRadios2">Urgente - 2 dias úteis
-  </label>
-</div></td>
+                            <td></td>
+                            <td></td>
                             <td>Frete</td>
                             <td class="text-right"></td>
                         </tr>
@@ -109,13 +77,10 @@
         <div class="col mb-2">
             <div class="row">
                 <div class="col-sm-12  col-md-6 text-right">
-                    <a class="btn btn-lg btn-block btn-success" href="/" style="background:black;">Continue Comprando</a>
+                    <a class="btn btn-lg btn-block btn-success" href="carrinho" style="background:black;">Voltar para o carrinho</a>
                 </div>
                 <div class="col-sm-12 col-md-6 text-right">
-                  <a class="btn btn-lg btn-block btn-success text-uppercase"
-                            th:href="finalizarCompra" role="button">
-                            Finalizar a Compra
-                            </a>
+                    <button class="btn btn-lg btn-block btn-success text-uppercase">Comprar</button>
                 </div>
             </div>
         </div>
