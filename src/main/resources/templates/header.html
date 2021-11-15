@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <body>
 <div th:fragment="myheader" class="container-fluid px-md-4 px-2 bg-warning">
+    <head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></head>
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-between py-3 mb-4 border-bottom">
         <a href="/index" class="mb-2 text-dark text-decoration-none">
-            <img src="assets/images/logo-vasos.png" class="logo" alt="img-logo">
+            <img src="/assets/images/logo-vasos.png" class="logo" alt="img-logo">
         </a>
 
         <div>
 
-            <!-- <a href ="/logout" class="me-3">Logout</a> -->
             <div th:if="${id}">
                 <div>
-                    <a href ="/logout" class="me-3">Logout</a>
-                    <a href ="/index" class="me-3"><img src="assets/images/carrinho.png" alt="Comprar"></a></div>
+                    <a style="color: black" href ="/logout" class="me-3"><i class="fa fa-user-times" aria-hidden="true"></i>Logout</a>
+                    <a style="color: black" href ="/carrinho" class="me-3"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="me-3">Login</span></a></div>
             </div>
             <!-- ELSE -->
             <div th:unless="${id}">
                 <div>
-                    <a  href="/cadastropessoa" class="me-1"><img src="assets/images/registration.png" alt="Registrar"><span class="me-3">Criar login</a></span>
-                    <a href ="/loginCliente" class="me-1"><img src="assets/images/login.png" alt="Login"><span class="me-3">Login</a></span>
-                    <a href ="/index" class="me-3"><img src="assets/images/carrinho.png" alt="Comprar"></a></div>
+                    <a style="color: black" href="/cadastropessoa" class="me-1"><i class="fa fa-user-plus" aria-hidden="true"></i><span class="me-3">Cadastre-se</span></a>
+                    <a style="color: black" href ="/loginCliente" class="me-1"><i class="fa fa-sign-in" aria-hidden="true"></i><span class="me-3">Login</span></a>
+                    <a style="color: black" href ="/carrinho" class="me-3"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="me-3">Carrinho</span></a></div>
             </div>
         </div>
 
