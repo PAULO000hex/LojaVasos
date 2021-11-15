@@ -22,4 +22,8 @@ public interface EnderecoRepository extends CrudRepository<Endereco, Long> {
 	@Query(value="UPDATE endereco SET status=false WHERE id = :enderecoId", nativeQuery = true)
 	public void desativarEndereco(long enderecoId);
 	
+	@Query(value="select cep from endereco where clienteid = :clienteid and status=true and principal=true", nativeQuery = true)
+	public String findEnderecoPrincipal(long clienteid);
+	
+	
 }

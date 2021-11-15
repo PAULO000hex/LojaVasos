@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import pi.quarto.semestre.models.Compra;
 import pi.quarto.semestre.models.ItensCompra;
 import pi.quarto.semestre.models.Produto;
+import pi.quarto.semestre.repositories.EnderecoRepository;
 import pi.quarto.semestre.repositories.ProdutoRepositorio;
 
 
@@ -26,6 +29,9 @@ public class CarrinhoController {
 	@Autowired
 	private ProdutoRepositorio prodRepo;
 	
+	@Autowired
+	private EnderecoRepository enderecoRepo;
+	
 	private void calcularTotal() {
 		compra.setValorTotal(0.0);
 		for(ItensCompra it: itensCompra) {
@@ -34,10 +40,11 @@ public class CarrinhoController {
 	}
 	
 	@GetMapping("/carrinho")
-	public ModelAndView carrinho() {
+	public ModelAndView carrinho(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("carrinho");
 		calcularTotal();
 		mv.addObject("compra",compra);
+		compra.setCepCliente(enderecoRepo.findEnderecoPrincipal((long)request.getSession().getAttribute("id")));
 		mv.addObject("listaItens", itensCompra);
 		return mv;
 		
