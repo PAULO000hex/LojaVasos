@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import pi.quarto.semestre.models.Compra;
+import pi.quarto.semestre.models.Endereco;
 import pi.quarto.semestre.models.ItensCompra;
 import pi.quarto.semestre.models.Produto;
 import pi.quarto.semestre.repositories.EnderecoRepository;
@@ -44,16 +45,39 @@ public class CarrinhoController {
 		ModelAndView mv = new ModelAndView("carrinho");
 		calcularTotal();
 		mv.addObject("compra",compra);
+		if(request.getSession().getAttribute("id")!=null) {
 		compra.setCepCliente(enderecoRepo.findEnderecoPrincipal((long)request.getSession().getAttribute("id")));
+		}
 		mv.addObject("listaItens", itensCompra);
 		return mv;
 		
 	}
 	
 	@GetMapping("/finalizarCompra")
-	public ModelAndView finalizarCompra() {
+	public ModelAndView finalizarCompra(HttpServletRequest request) {
+		if(request.getSession().getAttribute("id")==null) {
+			ModelAndView mv = new ModelAndView("redirect:/loginCliente");
+			return mv;
+		}
 		ModelAndView mv = new ModelAndView("finalizarCompra");
 		calcularTotal();
+		mv.addObject("compra",compra);
+		mv.addObject("listaItens", itensCompra);
+		return mv;
+		
+	}
+	
+	@GetMapping("selecaoEndereco")
+	public ModelAndView selecaoEndereco(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("selecaoEndereco");
+		calcularTotal();
+		if(request.getSession().getAttribute("id")!=null) {
+		List<Endereco> endereco = enderecoRepo.findEnderecoEntrega((long)request.getSession().getAttribute("id"));
+		mv.addObject("listaEnderecos", endereco);
+		}else if(request.getSession().getAttribute("id")==null) {
+				mv.setViewName("redirect:/loginCliente");
+			return mv;
+		}
 		mv.addObject("compra",compra);
 		mv.addObject("listaItens", itensCompra);
 		return mv;

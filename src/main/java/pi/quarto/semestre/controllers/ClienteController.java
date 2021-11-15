@@ -110,7 +110,7 @@ public class ClienteController {
     		request.getSession().setAttribute("nome", user.getNome());
     		request.getSession().setAttribute("id", user.getId());
     		
-    		return "redirect:/cliente"; 
+    		return "redirect:/"; 
     	}
     	model.addAttribute("erro", "Usuário ou senha invalidos");
 	    return "/loginCliente";

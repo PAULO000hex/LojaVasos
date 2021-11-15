@@ -25,5 +25,6 @@ public interface EnderecoRepository extends CrudRepository<Endereco, Long> {
 	@Query(value="select cep from endereco where clienteid = :clienteid and status=true and principal=true", nativeQuery = true)
 	public String findEnderecoPrincipal(long clienteid);
 	
-	
+	@Query(value="select * from endereco where clienteid = :clienteid and entrega=true", nativeQuery = true)
+	public List<Endereco> findEnderecoEntrega(long clienteid);
 }

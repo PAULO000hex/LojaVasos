@@ -36,8 +36,10 @@
                     <img th:src="@{/produto/mostrarImagem/{imagem}(imagem=${produto.Image_url})}" class="img-fluid" alt="Card image cap" style=" max-height: 13rem;">
                     <div>
                       <h5 class="mt-2 mb-1" th:text="${produto.name}"></h5>
+                      
                       <div class="d-flex justify-content-between">
                         <span class="mt-1" th:text="'R$ ' + ${produto.price}">R$ 299,00</span>
+                        <a class="btn btn-warning mr-2" type="button" th:href="@{/adicionarCarrinho/{produtoid}(produtoid=${produto.id})}">Comprar</a>
                         <a th:href="@{/produto/detalhes-eccomerce/{id}(id=${produto.id})}"><img src="assets/images/detalhes.png" alt="detalhes"></a>
                       </div>
                     </div>

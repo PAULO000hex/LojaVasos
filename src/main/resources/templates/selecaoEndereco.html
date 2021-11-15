@@ -117,43 +117,35 @@
 <div th:replace="header::myheader"></div>
 <div class="container d-flex justify-content-center mt-5 mb-5">
     <div class="row g-3">
-        <div class="col-md-6"> <span>Forma de Pagamento</span>
+        <div class="col-md-6"> <span>Endereço de entrega</span>
             <div class="card">
                 <div class="accordion" id="accordionExample">
                     <div class="card">
                         <div class="card-header p-0" id="headingTwo">
-                            <h2 class="mb-0"> <button class="btn btn-light btn-block text-left collapsed p-3 rounded-0 border-bottom-custom" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                <div class="d-flex align-items-center justify-content-between"> <span>Paypal</span> <img src="https://i.imgur.com/7kQEsHU.png" width="30"> </div>
-                            </button> </h2>
+                           <div class="form-check" th:each="endereco : ${listaEnderecos}">
+  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+  <label class="form-check-label" for="exampleRadios1"><span th:text="${endereco.logradouro} + ' ' + ${endereco.numero}"&nbsp;></span><br><span th:text="${endereco.cep}"></span></label>
+ 
+</div>
                         </div>
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                            <div class="card-body"> <input type="text" class="form-control" placeholder="Paypal email"> </div>
-                             <a class="btn btn-primary btn-block free-button" th:href="selecaoEndereco">Voltar para o endereço de entrega</a>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-header p-0">
-                            <h2 class="mb-0"> <button class="btn btn-light btn-block text-left p-3 rounded-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <div class="d-flex align-items-center justify-content-between"> <span>Cartão de Crédito</span>
-                                    <div class="icons"> <img src="https://i.imgur.com/2ISgYja.png" width="30"> <img src="https://i.imgur.com/W1vtnOV.png" width="30"></div>
-                                </div>
-                            </button> </h2>
                         </div>
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                             <div class="card-body payment-card-body">
-                                <span class="font-weight-normal card-text">Nome do Titular</span>
-                                <div class="input"> <i class="fa fa-user-circle" aria-hidden="true"></i> <input type="text" class="form-control"> </div>
-                                <span class="font-weight-normal card-text">Número do Cartão</span>
-                                <div class="input"> <i class="fa fa-credit-card"></i> <input type="text" class="form-control" placeholder="0000 0000 0000 0000"> </div>
+                                
                                 <div class="row mt-3 mb-3">
-                                    <div class="col-md-6"> <span class="font-weight-normal card-text">Vencimento</span>
-                                        <div class="input"> <i class="fa fa-calendar"></i> <input type="text" class="form-control" placeholder="MM/AA"> </div>
+                                    <div class="col-md-6"> 
+                                       
                                     </div>
-                                    <div class="col-md-6"> <span class="font-weight-normal card-text">CVV</span>
-                                        <div class="input"> <i class="fa fa-lock"></i> <input type="text" class="form-control" placeholder="000"> </div>
+                                    <div class="col-md-6">
+                                        <div class="input"> </div>
                                     </div>
-                                </div> <span class="text-muted certificate-text"><i class="fa fa-lock"></i> Transação Segura</span>
-                                <a class="btn btn-primary btn-block free-button" th:href="selecaoEndereco">Voltar para o endereço de entrega</a>
+                                </div> 
+                                <a class="btn btn-primary btn-block free-button" th:href="carrinho">Voltar para o carrinho</a>
                             </div>
                         </div>
                     </div>
@@ -175,7 +167,7 @@
                 <div class="p-3 d-flex justify-content-between">
                     <div class="d-flex flex-column"> <small>Frete $9.59</small> <span>Total</span> </div> <span th:text="${compra.valorTotal}"></span>
                 </div>
-                <div class="p-3"> <button class="btn btn-primary btn-block free-button">Finalizar Compra</button></div>
+                <div class="p-3"> <a class="btn btn-primary btn-block free-button" th:href="finalizarCompra">Forma de pagamento</a></div>
             </div>
         </div>
     </div>
