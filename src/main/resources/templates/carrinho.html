@@ -70,7 +70,7 @@
                             <td><div class="form-outline mb-4">
                     <label class="form-label" for="cep" style="display: block">CEP</label>
                     <input th:value="${compra.cepCliente}" name="cep" th id="cep" class="form-control form-control-lg col-6" required/>
-                      <button type="submit" onClick="buscarCEP()" class="btn btn-success btn-lg gradient-custom-4 text-body" style="background-color: #ffc107; border-color: #ffc107;  float: right;" value="Buscar">Buscar</button>
+                      <button type="submit" onClick="buscarCEP()" class="btn btn-success btn-lg gradient-custom-4 text-body" style="background-color: #ffc107; border-color: #ffc107; float: right;" value="Buscar">Buscar</button>
                   </div></td>
                             <td></td>
                             <td></td>
@@ -113,8 +113,8 @@
                 </div>
                 <div class="col-sm-12 col-md-6 text-right">
                   <a class="btn btn-lg btn-block btn-success text-uppercase"
-                            th:href="finalizarCompra" role="button">
-                            Finalizar a Compra
+                            th:href="selecaoEndereco" role="button">
+                            Escolher endereço de entrega
                             </a>
                 </div>
             </div>
