@@ -34,6 +34,8 @@ public class Compra implements Serializable {
 	private Date dataCompra = new Date();
 
 	private String pagamento;
+	
+	private String cepCliente;
 
 	public Long getId() {
 		return Id;
@@ -76,6 +78,15 @@ public class Compra implements Serializable {
 	}
 
 	
+	public String getCepCliente() {
+		return cepCliente;
+	}
+
 	private Double valorTotal = 0.;
+
+	public void setCepCliente(String cepCliente) {
+		this.cepCliente = cepCliente;
+		
+	}
 
 }
