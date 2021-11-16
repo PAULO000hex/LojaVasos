@@ -10,13 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import pi.quarto.semestre.models.Compra;
 import pi.quarto.semestre.models.Endereco;
 import pi.quarto.semestre.models.ItensCompra;
+import pi.quarto.semestre.models.Pedido;
 import pi.quarto.semestre.models.Produto;
 import pi.quarto.semestre.repositories.EnderecoRepository;
+import pi.quarto.semestre.repositories.PedidoRepository;
 import pi.quarto.semestre.repositories.ProdutoRepositorio;
 
 
@@ -26,12 +29,16 @@ public class CarrinhoController {
 	
 	private List<ItensCompra> itensCompra = new ArrayList<ItensCompra>();
 	private Compra compra = new Compra();
+	Pedido pedido = new Pedido();
 	
 	@Autowired
 	private ProdutoRepositorio prodRepo;
 	
 	@Autowired
 	private EnderecoRepository enderecoRepo;
+	
+	@Autowired
+	private PedidoRepository pedidoRepo;
 	
 	private void calcularTotal() {
 		compra.setValorTotal(0.0);
@@ -54,21 +61,41 @@ public class CarrinhoController {
 		
 	}
 	
+	@GetMapping("/DetalhesPedido")
+	public ModelAndView detalhesPedido(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("DetalhesPedido");
+		mv.addObject("compra",compra);
+		mv.addObject("listaItens", itensCompra);
+		
+		pedido.setStatus("aguardando pagamento");
+		pedido.setValor(compra.getValorTotal());
+		pedido.setIdCliente((long)request.getSession().getAttribute("id"));
+		pedidoRepo.save(pedido);
+		List<Pedido>pedido2 = pedidoRepo.findPedidoById((long)request.getSession().getAttribute("id"));
+		mv.addObject("listaPedidos",pedido2);
+		return mv;
+		
+	}
+	
 	@GetMapping("/finalizarCompra")
-	public ModelAndView finalizarCompra(HttpServletRequest request) {
+	public ModelAndView finalizarCompra(HttpServletRequest request, @RequestParam ("frete")float frete) {
 		if(request.getSession().getAttribute("id")==null) {
 			ModelAndView mv = new ModelAndView("redirect:/loginCliente");
 			return mv;
 		}
 		ModelAndView mv = new ModelAndView("finalizarCompra");
 		calcularTotal();
+		
 		mv.addObject("compra",compra);
+		compra.setValorTotal(compra.getValorTotal()+frete);
+		compra.setFrete(frete);
 		mv.addObject("listaItens", itensCompra);
+		
 		return mv;
 		
 	}
 	
-	/*@GetMapping("selecaoEndereco")
+	@GetMapping("selecaoEndereco")
 	public ModelAndView selecaoEndereco(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("selecaoEndereco");
 		calcularTotal();
@@ -84,7 +111,7 @@ public class CarrinhoController {
 		return mv;
 		
 	}
-	*/
+	
 	@GetMapping("/alterarQuantidade/{produtoid}/{acao}")
 	public String alterarQuantidade(@PathVariable Long produtoid, @PathVariable Integer acao) {
 		

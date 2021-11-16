@@ -173,9 +173,9 @@
                 </div>
                 <hr class="mt-0 line">
                 <div class="p-3 d-flex justify-content-between">
-                    <div class="d-flex flex-column"> <small>Frete $9.59</small> <span>Total</span> </div> <span th:text="${compra.valorTotal}"></span>
+                    <div class="d-flex flex-column" th:text="${compra.frete}" > <small></small> <span>Total</span> </div> <span th:text="${compra.valorTotal}"></span>
                 </div>
-                <div class="p-3"> <button class="btn btn-primary btn-block free-button">Finalizar Compra</button></div>
+                <a class="btn btn-primary btn-block free-button" th:href="selecaoEndereco">Escolher endereço de entrega</a>
             </div>
         </div>
     </div>
