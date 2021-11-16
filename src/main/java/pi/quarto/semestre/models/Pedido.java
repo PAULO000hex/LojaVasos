@@ -12,7 +12,7 @@ public class Pedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	private Long Id;
-	@ManyToMany
+	@ManyToOne
 	private Produto produto;
 	@ManyToOne
 	private Cliente cliente;
