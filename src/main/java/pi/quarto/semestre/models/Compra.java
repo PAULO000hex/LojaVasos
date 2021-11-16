@@ -23,6 +23,7 @@ public class Compra implements Serializable {
 
 	public Compra() {
 	}
+
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,9 +33,8 @@ public class Compra implements Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCompra = new Date();
-
 	private String pagamento;
-	
+	private float frete;
 	private String cepCliente;
 
 	public Long getId() {
@@ -89,4 +89,11 @@ public class Compra implements Serializable {
 		
 	}
 
+	public float getFrete() {
+		return frete;
+	}
+
+	public void setFrete(float frete) {
+		this.frete = frete;
+	}
 }

@@ -11,9 +11,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+<div th:replace="header::myheader"></div>
 
-	
-	<div class="container">
+<div class="container">
 		<div class="row">
         <div class="col-12">
             <div class="table-responsive">
@@ -64,7 +64,7 @@
                             <td></td>
                             <td></td>
                             <td>Sub-Total</td>
-                            <td class="text-right"><span th:text="${compra.valorTotal}"></span></td>
+                            <td class="text-right"><span th:text="${compra.valorTotal}" id="subtotal"></span></td>
                         </tr>
                         <tr>
                             <td><div class="form-outline mb-4">
@@ -91,7 +91,7 @@
   </label>
 </div></td>
                             <td>Frete</td>
-                            <td class="text-right" id="valorFrete"></td>
+                            <td class="text-right" th:text="${compra.frete}" id="valorFrete"></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -100,7 +100,7 @@
                             <td></td>
                             <td></td>
                             <td><strong>Total</strong></td>
-                            <td class="text-right"><span th:text="${compra.valorTotal}"></span></td>
+                            <td class="text-right"><span th:text="${compra.valorTotal}" id="valorTotal"></span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -123,6 +123,12 @@
 </body>
 <script>
     var frete = 0;
+    var valorTotal = $('#valorTotal').text();
+    var subtotal = $('#subtotal').text();
+
+    function calculaTotal(subtotal, frete){
+        return parseFloat(subtotal) + parseFloat(frete);
+    }
 
     function buscarCEP() {
         let CEP = $("#cep").val().replace("-", "").trim();
@@ -135,7 +141,6 @@
             console.log(response)
             let estado = response.uf;
             let cidade = response.localidade;
-
 
             switch(estado){
                 case "SP":
@@ -332,11 +337,10 @@
             }
 
             $('#valorFrete').text("R$ "+frete.toFixed(2));
+            $('#valorTotal').text("R$ "+calculaTotal(subtotal, frete).toFixed(2));
 
         });
     }
-
-
 
     $('.form-check-input').change(function(){
 
@@ -345,15 +349,23 @@
         if($(this).val() == 1) {
             freteComTaxa = frete * 1;
             $('#valorFrete').text("R$ " + freteComTaxa.toFixed(2));
+            $('#valorTotal').text("R$ "+calculaTotal(subtotal, freteComTaxa).toFixed(2));
+
         }
         if($(this).val() == 2){
             freteComTaxa = frete * 1.2;
             $('#valorFrete').text("R$ "+freteComTaxa.toFixed(2));
+            $('#valorTotal').text("R$ "+calculaTotal(subtotal, freteComTaxa).toFixed(2));
+
         }else if($(this).val() == 3){
             freteComTaxa = frete * 1.5;
             $('#valorFrete').text("R$ "+freteComTaxa.toFixed(2));
+
         }
+        $('#valorTotal').text("R$ "+calculaTotal(subtotal, freteComTaxa).toFixed(2));
+
 
     })
+
 </script>
 </html>
