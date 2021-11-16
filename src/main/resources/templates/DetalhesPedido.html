@@ -117,14 +117,13 @@
 <div th:replace="header::myheader"></div>
 <div class="container d-flex justify-content-center mt-5 mb-5">
     <div class="row g-3">
-        <div class="col-md-6"> <span>Endereço de entrega</span>
+        <div class="col-md-6"> <span>Detalhes do Pedido</span>
             <div class="card">
                 <div class="accordion" id="accordionExample">
                     <div class="card">
                         <div class="card-header p-0" id="headingTwo">
-                           <div class="form-check" th:each="endereco : ${listaEnderecos}">
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-  <label class="form-check-label" for="exampleRadios1"><span th:text="${endereco.logradouro} + ' ' + ${endereco.numero}"&nbsp;></span><br><span th:text="${endereco.cep}"></span></label>
+                           <div class="form-check" th:each="pedido : ${listaPedidos}"><span><h2>Compra realizada com sucesso!</h2></span><br>
+<span>Número da compra: </span> <span th:text="${pedido.id}"></span><br><span>Status do pedido: </span><span th:text="${pedido.status}"></span><br>Valor R$ </span><span th:text="${pedido.valor}"></span></label><br>
  
 </div>
                         </div>
@@ -145,8 +144,7 @@
                                         <div class="input"> </div>
                                     </div>
                                 </div> 
-                                <a class="btn btn-primary btn-block free-button" th:href="carrinho">Voltar para o carrinho</a>
-                                <a class="btn btn-primary btn-block free-button" th:href="DetalhesPedido">Finalizar compra</a>
+                               
                             </div>
                         </div>
                     </div>

@@ -18,6 +18,8 @@ public class Pedido {
 	private Cliente cliente;
 	
 	private String status;
+	
+	private Long idCliente;
 
 	private ItensCompra itensCompra;
 	
@@ -71,6 +73,14 @@ public class Pedido {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public Long getIdCliente() {
+		return idCliente;
+	}
+
+	public void setIdCliente(Long idCliente) {
+		this.idCliente = idCliente;
 	}
 
 }
