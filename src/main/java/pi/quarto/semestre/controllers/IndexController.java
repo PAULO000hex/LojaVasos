@@ -31,7 +31,7 @@ public class IndexController {
 		return "redirect:/loginCliente";
 	}
 
-	@GetMapping("/")
+	@GetMapping(value = {"/", "/index"})
 	public String produtos(Model model, HttpServletRequest request) {
 		model.addAttribute("listaProdutos", produtoRepo.findByStatus(true) );
 		model.addAttribute("id",request.getSession().getAttribute("id"));
