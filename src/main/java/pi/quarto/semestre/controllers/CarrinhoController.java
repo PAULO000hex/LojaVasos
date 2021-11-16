@@ -38,6 +38,7 @@ public class CarrinhoController {
 		for(ItensCompra it: itensCompra) {
 			compra.setValorTotal(compra.getValorTotal() + it.getValorTotal());
 		}
+		
 	}
 	
 	@GetMapping("/carrinho")
@@ -67,7 +68,7 @@ public class CarrinhoController {
 		
 	}
 	
-	@GetMapping("selecaoEndereco")
+	/*@GetMapping("selecaoEndereco")
 	public ModelAndView selecaoEndereco(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("selecaoEndereco");
 		calcularTotal();
@@ -83,7 +84,7 @@ public class CarrinhoController {
 		return mv;
 		
 	}
-	
+	*/
 	@GetMapping("/alterarQuantidade/{produtoid}/{acao}")
 	public String alterarQuantidade(@PathVariable Long produtoid, @PathVariable Integer acao) {
 		
