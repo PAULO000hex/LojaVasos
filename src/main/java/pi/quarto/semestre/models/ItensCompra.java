@@ -28,14 +28,8 @@ public class ItensCompra implements Serializable{
 	
 	@ManyToOne
 	private Compra compra;
-	
-	
 	private int quantidade = 0;
-	
-	
 	private Double valorUnitario = 0.;
-	
-	
 	private Double valorTotal = 0.;
 
 	public Long getId() {

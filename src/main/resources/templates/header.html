@@ -3,8 +3,28 @@
 
 <body>
 <div th:fragment="myheader" class="container-fluid px-md-4 px-2 bg-warning">
-    <head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></head>
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-between py-3 mb-4 border-bottom">
+    <head>
+        <style>
+            @media(max-width: 992px) {
+                .card {
+                    margin: 0 auto;
+                }
+            }
+
+            .logo {
+                width: 135px;
+                height: 60px;
+            }
+
+            @media(max-width: 568px) {
+                .logo {
+                    width: 100px;
+                    height: 50px;
+                }
+            }
+        </style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></head>
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-between py-3 mb-4 border-bottom">
         <a href="/" class="mb-2 text-dark text-decoration-none">
             <img src="/assets/images/logo-vasos.png" class="logo" alt="img-logo">
         </a>
