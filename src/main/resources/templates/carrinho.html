@@ -124,6 +124,7 @@
     var frete = 0;
     var valorTotal = $('#valorTotal').text();
     var subtotal = $('#subtotal').text();
+    var freteComTaxa = 0;
 
     function calculaTotal(subtotal, frete){
         return parseFloat(subtotal) + parseFloat(frete);
@@ -344,7 +345,7 @@
 
     $('.form-check-input').change(function(){
 
-        var freteComTaxa = 0;
+        freteComTaxa = 0;
 
         if($(this).val() == 1) {
             freteComTaxa = frete * 1;
@@ -366,7 +367,7 @@
 
     })
     $('#next').click(function(){
-        $('#next').prop("href", "finalizarCompra?frete="+frete);
+        $('#next').prop("href", "finalizarCompra?frete="+freteComTaxa);
     })
 </script>
 </html>
