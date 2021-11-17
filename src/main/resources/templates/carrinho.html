@@ -112,8 +112,8 @@
                 </div>
                 <div class="col-sm-12 col-md-6 text-right">
                   <a class="btn btn-lg btn-block btn-success text-uppercase"
-                            th:href="finalizarCompra" role="button" id="next">
-                            Escolher forma de pagamento
+                            th:href="selecaoEndereco" role="button" id="next">
+                            Escolher endereço de entrega
                             </a>
                 </div>
             </div>
@@ -367,7 +367,7 @@
 
     })
     $('#next').click(function(){
-        $('#next').prop("href", "finalizarCompra?frete="+freteComTaxa);
+        $('#next').prop("href", "selecaoEndereco?frete="+freteComTaxa);
     })
 </script>
 </html>

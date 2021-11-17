@@ -37,6 +37,8 @@ public class CarrinhoController {
 	@Autowired
 	private EnderecoRepository enderecoRepo;
 	
+	
+	
 	@Autowired
 	private PedidoRepository pedidoRepo;
 	
@@ -66,6 +68,11 @@ public class CarrinhoController {
 		ModelAndView mv = new ModelAndView("DetalhesPedido");
 		mv.addObject("compra",compra);
 		mv.addObject("listaItens", itensCompra);
+		for(ItensCompra it:itensCompra) {
+			pedido.setQuantidade(it.getQuantidade());
+			pedido.setProduto(it.getProduto());
+			
+			}
 		
 		pedido.setStatus("aguardando pagamento");
 		pedido.setValor(compra.getValorTotal());
