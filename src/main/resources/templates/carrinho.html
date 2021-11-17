@@ -75,7 +75,7 @@
                             <td></td>
                             <td></td>
                             <td><div class="form-check">
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="1" checked>
+  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="1">
   <label class="form-check-label" for="exampleRadios1">Normal - 4 dias �teis
   </label>
 </div>
@@ -125,6 +125,7 @@
     var valorTotal = $('#valorTotal').text();
     var subtotal = $('#subtotal').text();
     var freteComTaxa = 0;
+    var categoria = '';
 
     function calculaTotal(subtotal, frete){
         return parseFloat(subtotal) + parseFloat(frete);
@@ -348,17 +349,21 @@
         freteComTaxa = 0;
 
         if($(this).val() == 1) {
+            categoria = 'normal';
             freteComTaxa = frete * 1;
             $('#valorFrete').text("R$ " + freteComTaxa.toFixed(2));
             $('#valorTotal').text("R$ "+calculaTotal(subtotal, freteComTaxa).toFixed(2));
 
         }
         if($(this).val() == 2){
+            categoria = 'expressa';
+
             freteComTaxa = frete * 1.2;
             $('#valorFrete').text("R$ "+freteComTaxa.toFixed(2));
             $('#valorTotal').text("R$ "+calculaTotal(subtotal, freteComTaxa).toFixed(2));
 
         }else if($(this).val() == 3){
+            categoria = 'urgente';
             freteComTaxa = frete * 1.5;
             $('#valorFrete').text("R$ "+freteComTaxa.toFixed(2));
 
@@ -367,7 +372,7 @@
 
     })
     $('#next').click(function(){
-        $('#next').prop("href", "selecaoEndereco?frete="+freteComTaxa);
+        $('#next').prop("href", "selecaoEndereco?categoria="+categoria);
     })
 </script>
 </html>
