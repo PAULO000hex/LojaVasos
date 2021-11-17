@@ -121,8 +121,8 @@
             <div class="card">
                 <div class="accordion" id="accordionExample">
                     <div class="card">
-                        <div class="card-header p-0" id="headingTwo">
-                           <div class="form-check" th:each="pedido : ${listaPedidos}"><span><h2>Compra realizada com sucesso!</h2></span><br>
+                        <div class="card-header p-0" id="headingTwo"><h2>Compra realizada com sucesso!</h2><br>
+                           <div class="form-check" th:each="pedido : ${listaPedidos}"><span><h2>Detalhes da compra</h2></span>
 <span>Número da compra: </span> <span th:text="${pedido.id}"></span><br><span>Status do pedido: </span><span th:text="${pedido.status}"></span><br>Valor R$ </span><span th:text="${pedido.valor}"></span></label><br>
  
 </div>
