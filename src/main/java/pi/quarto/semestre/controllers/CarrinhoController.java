@@ -70,9 +70,12 @@ public class CarrinhoController {
 		pedido.setStatus("aguardando pagamento");
 		pedido.setValor(compra.getValorTotal());
 		pedido.setIdCliente((long)request.getSession().getAttribute("id"));
-		pedidoRepo.save(pedido);
-		List<Pedido>pedido2 = pedidoRepo.findPedidoById((long)request.getSession().getAttribute("id"));
-		mv.addObject("listaPedidos",pedido2);
+		Pedido pedido2 = new Pedido();
+		pedido2 = pedido;
+		
+		pedidoRepo.save(pedido2);
+		List<Pedido>pedido3 = pedidoRepo.findPedidoById((long)request.getSession().getAttribute("id"));
+		mv.addObject("listaPedidos",pedido3);
 		return mv;
 		
 	}
