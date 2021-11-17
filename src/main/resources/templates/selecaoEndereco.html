@@ -145,14 +145,33 @@
                                         <div class="input"> </div>
                                     </div>
                                 </div> 
-                                <a class="btn btn-primary btn-block free-button" th:href="carrinho">Voltar para o carrinho</a>
-                                <a class="btn btn-primary btn-block free-button" th:href="DetalhesPedido">Finalizar compra</a>
                             </div>
                         </div>
                     </div>
                 </div>
+                <a class="btn btn-primary btn-block free-button" th:href="carrinho">Voltar para o carrinho</a>
             </div>
         </div>
+        <div class="col-md-6"> <span>Detalhes</span>
+            <div class="card">
+                <div class="d-flex justify-content-between p-3">
+                    <div class="d-flex flex-column"> <span>Subtotal</span></div>
+                    <div class="mt-1"> <sup class="super-price" th:text="${compra.valorTotal}">R$</sup></div>
+                </div>
+                <hr class="mt-0 line">
+                <div class="p-3" th:each="item : ${listaItens}">
+                    <div class="d-flex justify-content-between mb-2"><img th:src="@{/produto/mostrarImagem/{imagem}(imagem=${item.produto.image_url})}" class="img-fluid" alt="Card image cap" style=" max-height: 3rem;"><span th:text="${item.produto.name}"></span> <span th:text="${item.quantidade}"></span><span th:text="${item.valorUnitario}"></span> </div>
+
+                </div>
+                <hr class="mt-0 line">
+                <div class="p-3 d-flex justify-content-between">
+                    <div class="d-flex flex-column" th:text="${compra.frete}" > <small></small> <span>Total</span> </div> <span th:text="${compra.valorTotal}"></span>
+                </div>
+                <a class="btn btn-primary btn-block free-button" th:href="finalizarCompra">Escolher forma de pagamento</a>
+            </div>
+        </div>
+    </div>
+</div>
         
 </body>
 </html>
