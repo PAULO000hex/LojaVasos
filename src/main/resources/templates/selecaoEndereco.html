@@ -117,13 +117,13 @@
 <div th:replace="header::myheader"></div>
 <div class="container d-flex justify-content-center mt-5 mb-5">
     <div class="row g-3">
-        <div class="col-md-6"> <span>EndereÃ§o de entrega</span>
+        <div class="col-md-6"> <span>Endereço de entrega</span>
             <div class="card">
                 <div class="accordion" id="accordionExample">
                     <div class="card">
                         <div class="card-header p-0" id="headingTwo">
                            <div class="form-check" th:each="endereco : ${listaEnderecos}">
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" th:attr="data-cep=${endereco.cep}">
   <label class="form-check-label" for="exampleRadios1"><span th:text="${endereco.logradouro} + ' ' + ${endereco.numero}"&nbsp;></span><br><span th:text="${endereco.cep}"></span></label>
  
 </div>
@@ -156,22 +156,258 @@
             <div class="card">
                 <div class="d-flex justify-content-between p-3">
                     <div class="d-flex flex-column"> <span>Subtotal</span></div>
-                    <div class="mt-1"> <sup class="super-price" th:text="${compra.valorTotal}">R$</sup></div>
+                    <div class="mt-1"> <sup class="super-price" th:text="${compra.valorTotal}" id="subtotal">R$</sup></div>
                 </div>
                 <hr class="mt-0 line">
                 <div class="p-3" th:each="item : ${listaItens}">
                     <div class="d-flex justify-content-between mb-2"><img th:src="@{/produto/mostrarImagem/{imagem}(imagem=${item.produto.image_url})}" class="img-fluid" alt="Card image cap" style=" max-height: 3rem;"><span th:text="${item.produto.name}"></span> <span th:text="${item.quantidade}"></span><span th:text="${item.valorUnitario}"></span> </div>
-
+                    <input type="hidden" id="categoria" value="normal">
                 </div>
                 <hr class="mt-0 line">
                 <div class="p-3 d-flex justify-content-between">
-                    <div class="d-flex flex-column" th:text="${compra.frete}" > <small></small> <span>Total</span> </div> <span th:text="${compra.valorTotal}"></span>
+                    <div class="d-flex flex-column" id="valorFret" th:text="${compra.frete}" > <small></small> <span>Total</span> </div> <span th:text="${compra.valorTotal}" id="valorTotal"></span>
                 </div>
-                <a class="btn btn-primary btn-block free-button" th:href="finalizarCompra">Escolher forma de pagamento</a>
+                <a class="btn btn-primary btn-block free-button" th:href="finalizarCompra" id="next">Escolher forma de pagamento</a>
             </div>
         </div>
     </div>
 </div>
         
 </body>
+<script>
+    var frete = 0;
+    var freteComTaxa = 0;
+    var subtotal = $('#subtotal').text();
+
+    function buscarCEP() {
+        let CEP = $('#exampleRadios1').attr('data-cep');
+        let settings = {
+            "url": "https://viacep.com.br/ws/" + CEP + "/json/",
+            "method": "GET",
+            "timeout": 0,
+        };
+        $.ajax(settings).done(function (response) {
+            console.log(response)
+            let estado = response.uf;
+            let cidade = response.localidade;
+
+            switch(estado){
+                case "SP":
+                    if(cidade == "S?o Paulo"){
+                        frete = 9.99;
+                    }else{
+                        frete = 14.99;
+                    }
+                    break;
+                case "MG":
+                    if(cidade == "Belo Horizonte"){
+                        frete = 16.99;
+                    }else{
+                        frete = 21.99
+                    }
+                    break;
+                case "RJ":
+                    if(cidade == "Rio De Janeiro"){
+                        frete = 14.69;
+                    }else{
+                        frete = 20;
+                    }
+                    break;
+                case "MA":
+                    if(cidade == "S?o Lu?s"){
+                        frete = 25.59;
+                    }else{
+                        frete = 32;
+                    }
+                    break;
+                case "MT":
+                    if(cidade == "Cuiab?"){
+                        frete = 19.25;
+                    }else{
+                        frete = 24.75;
+                    }
+                    break;
+                case "MS":
+                    if(cidade == "Campo Grande"){
+                        frete = 22;
+                    }else{
+                        frete = 26.78;
+                    }
+                    break;
+                case "BA":
+                    if(cidade == "Salvador"){
+                        frete = 29.30;
+                    }else{
+                        frete = 36;
+                    }
+                    break;
+                case "PR":
+                    if(cidade == "Bel?m"){
+                        frete = 17.21;
+                    }else{
+                        frete = 19.66;
+                    }
+                    break;
+                case "PN":
+                    if(cidade == "Curitiba"){
+                        frete = 12.50;
+                    }else{
+                        frete = 17;
+                    }
+                    break;
+                case "SC":
+                    if(cidade == "Florian?polis"){
+                        frete = 16.50;
+                    }else{
+                        frete = 18.20;
+                    }
+                    break;
+                case "RS":
+                    if(cidade == "Porto Alegre"){
+                        frete = 32.50;
+                    }else{
+                        frete = 36.78;
+                    }
+                    break;
+                case "RR":
+                    if(cidade == "Boa Vista"){
+                        frete = 36.40;
+                    }else{
+                        frete = 39.99;
+                    }
+                    break;
+                case "RO":
+                    if(cidade == "Porto Velho"){
+                        frete = 39.55;
+                    }else{
+                        frete = 42.60;
+                    }
+                    break;
+                case "AC":
+                    if(cidade == "Rio Branco"){
+                        frete = 55;
+                    }else{
+                        frete = 59.99;
+                    }
+                    break;
+                case "AL":
+                    if(cidade == "Macei?"){
+                        frete = 32;
+                    }else{
+                        frete = 35.99;
+                    }
+                    break;
+                case "AP":
+                    if(cidade == "Macap?"){
+                        frete = 65;
+                    }else{
+                        frete = 67.99;
+                    }
+                    break;
+                case "AM":
+                    if(cidade == "Manaus"){
+                        frete = 42;
+                    }else{
+                        frete = 47.99;
+                    }
+                    break;
+                case "CE":
+                    if(cidade == "Fortaleza"){
+                        frete = 32;
+                    }else{
+                        frete = 35.99;
+                    }
+                    break;
+                case "ES":
+                    if(cidade == "Vit?ria"){
+                        frete = 21;
+                    }else{
+                        frete = 23.66;
+                    }
+                    break;
+                case "GO":
+                    if(cidade == "Goiania"){
+                        frete = 26;
+                    }else{
+                        frete = 28.69;
+                    }
+                    break;
+                case "PB":
+                    if(cidade == "Jo?o Pessoa"){
+                        frete = 36;
+                    }else{
+                        frete = 38.59;
+                    }
+                    break;
+                case "PI":
+                    if(cidade == "Teresina"){
+                        frete = 45;
+                    }else{
+                        frete = 49.59;
+                    }
+                    break;
+                case "TO":
+                    if(cidade == "Palmas"){
+                        frete = 27;
+                    }else{
+                        frete = 31.50;
+                    }
+                    break;
+                case "SE":
+                    if(cidade == "Aracaju"){
+                        frete = 32;
+                    }else{
+                        frete = 35.99;
+                    }
+                    break;
+                case "RN":
+                    if(cidade == "Natal"){
+                        frete = 41;
+                    }else{
+                        frete = 43;
+                    }
+                    break;
+                case "PE":
+                    if(cidade == "Recife"){
+                        frete = 46;
+                    }else{
+                        frete = 48.30;
+                    }
+                    break;
+                case "DF":
+                    if(cidade == "Brasilia"){
+                        frete = 46;
+                    }else{
+                        frete = 48.30;
+                    }
+                    break;
+                default:
+                    frete = 50
+            }
+
+            $('#valorFret').text("R$ "+frete.toFixed(2));
+            $('#valorTotal').text("R$ "+calculaTotal(subtotal, frete).toFixed(2));
+
+        });
+    }
+
+$('.form-check').change(function(){
+    buscarCEP()
+    if($('#categoria').val() == 'normal'){
+        freteComTaxa = frete*1.0;
+    }else if($('#categoria').val() == 'expressa'){
+        freteComTaxa = frete*1.1;
+
+    }else if($('#categoria').val() == 'urgente'){
+        freteComTaxa = frete*1.2;
+    }
+    $('#valorFret').text(freteComTaxa)
+    $('#valorTotal').text(parseFloat(freteComTaxa)+parseFloat(subtotal));
+
+});
+    $('#next').click(function(){
+        $('#next').prop("href", "finalizarCompra?frete="+parseFloat(freteComTaxa)+parseFloat(subtotal));
+    })
+
+</script>
 </html>
