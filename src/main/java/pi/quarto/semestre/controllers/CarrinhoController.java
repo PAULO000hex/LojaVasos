@@ -106,12 +106,13 @@ public class CarrinhoController {
 	}
 	
 	@GetMapping("selecaoEndereco")
-	public ModelAndView selecaoEndereco(HttpServletRequest request) {
+	public ModelAndView selecaoEndereco(HttpServletRequest request, @RequestParam ("categoria")String categoria) {
 		ModelAndView mv = new ModelAndView("selecaoEndereco");
 		calcularTotal();
 		if(request.getSession().getAttribute("id")!=null) {
 		List<Endereco> endereco = enderecoRepo.findEnderecoEntrega((long)request.getSession().getAttribute("id"));
 		mv.addObject("listaEnderecos", endereco);
+		mv.addObject("categoria",categoria);
 		}else if(request.getSession().getAttribute("id")==null) {
 				mv.setViewName("redirect:/loginCliente");
 			return mv;

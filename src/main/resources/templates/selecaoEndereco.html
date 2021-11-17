@@ -117,7 +117,7 @@
 <div th:replace="header::myheader"></div>
 <div class="container d-flex justify-content-center mt-5 mb-5">
     <div class="row g-3">
-        <div class="col-md-6"> <span>Endereço de entrega</span>
+        <div class="col-md-6"> <span>Endereï¿½o de entrega</span>
             <div class="card">
                 <div class="accordion" id="accordionExample">
                     <div class="card">
@@ -161,7 +161,7 @@
                 <hr class="mt-0 line">
                 <div class="p-3" th:each="item : ${listaItens}">
                     <div class="d-flex justify-content-between mb-2"><img th:src="@{/produto/mostrarImagem/{imagem}(imagem=${item.produto.image_url})}" class="img-fluid" alt="Card image cap" style=" max-height: 3rem;"><span th:text="${item.produto.name}"></span> <span th:text="${item.quantidade}"></span><span th:text="${item.valorUnitario}"></span> </div>
-                    <input type="hidden" id="categoria" value="normal">
+                    <input type="hidden" id="categoria" th:value="${categoria}">
                 </div>
                 <hr class="mt-0 line">
                 <div class="p-3 d-flex justify-content-between">
@@ -385,8 +385,6 @@
                     frete = 50
             }
 
-            $('#valorFret').text("R$ "+frete.toFixed(2));
-            $('#valorTotal').text("R$ "+calculaTotal(subtotal, frete).toFixed(2));
 
         });
     }
@@ -396,17 +394,17 @@ $('.form-check').change(function(){
     if($('#categoria').val() == 'normal'){
         freteComTaxa = frete*1.0;
     }else if($('#categoria').val() == 'expressa'){
-        freteComTaxa = frete*1.1;
+        freteComTaxa = frete*1.2;
 
     }else if($('#categoria').val() == 'urgente'){
-        freteComTaxa = frete*1.2;
+        freteComTaxa = frete*1.5;
     }
     $('#valorFret').text(freteComTaxa)
     $('#valorTotal').text(parseFloat(freteComTaxa)+parseFloat(subtotal));
 
 });
     $('#next').click(function(){
-        $('#next').prop("href", "finalizarCompra?frete="+parseFloat(freteComTaxa)+parseFloat(subtotal));
+        $('#next').prop("href", "finalizarCompra?frete="+parseFloat(freteComTaxa));
     })
 
 </script>
