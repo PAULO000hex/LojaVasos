@@ -79,13 +79,14 @@ public class CarrinhoController {
 		ModelAndView mv = new ModelAndView("DetalhesPedido");
 		mv.addObject("compra",compra);
 		mv.addObject("listaItens", itensCompra);
+		
+		
 
 		Cliente cliente = clienteRepo.findUsuarioById((long)request.getSession().getAttribute("id"));
 
-		pedido.setStatus("aguardando pagamento");
+		pedido.setStatus("Aguardando Pagamento");
 		pedido.setValor(compra.getValorTotal());
 		pedido.setCliente(cliente);
-		pedido.setIdCliente((long)request.getSession().getAttribute("id"));
 		Pedido pedido2 = new Pedido();
 		pedido2 = pedido;
 		
@@ -104,6 +105,7 @@ public class CarrinhoController {
 	@PostMapping("/pagamento")
 	public String salvarCompra(HttpServletRequest request, @RequestParam ("emailPaypal") String emailPaypal, @RequestParam ("nomeCartao") String nomeCartao, @RequestParam ("numeroCartao") String numeroCartao,@RequestParam ("vencimentoCartao") String vencimentoCartao, @RequestParam ("cvvCartao") String cvvCartao) {		                		   
 	    compra.setNomeCartao(nomeCartao);
+	    compra.setEmailPaypal(emailPaypal);
 	    compra.setVencimentoCartao(vencimentoCartao);
 	    compra.setNumeroCartao(numeroCartao);
 	    compra.setCvvCartao(cvvCartao);
@@ -146,6 +148,23 @@ public class CarrinhoController {
 		mv.addObject("compra",compra);
 		mv.addObject("listaItens", itensCompra);
 		
+		return mv;
+		
+	}
+	
+	@GetMapping("/informacoesPedido/{id}")
+	public ModelAndView informacoesPedido(HttpServletRequest request, @PathVariable("id") long id) {
+		if(request.getSession().getAttribute("id")==null) {
+			ModelAndView mv = new ModelAndView("redirect:/loginCliente");
+			return mv;
+		}
+		ModelAndView mv = new ModelAndView("informacoesPedido");
+		mv.addObject("compra",compra);
+		mv.addObject("listaItens", itensCompra);
+		Pedido pedidinho = pedidoRepo.getById(id);
+		mv.addObject("pedidinho",pedidinho);
+		List<ItensCompra> itensProduto= itensRepo.findByPedido(id);
+		mv.addObject("itensProduto",itensProduto);
 		return mv;
 		
 	}

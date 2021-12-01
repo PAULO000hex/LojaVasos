@@ -120,6 +120,7 @@
 <div class="container d-flex justify-content-center mt-5 mb-5">
     <div class="row g-3">
         <div class="col-md-6">
+        <form>
             <div class="card">
                 <div class="accordion" id="accordionExample">
                     <div class="card">
@@ -130,7 +131,11 @@
   <div> <span th:text="${compra.numeroCartao}"></span></div>
   <div> <span th:text="${compra.vencimentoCartao}"></span></div>
   <div> <span th:text="${compra.cvvCartao}"></span></div><br>
-  <div><h4>Endereço de entrega</h4><br><span th:text="${compra.cepCliente}"></span><br><span></span>
+  <div><h4>Endereço de entrega</h4><br><span th:text="${compra.cepCliente}"></span><br><span></span></div><br>
+    <div><h4>Status do pedido</h4><br><span th:text="${pedidinho.status}"></span><br><span></span></div><br>
+      <div><h4>Data da compra</h4><br><span th:text="${pedidinho.dataPedido}"></span><br><span></span></div><br>
+    
+  
  
 </div>
                         </div>
@@ -155,7 +160,7 @@
                         </div>
                     </div>
                 </div>
-                <a class="btn btn-primary btn-block free-button" th:href="carrinho">Voltar para o carrinho</a>
+              
             </div>
         </div>
         <div class="col-md-6"> <span>Detalhes</span>
@@ -165,7 +170,7 @@
                     <div class="mt-1"> <sup class="super-price" th:text="${compra.valorTotal}">R$</sup></div>
                 </div>
                 <hr class="mt-0 line">
-                <div class="p-3" th:each="item : ${listaItens}">
+                <div class="p-3" th:each="item : ${itensProduto}">
                     <div class="d-flex justify-content-between mb-2"><img th:src="@{/produto/mostrarImagem/{imagem}(imagem=${item.produto.image_url})}" class="img-fluid" alt="Card image cap" style=" max-height: 3rem;"><span th:text="${item.produto.name}"></span> <span th:text="${item.quantidade}"></span><span th:text="${item.valorUnitario}"></span> </div>
 
                 </div>
@@ -173,7 +178,7 @@
                 <div class="p-3 d-flex justify-content-between">
                     <div class="d-flex flex-column" th:text="${compra.frete}" > <small></small> <span>Total</span> </div> <span th:text="${compra.valorTotal}"></span>
                 </div>
-                <a class="btn btn-primary btn-block free-button" th:href="DetalhesPedido">Comprar</a>
+                <a class="btn btn-primary btn-block free-button" href="/DetalhesPedido">Voltar para meus pedidos</a>
             </div>
         </div>
     </div>
