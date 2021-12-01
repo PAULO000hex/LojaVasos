@@ -123,8 +123,8 @@
                     <div class="card">
                         <div class="card-header p-0" id="headingTwo">
                            <div class="form-check" th:each="endereco : ${listaEnderecos}">
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" th:attr="data-cep=${endereco.cep}">
-  <label class="form-check-label" for="exampleRadios1"><span th:text="${endereco.logradouro} + ' ' + ${endereco.numero}"&nbsp;></span><br><span th:text="${endereco.cep}"></span></label>
+  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" th:value="${endereco.logradouro} + ' ' + ${endereco.numero}" th:attr="data-cep=${endereco.cep}">
+  <label class="form-check-label" for="exampleRadios1" ><span th:text="${endereco.logradouro} + ' ' + ${endereco.numero}"&nbsp;></span><br><span th:text="${endereco.cep}"></span></label>
  
 </div>
                         </div>
@@ -178,6 +178,7 @@
     var frete = 0;
     var freteComTaxa = 0;
     var subtotal = $('#subtotal').text();
+    var endereco = $('.form-check-input:checked').val();
 
     function buscarCEP() {
         let CEP = $('#exampleRadios1').attr('data-cep');
@@ -389,7 +390,8 @@
         });
     }
 
-$('.form-check').change(function(){
+$('.form-check-input').change(function(){
+    endereco = $(this).val();
     buscarCEP()
     if($('#categoria').val() == 'normal'){
         freteComTaxa = frete*1.0;
@@ -404,7 +406,7 @@ $('.form-check').change(function(){
 
 });
     $('#next').click(function(){
-        $('#next').prop("href", "finalizarCompra?frete="+parseFloat(freteComTaxa));
+        $('#next').prop("href", "finalizarCompra?frete="+parseFloat(freteComTaxa)+"&endereco="+endereco);
     })
 
 </script>

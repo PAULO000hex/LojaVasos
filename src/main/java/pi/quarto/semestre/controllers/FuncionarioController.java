@@ -1,6 +1,7 @@
 package pi.quarto.semestre.controllers;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.Optional;
 
 import javax.management.AttributeValueExp;
@@ -21,31 +22,45 @@ import org.springframework.web.servlet.ModelAndView;
 
 import pi.quarto.semestre.Exceptions.ServiceExc;
 import pi.quarto.semestre.models.Funcionario;
+import pi.quarto.semestre.models.Pedido;
 import pi.quarto.semestre.repositories.FuncionarioRepository;
+import pi.quarto.semestre.repositories.PedidoRepository;
 import pi.quarto.semestre.service.ServiceUsuario;
 import pi.quarto.semestre.util.Util;
 
 @Controller
 public class FuncionarioController {
 
-	
 
-		
+	@Autowired
+	private PedidoRepository pedidoRepo;
+
 		@Autowired
 		private ServiceUsuario serviceUsuario;
-		
+
 		@Autowired
 		private FuncionarioRepository funcionarioRepository;
 
+		@GetMapping("/backoffice/listarPedidos")
+		public ModelAndView listarPedidos(){
+			ModelAndView mv = new ModelAndView();
 
-		
+			List<Pedido> pedidos= pedidoRepo.findAll();
+
+
+			mv.addObject("pedidos",pedidos);
+
+			return mv;
+		}
+
+
 		@GetMapping("/login")
 		public ModelAndView login() {
 			ModelAndView mv = new ModelAndView();
 			mv.setViewName("/login");
 			return mv;
 		}
-		
+
 		@RequestMapping(method = RequestMethod.GET, value = "/cadastropessoa")
 		public ModelAndView inicio() {
 
@@ -75,11 +90,11 @@ public class FuncionarioController {
 
 		@RequestMapping(method = RequestMethod.GET, value = "cadastro/listarpessoas")
 		public ModelAndView pessoas(HttpServletRequest request) {
-			
+
 			if(request.getSession().getAttribute("admin") == null || (boolean) request.getSession().getAttribute("admin") == false) {
 				return new ModelAndView("/login");
 			}
-			
+
 			ModelAndView andView = new ModelAndView("cadastro/listarpessoas");
 			Iterable<Funcionario> pessoasIt = funcionarioRepository.findAll();
 			andView.addObject("userId",request.getSession().getAttribute("id"));
@@ -90,10 +105,10 @@ public class FuncionarioController {
 			return andView;
 
 		}
-		
+
 		@RequestMapping(method = RequestMethod.GET, value = "cadastro/listarpessoa")
 		public ModelAndView pessoa(HttpServletRequest request) {
-			
+
 
 			ModelAndView andView = new ModelAndView("cadastro/listarpessoa");
 			Funcionario pessoasIt = funcionarioRepository.findUsuarioById((long)request.getSession().getAttribute("id"));
@@ -105,8 +120,8 @@ public class FuncionarioController {
 			return andView;
 
 		}
-		
-		
+
+
 
 		@GetMapping("/editarpessoa/{idpessoa}")
 		public ModelAndView editar(@PathVariable("idpessoa") Long idpessoa, HttpServletRequest request) {// Intercepta url passando idpesoa {
@@ -121,9 +136,9 @@ public class FuncionarioController {
 			return modelAndView;
 		}
 
-		
-		
-		
+
+
+
 		@GetMapping("/removerpessoa/{idpessoa}")
 		public ModelAndView excluir(@PathVariable("idpessoa") Long idpessoa) {// Intercepta url passando idpesoa {
 
@@ -146,7 +161,7 @@ public class FuncionarioController {
 
 			return modelAndView;
 		}
-		
+
 		@GetMapping("/alterargrupo/{idpessoa}")
 		public ModelAndView alterarGrupo(@PathVariable("idpessoa") Long idpessoa) {// Intercepta url passando idpesoa {
 
@@ -169,8 +184,8 @@ public class FuncionarioController {
 
 			return modelAndView;
 		}
-		
-		
+
+
 		@PostMapping("/login")
 	    public String loginUsuario(Model model, Funcionario usuario, HttpServletRequest request) throws NoSuchAlgorithmException {
 	    	Funcionario user = this.funcionarioRepository.Login(usuario.getEmail(), Util.md5(usuario.getSenha()));
@@ -178,17 +193,17 @@ public class FuncionarioController {
 	    		request.getSession().setAttribute("nome", user.getNome());
 	    		request.getSession().setAttribute("id", user.getId());
 	    		request.getSession().setAttribute("admin",user.isAdmin());
-	    		
-	    		return "redirect:/menu"; 
+
+	    		return "redirect:/menu";
 	    	}
 	    	model.addAttribute("erro", "Usuário ou senha invalidos");
 		    return "/login";
 		}
 	}
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 
