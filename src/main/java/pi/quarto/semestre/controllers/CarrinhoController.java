@@ -140,9 +140,9 @@ public class CarrinhoController {
 			ModelAndView mv = new ModelAndView("redirect:/loginCliente");
 			return mv;
 		}
-		if(compra.getEmailPaypal() != null && compra.getNomeCartao()==null) {
+		if(compra.getEmailPaypal() != null) {
 			compra.setFormaPagamento("Email Paypal");
-		}else if(compra.getNomeCartao()!= null && compra.getNumeroCartao() != null && compra.getEmailPaypal()==null) {
+		}else if(compra.getNomeCartao()!= null && compra.getNumeroCartao() != null) {
 			compra.setFormaPagamento("Cartão de crédito");
 		}
 		pedido = new Pedido();
