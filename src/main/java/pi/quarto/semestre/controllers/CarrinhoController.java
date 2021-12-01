@@ -65,9 +65,11 @@ public class CarrinhoController {
 		ModelAndView mv = new ModelAndView("DetalhesPedido");
 		mv.addObject("compra",compra);
 		mv.addObject("listaItens", itensCompra);
+
 		for(ItensCompra it:itensCompra) {
 			pedido.setQuantidade(it.getQuantidade());
 			pedido.setProduto(it.getProduto());
+
 			}
 
 		Cliente cliente = clienteRepo.findUsuarioById((long)request.getSession().getAttribute("id"));
