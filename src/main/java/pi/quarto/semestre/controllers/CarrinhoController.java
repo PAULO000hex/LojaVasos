@@ -98,6 +98,7 @@ public class CarrinhoController {
 		}
 		List<Pedido>pedido3 = pedidoRepo.findPedidoById((long)request.getSession().getAttribute("id"));
 		mv.addObject("listaPedidos",pedido3);
+		itensCompra.clear();
 		return mv;
 		
 	}
@@ -144,6 +145,7 @@ public class CarrinhoController {
 		}else if(compra.getNomeCartao()!= null && compra.getNumeroCartao() != null && compra.getEmailPaypal()==null) {
 			compra.setFormaPagamento("Cartão de crédito");
 		}
+		pedido = new Pedido();
 		ModelAndView mv = new ModelAndView("ResumoPedido");
 		mv.addObject("compra",compra);
 		mv.addObject("listaItens", itensCompra);
