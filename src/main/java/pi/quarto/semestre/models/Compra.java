@@ -142,4 +142,5 @@ public class Compra implements Serializable {
 	public void setFormaPagamento(String formaPagamento) {
 		this.formaPagamento = formaPagamento;
 	}
+	
 }
