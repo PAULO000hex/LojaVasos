@@ -13,11 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import pi.quarto.semestre.models.Compra;
-import pi.quarto.semestre.models.Endereco;
-import pi.quarto.semestre.models.ItensCompra;
-import pi.quarto.semestre.models.Pedido;
-import pi.quarto.semestre.models.Produto;
+import pi.quarto.semestre.models.*;
+import pi.quarto.semestre.repositories.ClienteRepository;
 import pi.quarto.semestre.repositories.EnderecoRepository;
 import pi.quarto.semestre.repositories.PedidoRepository;
 import pi.quarto.semestre.repositories.ProdutoRepositorio;
@@ -33,11 +30,12 @@ public class CarrinhoController {
 	
 	@Autowired
 	private ProdutoRepositorio prodRepo;
+
+	@Autowired
+	private ClienteRepository clienteRepo;
 	
 	@Autowired
 	private EnderecoRepository enderecoRepo;
-	
-	
 	
 	@Autowired
 	private PedidoRepository pedidoRepo;
@@ -47,7 +45,6 @@ public class CarrinhoController {
 		for(ItensCompra it: itensCompra) {
 			compra.setValorTotal(compra.getValorTotal() + it.getValorTotal());
 		}
-		
 	}
 	
 	@GetMapping("/carrinho")
@@ -71,11 +68,13 @@ public class CarrinhoController {
 		for(ItensCompra it:itensCompra) {
 			pedido.setQuantidade(it.getQuantidade());
 			pedido.setProduto(it.getProduto());
-			
 			}
-		
+
+		Cliente cliente = clienteRepo.findUsuarioById((long)request.getSession().getAttribute("id"));
+
 		pedido.setStatus("aguardando pagamento");
 		pedido.setValor(compra.getValorTotal());
+		pedido.setCliente(cliente);
 		pedido.setIdCliente((long)request.getSession().getAttribute("id"));
 		Pedido pedido2 = new Pedido();
 		pedido2 = pedido;
@@ -88,11 +87,12 @@ public class CarrinhoController {
 	}
 	
 	@GetMapping("/finalizarCompra")
-	public ModelAndView finalizarCompra(HttpServletRequest request, @RequestParam ("frete")float frete) {
+	public ModelAndView finalizarCompra(HttpServletRequest request, @RequestParam ("frete") float frete, @RequestParam ("endereco") String endereco) {
 		if(request.getSession().getAttribute("id")==null) {
 			ModelAndView mv = new ModelAndView("redirect:/loginCliente");
 			return mv;
 		}
+		System.out.println(endereco);
 		ModelAndView mv = new ModelAndView("finalizarCompra");
 		calcularTotal();
 		
