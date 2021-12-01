@@ -2,6 +2,7 @@ package pi.quarto.semestre.models;
 
 
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -13,7 +14,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Id;
 @Entity
-public class Pedido {
+public class Pedido implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id

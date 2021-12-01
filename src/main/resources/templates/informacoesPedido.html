@@ -120,7 +120,6 @@
 <div class="container d-flex justify-content-center mt-5 mb-5">
     <div class="row g-3">
         <div class="col-md-6">
-        <form>
             <div class="card">
                 <div class="accordion" id="accordionExample">
                     <div class="card">
@@ -131,9 +130,9 @@
   <div> <span th:text="${compra.numeroCartao}"></span></div>
   <div> <span th:text="${compra.vencimentoCartao}"></span></div>
   <div> <span th:text="${compra.cvvCartao}"></span></div><br>
-  <div><h4>Endereço de entrega</h4><br><span th:text="${compra.cepCliente}"></span><br><span></span></div><br>
-    <div><h4>Status do pedido</h4><br><span th:text="${pedidinho.status}"></span><br><span></span></div><br>
-      <div><h4>Data da compra</h4><br><span th:text="${pedidinho.dataPedido}"></span><br><span></span></div><br>
+  <div><h4>Endereço de entrega</h4><span th:text="${compra.cepCliente}"></span><br><span></span></div><br>
+    <div><h4>Status do pedido</h4><span th:text="${pedidinho.status}"></span><br><span></span></div><br>
+      <div><h4>Data da compra</h4><span th:text="${pedidinho.dataPedido}"></span><br><span></span></div><br>
     
   
  
@@ -146,18 +145,7 @@
                         <div class="card-header p-0">
                         </div>
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                            <div class="card-body payment-card-body">
-                                
-                                <div class="row mt-3 mb-3">
-                                    <div class="col-md-6"> 
-                                       
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="input"> </div>
-                                    </div>
-                                </div> 
-                            </div>
-                        </div>
+                            
                     </div>
                 </div>
               
