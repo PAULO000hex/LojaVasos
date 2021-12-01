@@ -188,3 +188,8 @@
     $('#vencimento').mask('##/##', {reverse: true});
     $('#cartao').mask('#### #### #### ####', {reverse: true});
 </script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    console.log([[${listaItens}]]);
+    /*]]>*/
+</script>
