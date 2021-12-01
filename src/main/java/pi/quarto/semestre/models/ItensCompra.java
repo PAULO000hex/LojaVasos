@@ -26,8 +26,7 @@ public class ItensCompra implements Serializable{
 	@ManyToOne
 	private Produto produto;
 	
-	@ManyToOne
-	private Compra compra;
+    private long idPedido;
 	private int quantidade = 0;
 	private Double valorUnitario = 0.;
 	private Double valorTotal = 0.;
@@ -46,14 +45,6 @@ public class ItensCompra implements Serializable{
 
 	public void setProduto(Produto produto) {
 		this.produto = produto;
-	}
-
-	public Compra getCompra() {
-		return compra;
-	}
-
-	public void setCompra(Compra compra) {
-		this.compra = compra;
 	}
 
 	public int getQuantidade() {
@@ -78,6 +69,14 @@ public class ItensCompra implements Serializable{
 
 	public void setValorTotal(Double valorTotal) {
 		this.valorTotal = valorTotal;
+	}
+
+	public long getIdPedido() {
+		return idPedido;
+	}
+
+	public void setIdPedido(long idPedido) {
+		this.idPedido = idPedido;
 	}
 	
 	

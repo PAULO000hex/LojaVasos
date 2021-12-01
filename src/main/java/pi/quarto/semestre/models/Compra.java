@@ -33,9 +33,14 @@ public class Compra implements Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCompra = new Date();
-	private String pagamento;
 	private float frete;
 	private String cepCliente;
+	private String emailPaypal;
+	private String nomeCartao;
+	private String numeroCartao;
+	private String vencimentoCartao;
+	private String cvvCartao;
+	private String formaPagamento;
 
 	public Long getId() {
 		return Id;
@@ -61,13 +66,6 @@ public class Compra implements Serializable {
 		this.dataCompra = dataCompra;
 	}
 
-	public String getPagamento() {
-		return pagamento;
-	}
-
-	public void setPagamento(String pagamento) {
-		this.pagamento = pagamento;
-	}
 
 	public Double getValorTotal() {
 		return valorTotal;
@@ -95,5 +93,53 @@ public class Compra implements Serializable {
 
 	public void setFrete(float frete) {
 		this.frete = frete;
+	}
+
+	public String getEmailPaypal() {
+		return emailPaypal;
+	}
+
+	public void setEmailPaypal(String emailPaypal) {
+		this.emailPaypal = emailPaypal;
+	}
+
+	public String getNomeCartao() {
+		return nomeCartao;
+	}
+
+	public void setNomeCartao(String nomeCartao) {
+		this.nomeCartao = nomeCartao;
+	}
+
+	public String getNumeroCartao() {
+		return numeroCartao;
+	}
+
+	public void setNumeroCartao(String numeroCartao) {
+		this.numeroCartao = numeroCartao;
+	}
+
+	public String getVencimentoCartao() {
+		return vencimentoCartao;
+	}
+
+	public void setVencimentoCartao(String vencimentoCartao2) {
+		this.vencimentoCartao = vencimentoCartao2;
+	}
+
+	public String getCvvCartao() {
+		return cvvCartao;
+	}
+
+	public void setCvvCartao(String cvvCartao) {
+		this.cvvCartao = cvvCartao;
+	}
+
+	public String getFormaPagamento() {
+		return formaPagamento;
+	}
+
+	public void setFormaPagamento(String formaPagamento) {
+		this.formaPagamento = formaPagamento;
 	}
 }
