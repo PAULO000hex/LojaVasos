@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="ISO-8859-1">
+    <meta charset="ISO-8859-1">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -10,186 +11,225 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.11.2/jquery.mask.js"></script>
 
     <title>Finalizar a compra</title>
-<meta charset="utf-8"/>
+    <meta charset="utf-8" />
 
     <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:weight@100;200;300;400;500;600;700;800&display=swap");
 
-    @import url("https://fonts.googleapis.com/css2?family=Poppins:weight@100;200;300;400;500;600;700;800&display=swap");
+        body {
+            background-color: #f5eee7;
+            font-family: "Poppins", sans-serif;
+            font-weight: 300
+        }
 
-    body {
-        background-color: #f5eee7;
-        font-family: "Poppins", sans-serif;
-        font-weight: 300
-    }
+        .container {
+            height: 100vh
+        }
 
-    .container {
-        height: 100vh
-    }
+        .card {
+            border: none
+        }
 
-    .card {
-        border: none
-    }
+        .card-header {
+            padding: .5rem 1rem;
+            margin-bottom: 0;
+            background-color: rgba(0, 0, 0, .03);
+            border-bottom: none
+        }
 
-    .card-header {
-        padding: .5rem 1rem;
-        margin-bottom: 0;
-        background-color: rgba(0, 0, 0, .03);
-        border-bottom: none
-    }
+        .btn-light:focus {
+            color: #212529;
+            background-color: #e2e6ea;
+            border-color: #dae0e5;
+            box-shadow: 0 0 0 0.2rem rgba(216, 217, 219, .5)
+        }
 
-    .btn-light:focus {
-        color: #212529;
-        background-color: #e2e6ea;
-        border-color: #dae0e5;
-        box-shadow: 0 0 0 0.2rem rgba(216, 217, 219, .5)
-    }
+        .form-control {
+            height: 50px;
+            border: 2px solid #eee;
+            border-radius: 6px;
+            font-size: 14px
+        }
 
-    .form-control {
-        height: 50px;
-        border: 2px solid #eee;
-        border-radius: 6px;
-        font-size: 14px
-    }
+        .form-control:focus {
+            color: #495057;
+            background-color: #fff;
+            border-color: #039be5;
+            outline: 0;
+            box-shadow: none
+        }
 
-    .form-control:focus {
-        color: #495057;
-        background-color: #fff;
-        border-color: #039be5;
-        outline: 0;
-        box-shadow: none
-    }
+        .input {
+            position: relative
+        }
 
-    .input {
-        position: relative
-    }
+        .input i {
+            position: absolute;
+            top: 16px;
+            left: 11px;
+            color: #989898
+        }
 
-    .input i {
-        position: absolute;
-        top: 16px;
-        left: 11px;
-        color: #989898
-    }
+        .input input {
+            text-indent: 25px
+        }
 
-    .input input {
-        text-indent: 25px
-    }
+        .card-text {
+            font-size: 13px;
+            margin-left: 6px
+        }
 
-    .card-text {
-        font-size: 13px;
-        margin-left: 6px
-    }
+        .certificate-text {
+            font-size: 12px
+        }
 
-    .certificate-text {
-        font-size: 12px
-    }
+        .billing {
+            font-size: 11px
+        }
 
-    .billing {
-        font-size: 11px
-    }
+        .super-price {
+            top: 0px;
+            font-size: 22px
+        }
 
-    .super-price {
-        top: 0px;
-        font-size: 22px
-    }
+        .super-month {
+            font-size: 11px
+        }
 
-    .super-month {
-        font-size: 11px
-    }
+        .line {
+            color: #bfbdbd
+        }
 
-    .line {
-        color: #bfbdbd
-    }
+        .free-button {
+            background: #1565c0;
+            height: 52px;
+            font-size: 15px;
+            border-radius: 8px
+        }
 
-    .free-button {
-        background: #1565c0;
-        height: 52px;
-        font-size: 15px;
-        border-radius: 8px
-    }
-
-    .payment-card-body {
-        flex: 1 1 auto;
-        padding: 24px 1rem !important
-    }
-
-</style>
+        .payment-card-body {
+            flex: 1 1 auto;
+            padding: 24px 1rem !important
+        }
+    </style>
 
 </head>
+
 <body>
-<div th:replace="header::myheader"></div>
-<div class="container d-flex justify-content-center mt-5 mb-5">
-    <div class="row g-3">
-        <div class="col-md-6"> <span>Forma de Pagamento</span>
-            <div class="card">
-                <div class="accordion" id="accordionExample">
+    <div th:replace="header::myheader"></div>
+    <div class="container d-flex justify-content-center mt-5 mb-5">
+        <div class="row g-3">
+            <div class="col-md-6"> <span>Forma de Pagamento</span>
+                <form id="myForm" th:action="@{/pagamento}" method="POST" th:object="${compra}">
                     <div class="card">
-                        <div class="card-header p-0" id="headingTwo">
-                            <h2 class="mb-0"> <button class="btn btn-light btn-block text-left collapsed p-3 rounded-0 border-bottom-custom" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                <div class="d-flex align-items-center justify-content-between"> <span>Paypal</span> <img src="https://i.imgur.com/7kQEsHU.png" width="30"> </div>
-                            </button> </h2>
-                        </div>
-                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                            <div class="card-body"> <input type="email" class="form-control" placeholder="Paypal email"> </div>
-                             <a class="btn btn-primary btn-block free-button" th:href="selecaoEndereco">Voltar para o endereço de entrega</a>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header p-0">
-                            <h2 class="mb-0"> <button class="btn btn-light btn-block text-left p-3 rounded-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <div class="d-flex align-items-center justify-content-between"> <span>Cart�o de Cr�dito</span>
-                                    <div class="icons"> <img src="https://i.imgur.com/2ISgYja.png" width="30"> <img src="https://i.imgur.com/W1vtnOV.png" width="30"></div>
+                        <div class="accordion" id="accordionExample">
+                            <div class="card">
+                                <div class="card-header p-0" id="headingTwo">
+                                    <h2 class="mb-0"> <button
+                                            class="btn btn-light btn-block text-left collapsed p-3 rounded-0 border-bottom-custom"
+                                            type="button" data-toggle="collapse" data-target="#collapseTwo"
+                                            aria-expanded="false" aria-controls="collapseTwo">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <span>Paypal</span> <img src="https://i.imgur.com/7kQEsHU.png"
+                                                    width="30">
+                                            </div>
+                                        </button>
+                                    </h2>
                                 </div>
-                            </button> </h2>
-                        </div>
-                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                            <div class="card-body payment-card-body">
-                                <span class="font-weight-normal card-text">Nome do Titular</span>
-                                <div class="input"> <i class="fa fa-user-circle" aria-hidden="true"></i> <input type="text" class="form-control"> </div>
-                                <span class="font-weight-normal card-text">Número do Cartão</span>
-                                <div class="input"> <i class="fa fa-credit-card"></i> <input type="text" class="form-control" id="cartao" placeholder="0000 0000 0000 0000" maxlength="16"> </div>
-                                <div class="row mt-3 mb-3">
-                                    <div class="col-md-6"> <span class="font-weight-normal card-text">Vencimento</span>
-                                        <div class="input"> <i class="fa fa-calendar"></i> <input type="text" class="form-control" id="vencimento" placeholder="MM/AA" maxlength="5"> </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                    data-parent="#accordionExample">
+                                    <div class="card-body"> <input type="email" name="emailPaypal"
+                                            th:field="*{emailPaypal}" class="form-control" placeholder="Paypal email">
                                     </div>
-                                    <div class="col-md-6"> <span class="font-weight-normal card-text">CVV</span>
-                                        <div class="input"> <i class="fa fa-lock"></i> <input type="text" class="form-control" placeholder="000" maxlength="3"> </div>
+                                    <a class="btn btn-primary btn-block free-button" th:href="selecaoEndereco">Voltar
+                                        para o endereço de entrega</a>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header p-0">
+                                    <h2 class="mb-0"> <button class="btn btn-light btn-block text-left p-3 rounded-0"
+                                            data-toggle="collapse" type="button" data-target="#collapseOne"
+                                            aria-expanded="true" aria-controls="collapseOne">
+                                            <div class="d-flex align-items-center justify-content-between"> <span>Cart�o
+                                                    de Cr�dito</span>
+                                                <div class="icons"> <img src="https://i.imgur.com/2ISgYja.png"
+                                                        width="30"> <img src="https://i.imgur.com/W1vtnOV.png"
+                                                        width="30"></div>
+                                            </div>
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                    data-parent="#accordionExample">
+                                    <div class="card-body payment-card-body">
+                                        <span class="font-weight-normal card-text">Nome do Titular</span>
+                                        <div class="input"> <i class="fa fa-user-circle" aria-hidden="true"></i> <input
+                                                type="text" name="nomeCartao" th:field="*{nomeCartao}"
+                                                class="form-control"> </div>
+                                        <span class="font-weight-normal card-text">Número do Cartão</span>
+                                        <div class="input"> <i class="fa fa-credit-card"></i> <input type="text"
+                                                class="form-control" name="numeroCartao" th:field="*{numeroCartao}"
+                                                placeholder="0000 0000 0000 0000" maxlength="16" id="cartao"> </div>
+                                        <div class="row mt-3 mb-3">
+                                            <div class="col-md-6"> <span
+                                                    class="font-weight-normal card-text">Vencimento</span>
+                                                <div class="input"> <i class="fa fa-calendar"></i> <input type="text"
+                                                        class="form-control" name="vencimentoCartao"
+                                                        th:field="*{vencimentoCartao}" placeholder="MM/AA" maxlength="5"
+                                                        id="vencimento"> </div>
+                                            </div>
+                                            <div class="col-md-6"> <span class="font-weight-normal card-text">CVV</span>
+                                                <div class="input"> <i class="fa fa-lock"></i> <input type="text"
+                                                        class="form-control" placeholder="000" name="cvvCartao"
+                                                        th:field="*{cvvCartao}" maxlength="3"> </div>
+                                            </div>
+                                        </div> <span class="text-muted certificate-text"><i class="fa fa-lock"></i>
+                                            Transação Segura</span>
+                                        <a class="btn btn-primary btn-block free-button"
+                                            th:href="selecaoEndereco">Voltar para o endereço de entrega</a>
                                     </div>
-                                </div> <span class="text-muted certificate-text"><i class="fa fa-lock"></i> Transação Segura</span>
-                                <a class="btn btn-primary btn-block free-button" th:href="selecaoEndereco">Voltar para o endereço de entrega</a>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </form>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-6"> <span>Detalhes</span>
-            <div class="card">
-                <div class="d-flex justify-content-between p-3">
-                    <div class="d-flex flex-column"> <span>Subtotal</span></div>
-                    <div class="mt-1"> <sup class="super-price" th:text="${compra.valorTotal}">R$</sup></div>
-                </div>
-                <hr class="mt-0 line">
-                <div class="p-3" th:each="item : ${listaItens}">
-                    <div class="d-flex justify-content-between mb-2"><img th:src="@{/produto/mostrarImagem/{imagem}(imagem=${item.produto.image_url})}" class="img-fluid" alt="Card image cap" style=" max-height: 3rem;"><span th:text="${item.produto.name}"></span> <span th:text="${item.quantidade}"></span><span th:text="${item.valorUnitario}"></span> </div>
+            <div class="col-md-6"> <span>Detalhes</span>
+                <div class="card">
+                    <div class="d-flex justify-content-between p-3">
+                        <div class="d-flex flex-column"> <span>Subtotal</span></div>
+                        <div class="mt-1"> <sup class="super-price" th:text="${compra.valorTotal}">R$</sup></div>
+                    </div>
+                    <hr class="mt-0 line">
+                    <div class="p-3" th:each="item : ${listaItens}">
+                        <div class="d-flex justify-content-between mb-2"><img
+                                th:src="@{/produto/mostrarImagem/{imagem}(imagem=${item.produto.image_url})}"
+                                class="img-fluid" alt="Card image cap" style=" max-height: 3rem;"><span
+                                th:text="${item.produto.name}"></span> <span th:text="${item.quantidade}"></span><span
+                                th:text="${item.valorUnitario}"></span>
+                        </div>
+                    </div>
+                    <hr class="mt-0 line">
+                    <div class="p-3 d-flex justify-content-between">
+                        <div class="d-flex flex-column" th:text="${compra.frete}"> <small></small> <span>Total</span>
+                        </div> <span th:text="${compra.valorTotal}"></span>
+                    </div>
+                    <button class="btn btn-primary btn-block free-button" th:href="ResumoPedido"
+                        type="submit" form="myForm">Comprar</button>
 
                 </div>
-                <hr class="mt-0 line">
-                <div class="p-3 d-flex justify-content-between">
-                    <div class="d-flex flex-column" th:text="${compra.frete}" > <small></small> <span>Total</span> </div> <span th:text="${compra.valorTotal}"></span>
-                </div>
-                <a class="btn btn-primary btn-block free-button" th:href="DetalhesPedido">Comprar</a>
             </div>
         </div>
     </div>
-</div>
 </body>
+
 </html>
 <script>
-    $('#vencimento').mask('##/##', {reverse: true});
-    $('#cartao').mask('#### #### #### ####', {reverse: true});
+    $('#vencimento').mask('##/##', { reverse: true });
+    $('#cartao').mask('#### #### #### ####', { reverse: true });
 </script>
 <script th:inline="javascript">
-    /*<![CDATA[*/
-    console.log([[${listaItens}]]);
-    /*]]>*/
+    /*<![CDATA[/
+    console.log([[${ listaItens }]]);
+    /]]>*/
 </script>

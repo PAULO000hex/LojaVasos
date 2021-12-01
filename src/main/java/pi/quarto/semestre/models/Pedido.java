@@ -1,5 +1,7 @@
 package pi.quarto.semestre.models;
 
+
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +20,7 @@ public class Pedido {
 	private Cliente cliente;
 	
 	private String status;
+	
 	
 	private Long idCliente;
 
@@ -82,5 +85,9 @@ public class Pedido {
 	public void setIdCliente(Long idCliente) {
 		this.idCliente = idCliente;
 	}
+
+
+
+
 
 }

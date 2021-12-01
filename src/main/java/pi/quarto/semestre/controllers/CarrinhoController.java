@@ -5,19 +5,28 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import pi.quarto.semestre.models.*;
 import pi.quarto.semestre.repositories.ClienteRepository;
 import pi.quarto.semestre.repositories.EnderecoRepository;
+import pi.quarto.semestre.repositories.ItensCompraRepository;
 import pi.quarto.semestre.repositories.PedidoRepository;
 import pi.quarto.semestre.repositories.ProdutoRepositorio;
+
 
 
 
@@ -39,6 +48,11 @@ public class CarrinhoController {
 	
 	@Autowired
 	private PedidoRepository pedidoRepo;
+	
+	@Autowired
+	private ItensCompraRepository itensRepo;
+	
+
 	
 	private void calcularTotal() {
 		compra.setValorTotal(0.0);
@@ -66,12 +80,6 @@ public class CarrinhoController {
 		mv.addObject("compra",compra);
 		mv.addObject("listaItens", itensCompra);
 
-		for(ItensCompra it:itensCompra) {
-			pedido.setQuantidade(it.getQuantidade());
-			pedido.setProduto(it.getProduto());
-
-			}
-
 		Cliente cliente = clienteRepo.findUsuarioById((long)request.getSession().getAttribute("id"));
 
 		pedido.setStatus("aguardando pagamento");
@@ -81,12 +89,28 @@ public class CarrinhoController {
 		Pedido pedido2 = new Pedido();
 		pedido2 = pedido;
 		
-		pedidoRepo.save(pedido2);
+		Pedido pedido4 = pedidoRepo.save(pedido2);
+		for(ItensCompra it:itensCompra) {
+		     it.setIdPedido(pedido4.getId());
+		     itensRepo.save(it);
+
+		}
 		List<Pedido>pedido3 = pedidoRepo.findPedidoById((long)request.getSession().getAttribute("id"));
 		mv.addObject("listaPedidos",pedido3);
 		return mv;
 		
 	}
+	
+	@PostMapping("/pagamento")
+	public String salvarCompra(HttpServletRequest request, @RequestParam ("emailPaypal") String emailPaypal, @RequestParam ("nomeCartao") String nomeCartao, @RequestParam ("numeroCartao") String numeroCartao,@RequestParam ("vencimentoCartao") String vencimentoCartao, @RequestParam ("cvvCartao") String cvvCartao) {		                		   
+	    compra.setNomeCartao(nomeCartao);
+	    compra.setVencimentoCartao(vencimentoCartao);
+	    compra.setNumeroCartao(numeroCartao);
+	    compra.setCvvCartao(cvvCartao);
+		
+		return "redirect:/ResumoPedido";
+		}
+	
 	
 	@GetMapping("/finalizarCompra")
 	public ModelAndView finalizarCompra(HttpServletRequest request, @RequestParam ("frete") float frete, @RequestParam ("endereco") String endereco) {
@@ -94,13 +118,32 @@ public class CarrinhoController {
 			ModelAndView mv = new ModelAndView("redirect:/loginCliente");
 			return mv;
 		}
-		System.out.println(endereco);
+		
 		ModelAndView mv = new ModelAndView("finalizarCompra");
 		calcularTotal();
-		
+		compra.setCepCliente(endereco);
 		mv.addObject("compra",compra);
 		compra.setValorTotal(compra.getValorTotal()+frete);
 		compra.setFrete(frete);
+		mv.addObject("listaItens", itensCompra);
+		
+		return mv;
+		
+	}
+	
+	@GetMapping("/ResumoPedido")
+	public ModelAndView resumoCompra(HttpServletRequest request) {
+		if(request.getSession().getAttribute("id")==null) {
+			ModelAndView mv = new ModelAndView("redirect:/loginCliente");
+			return mv;
+		}
+		if(compra.getEmailPaypal() != null && compra.getNomeCartao()==null) {
+			compra.setFormaPagamento("Email Paypal");
+		}else if(compra.getNomeCartao()!= null && compra.getNumeroCartao() != null && compra.getEmailPaypal()==null) {
+			compra.setFormaPagamento("Cartão de crédito");
+		}
+		ModelAndView mv = new ModelAndView("ResumoPedido");
+		mv.addObject("compra",compra);
 		mv.addObject("listaItens", itensCompra);
 		
 		return mv;
