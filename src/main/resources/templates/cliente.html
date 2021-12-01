@@ -62,14 +62,19 @@
 					<td th:text="${endereco.bairro}"></td>
 					<td th:text="${endereco.numero}"></td>
 					<td th:text="${endereco.faturamento} ? 'Faturamento' : 'Entrega'"></td>
-					<td>
-					<a th:href="@{/editarprincipal/{enderecoid}(enderecoid=${endereco.id})}"
-							class="btn btn-primary" th:text="'Alterar'"></a></td>
-					<td><a
-							th:href="@{/removerendereco/{idendereco}(idendereco=${endereco.id})}"
-							class="btn btn-danger"
-							> Excluir</a></td>
+					<!-- IF -->
+					<td th:if="${endereco.faturamento}"></td>
+					<!-- ELSE -->
+					<td th:unless="${endereco.faturamento}">
+						<div th:if="${endereco.principal}">
+						</div>
+						<div th:unless="${endereco.principal}">
+							<a th:href="@{/editarprincipal/{enderecoid}(enderecoid=${endereco.id})}" class="btn btn-primary" th:text="'Alterar'"></a>
+						</div>
+					</td>
+					<td><a th:href="@{/removerendereco/{idendereco}(idendereco=${endereco.id})}" class="btn btn-danger"> Excluir</a></td>
 				</tr>
+
 			</tbody>
 		</table>
 	</div>
@@ -79,4 +84,9 @@
 $(document).ready( function () {
     $('#table').DataTable();
 } );
+</script>
+<script th:inline="javascript">
+	/*<![CDATA[*/
+	console.log([[${listaEnderecos}]]);
+	/*]]>*/
 </script>
